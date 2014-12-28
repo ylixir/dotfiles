@@ -90,7 +90,7 @@ local settings =
   ['window_gap']                = '0',
   ['frame_padding']             = '0',
   ['smart_window_surroundings'] = '0',
-  ['smart_frame_surroundings']  = '1',
+  ['smart_frame_surroundings']  = '0',
   ['mouse_recenter_gap']        = '0',
   ['focus_follows_mouse']       = '1',
   ['tree_style']                = '╾│ ├└╼─┐',
@@ -98,14 +98,11 @@ local settings =
 
 local attributes =
 {
-  ['theme.tiling.reset']          = '1',
-  ['theme.floating.reset']        = '1',
   ['theme.background_color']      = "'#1e1e27'",
   ['theme.normal.color']          = "'#cfbfad'",
   ['theme.inner_color']           = "'#1e1e27'",
   ['theme.outer_color']           = "'#1e1e27'",
   ['theme.floating.outer_color']  = "'#1e1e27'",
-  --['theme.active.color']          = '#c080d0'",
   ['theme.active.color']          = "'#808bed'",
   ['theme.urgent.color']          = "'#f0ad6d'",
   ['theme.border_width']          = '3',
@@ -127,7 +124,7 @@ hc.emit_hook("reload")
 hc.lock()
 
 --we need to add in the tags
---hc.rename('default','1')
+hc.rename('default','1')
 for i=1,9 do
   hc.add(i)
   keybindings[mod..i]        = 'use '..i
@@ -151,6 +148,9 @@ for key,command in pairs(mousebindings) do
 end
 
 --settings and attributes
+hc.attr('theme.tiling.reset','1')
+hc.attr('theme.floating.reset','1')
+  --['theme.floating.reset']        = '1',
 for setting, value in pairs(settings) do
   hc.set(setting, value)
 end
