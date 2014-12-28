@@ -14,7 +14,7 @@ set term=xterm-256color
 set cursorline
 "set background=dark
 "colorscheme solarized
-colorscheme inkpot
+"colorscheme inkpot
 "colorscheme zenburn
 "colorscheme molokai
 
