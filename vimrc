@@ -10,11 +10,11 @@ setlocal spell spelllang=en
 
 syntax enable
 set number
-set term=xterm-256color
+set term=st-256color
 set cursorline
 "set background=dark
 "colorscheme solarized
-colorscheme inkpot
+"colorscheme inkpot
 "colorscheme zenburn
 "colorscheme molokai
 

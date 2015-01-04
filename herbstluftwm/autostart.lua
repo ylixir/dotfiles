@@ -38,7 +38,7 @@ local keybindings =
   [mod..shift..'q']   =   'close',
   [mod..shift..'r']   =   'reload',
   [mod..shift..'e']   =   'quit',
-  [mod..enter]        =   'spawn uxterm',
+  [mod..enter]        =   'spawn st',
   [mod..'d']          =   'spawn dmenu_run',
 
   [mod..'h']          =   'focus left',
