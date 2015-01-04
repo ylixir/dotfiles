@@ -8,4 +8,5 @@ ln -sf `pwd`/gvimrc ~/.gvimrc
 ln -sf `pwd`/xinitrc ~/.xinitrc
 ln -sf `pwd`/herbstluftwm ~/.config/
 ln -sf `pwd`/fonts ~/.fonts
+ln -sf `pwd`/bin ~/bin
 fc-cache -fv

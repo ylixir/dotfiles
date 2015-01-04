@@ -1,0 +1,6 @@
+#!/usr/bin/env lua
+
+local p = require('posix.unistd')
+
+p.exec("/usr/bin/ssh",{'ssh.blinkenshell.org','-p','2222','-t','tmux attach'})
+
