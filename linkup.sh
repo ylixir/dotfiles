@@ -1,7 +1,6 @@
 #!/bin/sh
-mkdir -p ~/.vim/colors
 mkdir -p ~/.config
-ln -sf `pwd`/vim/colors/inkpot.vim ~/.vim/colors/
+ln -sf `pwd`/vim ~/.vim
 ln -sf `pwd`/gitconfig ~/.gitconfig
 ln -sf `pwd`/vimrc ~/.vimrc
 ln -sf `pwd`/gvimrc ~/.gvimrc
@@ -11,4 +10,5 @@ ln -sf `pwd`/herbstluftwm ~/.config/
 ln -sf `pwd`/fonts ~/.fonts
 ln -sf `pwd`/bin ~/bin
 ln -sf `pwd`/terminfo ~/.terminfo
+ln -sf `pwd`/tmux.conf ~/.tmux.conf
 fc-cache -f

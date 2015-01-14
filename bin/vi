@@ -1,0 +1,6 @@
+#!/usr/bin/env lua
+
+local p = require('posix.unistd')
+
+p.exec("/usr/bin/vim",{...})
+
