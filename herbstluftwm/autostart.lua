@@ -39,6 +39,7 @@ local keybindings =
   [mod..shift..'r']   =   'reload',
   [mod..shift..'e']   =   'quit',
   [mod..enter]        =   'spawn st',
+  ['Mod5-o']          =   'spawn rotate_screen.sh',
   [mod..'d']          =   'spawn dmenu_run',
 
   [mod..'h']          =   'focus left',
@@ -94,6 +95,7 @@ local settings =
   ['mouse_recenter_gap']        = '0',
   ['focus_follows_mouse']       = '1',
   ['tree_style']                = '╾│ ├└╼─┐',
+  ['auto_detect_monitors']      = '1',
 }
 
 local attributes =

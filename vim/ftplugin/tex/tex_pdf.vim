@@ -257,17 +257,7 @@ function! <SID>ViewTexPdf(...)
     elseif has('win32') || has ('win64')
         silent execute "! start ".l:target
     else
-        if executable('xdg-open')
-            silent execute "! xdg-open ".l:target
-        elseif executable('gnome-open')
-            silent execute "! gnome-open ".l:target
-        elseif executable('kfmclient')
-            silent execute "! kfclient exec ".l:target
-        elseif executable('see')
-            silent execute "! see ".l:target
-        elseif executable('cygstart')
-            silent execute "! cygstart ".l:target
-        elseif executable('mupdf')
+        if executable('mupdf')
             let grep_command = "ps aux | grep '[m]updf ".l:target."' | awk '{print $2}'"
             let grep_results = system(grep_command)
             if grep_results
@@ -277,6 +267,16 @@ function! <SID>ViewTexPdf(...)
               silent execute "! mupdf ".l:target." &"
             endif
             :redraw!
+        elseif executable('xdg-open')
+            silent execute "! xdg-open ".l:target
+        elseif executable('gnome-open')
+            silent execute "! gnome-open ".l:target
+        elseif executable('kfmclient')
+            silent execute "! kfclient exec ".l:target
+        elseif executable('see')
+            silent execute "! see ".l:target
+        elseif executable('cygstart')
+            silent execute "! cygstart ".l:target
         endif
     endif
     if v:shell_error
