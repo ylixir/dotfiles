@@ -257,14 +257,14 @@ function! <SID>ViewTexPdf(...)
     elseif has('win32') || has ('win64')
         silent execute "! start ".l:target
     else
-        if executable('mupdf')
-            let grep_command = "ps aux | grep '[m]updf ".l:target."' | awk '{print $2}'"
+        if executable('llpp')
+            let grep_command = "ps aux | grep '[l]lpp ".l:target."' | awk '{print $2}'"
             let grep_results = system(grep_command)
             if grep_results
               let hup_command = "kill -HUP ".grep_results
               silent execute "! ".hup_command
             else
-              silent execute "! mupdf ".l:target." &"
+              silent execute "! llpp ".l:target." &"
             endif
             :redraw!
         elseif executable('xdg-open')
