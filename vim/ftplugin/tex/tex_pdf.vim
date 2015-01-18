@@ -206,8 +206,9 @@ function! <SID>BuildTexPdf(view_results, ...)
         else
             echon "compiling ..."
             let b:tex_flavor = 'pdflatex'
+"            let b:tex_flavor = 'lualatex'
             compiler tex
-            setlocal makeprg=pdflatex\ \-shell-escape\ \-file\-line\-error\ \-interaction=nonstopmode\ $*\\\|\ grep\ \-P\ ':\\d{1,5}:\ '
+            setlocal makeprg=lualatex\ \-shell-escape\ \-file\-line\-error\ \-interaction=nonstopmode\ $*\\\|\ grep\ \-P\ ':\\d{1,5}:\ '
             setlocal errorformat=%f:%l:\ %m
             silent make %
         endif
