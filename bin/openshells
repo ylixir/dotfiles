@@ -1,0 +1,7 @@
+#!/usr/bin/env lua
+
+local p = require('posix.unistd')
+
+p.exec("/usr/bin/st",{'-e','/usr/bin/ssh','thebes.openshells.net','-t','tmux','attach'})
+--p.exec("/usr/bin/ssh",{'thebes.openshells.net','-t','tmux attach'})
+
