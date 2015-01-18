@@ -25,6 +25,8 @@ imap align<TAB> \begin{align*}<ESC>o\end{align*}<ESC>O<TAB>
 imap tab<TAB> \begin{tabular}{}<ESC>o\end{tabular}<ESC>k4li
 imap aligned<TAB> \begin{aligned}<ESC>o\end{aligned}<ESC>O<TAB>
 imap array<TAB> \begin{array}{}\end{array}<ESC>11hi
+imap graph<TAB> \begin{tikzpicture}[main_node/.style={circle,fill=blue!60,minimum size=1em,inner sep=3pt]}]<ESC>o\end{tikzpicture}<ESC>O<TAB>\draw (1) -- (2) -- (3) -- (1);<ESC>O
+imap node<TAB> \node[main_node] (1) at (-1,-1) {1};
 imap /<TAB> \frac{}{}<ESC>2hi
 imap (<TAB> \left(\right)<ESC>6hi
 imap \|<TAB> \left\lvert\right\rvert<ESC>11hi
