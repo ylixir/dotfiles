@@ -1,5 +1,5 @@
 set shell=/bin/sh
-set guifont=DejaVu\ Sans\ Mono\ 10
+set guifont=monoOne\ 10
 "set guifont=Inconsolata\ 12
 " set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
