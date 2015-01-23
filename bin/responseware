@@ -1,0 +1,6 @@
+#!/usr/bin/env lua
+
+local p = require('posix.unistd')
+
+p.exec("/usr/bin/chromium",{'--touch-devices=10','--app=https://responseware.turningtechnologies.com/'})
+

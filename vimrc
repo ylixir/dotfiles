@@ -19,6 +19,8 @@ colorscheme inkpot
 "colorscheme molokai
 
 imap <C-l> <right>
+imap <silent> <C-r> <Esc>:BuildAndViewTexPdf<CR>a
+map <silent> <C-r> <Esc>:BuildAndViewTexPdf<CR>
 imap ^<TAB> ^{}<ESC>i
 imap _<TAB> _{}<ESC>i
 imap align<TAB> \begin{align*}<ESC>o\end{align*}<ESC>O<TAB>
