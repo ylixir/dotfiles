@@ -28,8 +28,10 @@ imap tab<TAB> \begin{tabular}{}<ESC>o\end{tabular}<ESC>k4li
 imap aligned<TAB> \begin{aligned}<ESC>o\end{aligned}<ESC>O<TAB>
 imap array<TAB> \begin{array}{}\end{array}<ESC>11hi
 imap graph<TAB> \tikz\path [graphs/.cd, nodes={shape=circle, draw, text=black,inner sep=1pt,outer sep=0pt}]<ESC>o<TAB>graph [tree layout] { 1 -- {2 -- 3} -- 1 }<ESC>o[shift=(0:1)];
- imap graf<TAB> \begin{tikzpicture}[main_node/.style={circle,draw,text=black,inner sep=1pt,outer sep=0pt]}]<ESC>o\end{tikzpicture}<ESC>O<TAB>\draw (1) -- (2) -- (3) -- (1);<ESC>O
-imap node<TAB> \node[main_node] (1) at (-1,-1) {1};
+imap hgraph<TAB> \begin{tikzpicture}[main_node/.style={circle,draw,text=black,inner sep=1pt,outer sep=0pt]}]<ESC>o\end{tikzpicture}<ESC>O<TAB>%nodes here<ESC>o\begin{pgfonlayer}{background}<ESC>o\end{pgfonlayer}<ESC>O<TAB>\begin{scope}[transparency group,opacity=.5]<ESC>o\end{scope}<ESC>O<TAB>%draws here<ESC>o\draw[edge,color=] ;<ESC>3kO
+
+ imap graf<TAB> \begin{tikzpicture}[main_node/.style={node distance=1cm,circle,draw,text=black,inner sep=1pt,outer sep=0pt]}]<ESC>o\end{tikzpicture}<ESC>O<TAB>\draw ();<ESC>O
+imap node<TAB> \node[main_node] () at (,) {};<ESC>11hi
 imap /<TAB> \frac{}{}<ESC>2hi
 imap (<TAB> \left(\right)<ESC>6hi
 imap \|<TAB> \left\lvert\right\rvert<ESC>11hi
@@ -46,7 +48,7 @@ imap R<TAB> \mathbb{R}
 imap C<TAB> \mathbb{C}
 imap lplc<TAB> \mathscr{L}\{\}<ESC>hi
 imap bar<TAB> \overline{}<ESC>i
-imap bold<TAB> \boldsymbol{}<ESC>i
+imap bold<TAB> {\bfseries }<ESC>i
 imap vec<TAB> \vec{}<ESC>i
 imap pd<TAB> \partial 
 imap dydx<TAB> \frac{\mathrm{d}y}{\mathrm{d}x}

@@ -2,5 +2,5 @@
 
 local p = require('posix.unistd')
 
-p.exec("/usr/bin/vim",{...})
+p.exec("/usr/bin/gvim",{...})
 
