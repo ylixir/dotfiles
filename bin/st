@@ -2,4 +2,4 @@
 
 local p = require('posix.unistd')
 
-p.exec("/usr/bin/st",{'-e','tmux'})-- attach'})
+p.exec("/usr/local/bin/st",{'-e','tmux'})-- attach'})
