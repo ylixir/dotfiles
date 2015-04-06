@@ -258,7 +258,14 @@ function! <SID>ViewTexPdf(...)
     elseif has('win32') || has ('win64')
         silent execute "! start ".l:target
     else
-        if executable('llpp')
+        if executable('zathura')
+            let grep_command = "ps aux | grep '[z]athura ".l:target."' | awk '{print $2}'"
+            let grep_results = system(grep_command)
+            if grep_results == 0
+              silent execute "! zathura ".l:target." &"
+            endif
+            :redraw!
+        elseif executable('llpp')
             let grep_command = "ps aux | grep '[l]lpp ".l:target."' | awk '{print $2}'"
             let grep_results = system(grep_command)
             if grep_results

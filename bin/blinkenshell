@@ -2,6 +2,6 @@
 
 local p = require('posix.unistd')
 
-p.exec("/usr/bin/st",{'-e','/usr/bin/ssh','ssh.blinkenshell.org','-p','2222','-t','. /etc/profile; . /etc/zsh/zprofile; tmux attach'})
+p.exec("/usr/local/bin/st",{'-e','/usr/bin/ssh','ssh.blinkenshell.org','-p','2222','-t','. /etc/profile; . /etc/zsh/zprofile; tmux attach'})
 --p.exec("/usr/bin/ssh",{'ssh.blinkenshell.org','-p','2222','-t','tmux attach'})
 
