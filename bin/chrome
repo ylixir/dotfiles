@@ -1,0 +1,6 @@
+#!/usr/bin/env lua
+
+local p = require('posix.unistd')
+
+p.exec("/bin/chromium",{'--touch-devices=10','--disk-cache-dir=/dev/null','--media-cache-dir=/dev/null'})
+
