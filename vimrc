@@ -49,6 +49,13 @@ imap C<TAB> \mathbb{C}
 imap lplc<TAB> \mathscr{L}\{\}<ESC>hi
 imap bar<TAB> \overline{}<ESC>i
 imap bold<TAB> {\bfseries }<ESC>i
+imap mb<TAB> \mathbf{}<ESC>i
+imap bx<TAB> \mathbf{x}
+imap by<TAB> \mathbf{y}
+imap bu<TAB> \mathbf{u}
+imap bv<TAB> \mathbf{v}
+imap bw<TAB> \mathbf{w}
+imap b0<TAB> \mathbf{0}
 imap vec<TAB> \vec{}<ESC>i
 imap pd<TAB> \partial 
 imap dydx<TAB> \frac{\mathrm{d}y}{\mathrm{d}x}
