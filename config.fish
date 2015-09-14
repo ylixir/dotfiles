@@ -1,5 +1,5 @@
 #set PATH ~/bin $PATH /usr/local/sbin /sbin /usr/sbin
-set PATH ~/bin /usr/local/bin /bin /usr/bin /usr/local/sbin /sbin /usr/sbin /opt/texlive/2015/bin/x86_64-linux /usr/lib/jvm/oracle-jre/bin
+set PATH ~/bin ~/go/bin /usr/local/bin /bin /usr/bin /usr/local/sbin /sbin /usr/sbin /opt/texlive/2015/bin/x86_64-linux /usr/lib/jvm/oracle-jre/bin
 set JAVA_HOME /usr/lib/jvm/oracle-jre
 
 # OPAM configuration
@@ -12,5 +12,6 @@ set -x CHROME_FLAGS "--ppapi-flash-path=/usr/lib/chromium-pepper-flash/libpepfla
 set -x GPGKEY 29A032C3
 
 set -x PAGER less
+set -x GOPATH $HOME/go
 
 ssh_agent_start
