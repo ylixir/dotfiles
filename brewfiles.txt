@@ -1,0 +1,6 @@
+fish		libtermkey	neovim		python		yarn
+gdbm		libuv		node		readline	zsh
+gettext		libvterm	openssl		sqlite
+icu4c		luajit		pcre		telnet
+jemalloc	msgpack		pcre2		unibilium
+
