@@ -22,5 +22,7 @@ fi
 # now make sure bash starts fish when running from login mode
 grep -F fish $HOME/.bashrc
 if [ $? -ne 0 ]; then
-  printf "exec %s\n" `which fish` >> $HOME/.bashrc
+  printf "if [ -z \$IN_NIX_SHELL ]; then\n" >> $HOME/.bashrc
+  printf "  exec %s\n" `which fish` >> $HOME/.bashrc
+  printf "fi\n" `which fish` >> $HOME/.bashrc
 fi
