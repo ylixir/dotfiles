@@ -26,3 +26,6 @@ if [ $? -ne 0 ]; then
   printf "  exec %s\n" `which fish` >> $HOME/.bashrc
   printf "fi\n" `which fish` >> $HOME/.bashrc
 fi
+
+mkdir -p $HOME/.config/fish
+cp -r fish/* $HOME/.config/fish/
