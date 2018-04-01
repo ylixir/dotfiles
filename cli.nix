@@ -3,6 +3,7 @@ let
   pkgs = import <nixpkgs> {};
   homies = with pkgs; [
     fish
+    nix
     ];
 in
   homies
