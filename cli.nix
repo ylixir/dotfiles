@@ -4,6 +4,15 @@ let
   homies = with pkgs; [
     fish
     nix
+    tmux
     ];
+  tmux = import ./tmux (with pkgs;
+    { inherit
+        makeWrapper
+        symlinkJoin
+        writeText
+        ;
+      tmux = pkgs.tmux;
+    });
 in
   homies
