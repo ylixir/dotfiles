@@ -15,6 +15,11 @@ nix-env -f cli.nix -i --remove-all
 
 #mostly bash is the default, and our game is just
 #to be able to use fish, not make it the "default"
+chsh -s `which bash`
+if [ $? -ne 0 ]
+then
+  chsh -s /bin/bash
+fi
 
 # make sure that we fire bashrc, even on a login
 if [ -e $HOME/.bash_profile ]
