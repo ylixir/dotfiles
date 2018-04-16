@@ -2,15 +2,16 @@
 
 #note that this is very bash centric.
 
+. ./install-nix.sh
+
 which nix-env
 if [ $? != 0 ]
 then
-  . ./install-nix.sh
   #need the environment setup, so recurse
   exec bash -l ./setup-cli.sh
 fi
 
-nix-env -f cli.nix -i --remove-all
+nix-env -f nix/cli.nix -i --remove-all
 
 
 #mostly bash is the default, and our game is just
