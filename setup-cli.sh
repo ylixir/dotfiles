@@ -60,5 +60,6 @@ eof
 
 fi
 
+rm -rf $HOME/.config/fish
 mkdir -p $HOME/.config/fish
-cp -r --remove-destination fish/* $HOME/.config/fish/
+cp -R fish/* $HOME/.config/fish/
