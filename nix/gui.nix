@@ -4,7 +4,7 @@ let
 in
   with pkgs;
   cli ++ [
-    pkgs.st
+    st
     fontconfig
     iosevka
   ]
