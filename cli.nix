@@ -5,6 +5,7 @@ let
     fish
     nix
     tmux
+    neovim
     ];
   tmux = import ./tmux (with pkgs;
     { inherit
@@ -14,5 +15,17 @@ let
         ;
       tmux = pkgs.tmux;
     });
+  neovim = pkgs.neovim.override {
+    configure = {
+      customRC = ''
+        autocmd BufRead,BufNewFile *.elm set filetype=elm
+        autocmd FileType elm :packadd elm-vim
+      '';
+      packages.myVimPackage = with pkgs.vimPlugins; {
+        start = [ ale ];
+        opt = [ elm-vim ];
+      };
+  };
+  };
 in
   homies
