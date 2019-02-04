@@ -1,13 +1,21 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 #note that this is very bash centric.
-
-which nix-env
-if [ $? != 0 ]
+if [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ]
 then
-  . ./install-nix.sh
-  #need the environment setup, so recurse
-  exec bash -l ./setup-cli.sh
+  . $HOME/.nix-profile/etc/profile.d/nix.sh ]
+fi
+
+if ! which nix-env
+then
+  if . ./install-nix.sh
+  then
+    #need the environment setup, so recurse
+    exec bash -l ./setup-cli.sh
+  else
+    echo "Could not install nix"
+    exit 1
+  fi
 fi
 
 nix-env -f cli.nix -i --remove-all
@@ -63,3 +71,6 @@ fi
 rm -rf $HOME/.config/fish
 mkdir -p $HOME/.config/fish
 cp -R fish/* $HOME/.config/fish/
+
+git config --global user.email "ylixir@gmail.com"
+git config --global user.name "Jon Allen"
