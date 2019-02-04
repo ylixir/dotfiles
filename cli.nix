@@ -6,6 +6,7 @@ let
     nix
     tmux
     neovim
+    ps
     ];
   tmux = import ./tmux (with pkgs;
     { inherit
