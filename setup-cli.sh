@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 #note that this is very bash centric.
 
@@ -6,9 +6,10 @@ which nix-env
 if [ $? != 0 ]
 then
   . ./install-nix.sh
-  #need the environment setup, so recurse
-  exec bash -l ./setup-cli.sh
+  #need the environment setup
+  . $HOME/.nix-profile/etc/profile.d/nix.sh
 fi
+
 
 nix-env -f cli.nix -i --remove-all
 
