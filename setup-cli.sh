@@ -56,7 +56,7 @@ if [ $? != 0 ]
 then
   cat >> $HOME/.bashrc << eof
 
-if [ -z \$IN_NIX_SHELL ]
+if [ -z \$IN_NIX_SHELL ] && [ -z \$PIPENV_ACTIVE ]
 then
   if [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ]
   then
