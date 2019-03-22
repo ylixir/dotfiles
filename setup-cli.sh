@@ -73,5 +73,5 @@ rm -rf $HOME/.config/fish
 mkdir -p $HOME/.config/fish
 cp -R fish/* $HOME/.config/fish/
 
-git config --global user.email "ylixir@gmail.com"
+git config --global user.email "jon@ylixir.io"
 git config --global user.name "Jon Allen"
