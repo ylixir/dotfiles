@@ -5,6 +5,8 @@ let
     fish
     nix
     tmux
+    curl
+    cacert
     neovim
     ps
     ];

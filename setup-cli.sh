@@ -10,13 +10,14 @@ if ! which nix-env
 then
   if . ./install-nix.sh
   then
-    #need the environment setup, so recurse
-    exec bash -l ./setup-cli.sh
+    #need the environment setup
+    . $HOME/.nix-profile/etc/profile.d/nix.sh
   else
     echo "Could not install nix"
     exit 1
   fi
 fi
+
 
 nix-env -f cli.nix -i --remove-all
 
@@ -55,7 +56,7 @@ if [ $? != 0 ]
 then
   cat >> $HOME/.bashrc << eof
 
-if [ -z \$IN_NIX_SHELL ]
+if [ -z \$IN_NIX_SHELL ] && [ -z \$PIPENV_ACTIVE ]
 then
   if [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ]
   then
@@ -72,5 +73,5 @@ rm -rf $HOME/.config/fish
 mkdir -p $HOME/.config/fish
 cp -R fish/* $HOME/.config/fish/
 
-git config --global user.email "ylixir@gmail.com"
+git config --global user.email "jon@ylixir.io"
 git config --global user.name "Jon Allen"
