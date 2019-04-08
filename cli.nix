@@ -20,6 +20,7 @@ let
       tmux = pkgs.tmux;
     });
   neovim = pkgs.neovim.override {
+    viAlias = true;
     configure = {
       customRC = ''
         autocmd BufRead,BufNewFile *.elm set filetype=elm
