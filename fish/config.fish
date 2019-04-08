@@ -31,3 +31,5 @@ if status --is-interactive
     exec tmux
   end
 end
+
+direnv hook fish | source
