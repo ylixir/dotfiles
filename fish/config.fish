@@ -14,6 +14,8 @@ for v in $PATH
 end
 
 set -x PATH $cleanpath
+set -x EDITOR nvim
+set -x VISUAL nvim
 
 function isWsl
   uname -a | grep -q "Microsoft"
