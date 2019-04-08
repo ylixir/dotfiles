@@ -9,6 +9,7 @@ let
     cacert
     neovim
     ps
+    direnv
     ];
   tmux = import ./tmux (with pkgs;
     { inherit
