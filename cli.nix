@@ -10,6 +10,7 @@ let
     neovim
     ps
     direnv
+    latex
     ];
   tmux = import ./tmux (with pkgs;
     { inherit
@@ -19,6 +20,9 @@ let
         ;
       tmux = pkgs.tmux;
     });
+  latex = pkgs.texlive.combine {
+      inherit (pkgs.texlive) scheme-small algorithms cm-super moderncv marvosym;
+  };
   neovim = pkgs.neovim.override {
     viAlias = true;
     configure = {
