@@ -11,7 +11,11 @@ let
     ps
     direnv
     latex
+    emacs
     ];
+  emacs = pkgs.emacsWithPackages(e: [
+  	e.evil
+  ]);
   tmux = import ./tmux (with pkgs;
     { inherit
         makeWrapper

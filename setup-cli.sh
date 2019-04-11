@@ -73,5 +73,9 @@ rm -rf $HOME/.config/fish
 mkdir -p $HOME/.config/fish
 cp -R fish/* $HOME/.config/fish/
 
+rm -rf $HOME/.emacs.d
+mkdir -p $HOME/.emacs.d
+cp -R emacs/* $HOME/.emacs.d/
+
 git config --global user.email "jon@ylixir.io"
 git config --global user.name "Jon Allen"
