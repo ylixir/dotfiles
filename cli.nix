@@ -21,7 +21,7 @@ let
       tmux = pkgs.tmux;
     });
   latex = pkgs.texlive.combine {
-      inherit (pkgs.texlive) scheme-small algorithms cm-super moderncv;
+      inherit (pkgs.texlive) scheme-small algorithms cm-super moderncv marvosym;
   };
   neovim = pkgs.neovim.override {
     viAlias = true;
