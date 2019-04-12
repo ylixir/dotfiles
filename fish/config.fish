@@ -16,6 +16,7 @@ end
 set -x PATH $cleanpath
 set -x EDITOR nvim
 set -x VISUAL nvim
+set -x TERM xterm-24bit
 
 function isWsl
   uname -a | grep -q "Microsoft"
