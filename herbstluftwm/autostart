@@ -38,7 +38,7 @@ local keybindings =
   [mod..shift..'q']   =   'close',
   [mod..shift..'r']   =   'reload',
   [mod..shift..'e']   =   'quit',
-  [mod..enter]        =   'spawn st',
+  [mod..enter]        =   'spawn lilyterm',
   ['Mod5-o']          =   'spawn rotate_screen.sh',
   [mod..'d']          =   'spawn dmenu_run',
 

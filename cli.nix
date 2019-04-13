@@ -14,7 +14,7 @@ let
     emacs
     herbstluftwm
     dmenu
-    st
+    lilyterm
     lua
     ];
   emacs = pkgs.emacsWithPackages(e: [
