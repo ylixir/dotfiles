@@ -5,7 +5,7 @@
 ;zomg emacs has a port of the best theme evah!
 ;the second argument tells emacs that this theme is safe
 (load-theme 'inkpot t)
-(setq-default display-line-numbers 'relative)
+(setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode t)
 
 ; go go vi mode
