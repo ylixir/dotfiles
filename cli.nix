@@ -12,10 +12,6 @@ let
     direnv
     latex
     emacs
-    herbstluftwm
-    dmenu
-    lilyterm
-    lua
     ];
   emacs = pkgs.emacsWithPackages(e: [
   	e.evil
