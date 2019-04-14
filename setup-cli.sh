@@ -69,6 +69,10 @@ eof
 
 fi
 
+mkdir -p $HOME/.local/share/fonts
+cp -R fonts/* $HOME/.local/share/fonts/
+fc-cache -f -v
+
 rm -rf $HOME/.config/fish
 mkdir -p $HOME/.config/fish
 cp -R fish/* $HOME/.config/fish/
