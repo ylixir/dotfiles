@@ -9,7 +9,11 @@
 (global-display-line-numbers-mode t)
 
 (add-to-list 'default-frame-alist
-             '(font . "Fantasque Sans Mono-10"))
+             '(font . "Fantasque Sans Mono-12"))
+
+;hack to get fish prompt working
+(add-hook 'term-mode-hook 'toggle-truncate-lines)
+
 ; go go vi mode
 (require 'evil)
 (evil-mode t)
