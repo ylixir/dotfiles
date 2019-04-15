@@ -8,6 +8,8 @@
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode t)
 
+(add-to-list 'default-frame-alist
+             '(font . "Fantasque Sans Mono-10"))
 ; go go vi mode
 (require 'evil)
 (evil-mode t)
