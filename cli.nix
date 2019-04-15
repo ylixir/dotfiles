@@ -2,20 +2,24 @@ let
   # https://unix.stackexchange.com/questions/183440/how-do-i-create-a-local-repository-for-nixos-nixpkgs
   pkgs = import <nixpkgs> {};
   homies = with pkgs; [
-    fish
-    nix
-    tmux
-    curl
     cacert
-    neovim
-    ps
+    curl
     direnv
-    latex
     emacs
+    fish
+    latex
+    neovim
+    nix
+    ps
+    tmux
     ];
-  emacs = pkgs.emacsWithPackages(e: [
-  	e.evil
-  ]);
+  emacs = pkgs.emacsWithPackages(e: (with e; [
+    evil
+    general
+    ivy
+    use-package
+    which-key
+  ]));
   tmux = import ./tmux (with pkgs;
     { inherit
         makeWrapper
