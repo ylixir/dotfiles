@@ -2,7 +2,7 @@
 (eval-when-compile
   (require 'package)
   (add-to-list 'package-archives
-    '("melpa-stable" . "https://stable.melpa.org/packages/"))
+    '("melpa" . "https://melpa.org/packages/"))
   (require 'use-package)
   (package-initialize)
 )
@@ -37,3 +37,15 @@
   :ensure t
   :config
   (evil-collection-init))
+
+;getting general from nix, not *elpa
+(use-package general
+  :after evil
+  :config
+(general-evil-setup)
+;spc by itself needs to be separate from the spc prefixes
+  (general-nvmap
+    "SPC" ctl-x-map)
+  (general-nvmap
+    :prefix "SPC"
+      "h" help-map))
