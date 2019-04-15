@@ -38,14 +38,23 @@
   :config
   (evil-collection-init))
 
+(use-package which-key
+  :init
+    (which-key-mode))
+
+(use-package ivy)
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
+
 ;getting general from nix, not *elpa
 (use-package general
   :after evil
-  :config
-(general-evil-setup)
-;spc by itself needs to be separate from the spc prefixes
-  (general-nvmap
-    "SPC" ctl-x-map)
-  (general-nvmap
-    :prefix "SPC"
-      "h" help-map))
+  :init
+    (general-evil-setup)
+    ;spc by itself needs to be separate from the spc prefixes
+    (general-nvmap
+      "SPC" ctl-x-map)
+    (general-nvmap
+      :prefix "SPC"
+        "h" help-map))
