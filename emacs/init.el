@@ -1,3 +1,12 @@
+;we will be using "use-package" for dependencies
+(eval-when-compile
+  (require 'package)
+  (add-to-list 'package-archives
+    '("melpa-stable" . "https://stable.melpa.org/packages/"))
+  (require 'use-package)
+  (package-initialize)
+)
+
 ;i feel like this folder is gonna get cluttered
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
@@ -15,6 +24,16 @@
 (add-hook 'term-mode-hook 'toggle-truncate-lines)
 
 ; go go vi mode
-(require 'evil)
-(evil-mode t)
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration nil)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
 
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))

@@ -13,9 +13,9 @@ let
     latex
     emacs
     ];
-  emacs = pkgs.emacsWithPackages(e: [
-  	e.evil
-  ]);
+  emacs = pkgs.emacsWithPackages(e: (with e; [
+    e.use-package
+  ]));
   tmux = import ./tmux (with pkgs;
     { inherit
         makeWrapper
