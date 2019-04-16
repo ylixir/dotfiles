@@ -1,3 +1,11 @@
+;first we taketh away
+(blink-cursor-mode 0)
+(setq initial-scratch-message "")
+(setq inhibit-startup-message t)
+(setq visible-bell t)
+(scroll-bar-mode 0)
+(tool-bar-mode 0)
+
 ;we will be using "use-package" for dependencies
 (eval-when-compile
   (require 'package)
@@ -9,7 +17,7 @@
 
 ;i feel like this folder is gonna get cluttered
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-
+(setq speedbar-show-unknown-files t)
 
 ;zomg emacs has a port of the best theme evah!
 ;the second argument tells emacs that this theme is safe
@@ -23,6 +31,9 @@
 ;hack to get fish prompt working
 (add-hook 'term-mode-hook 'toggle-truncate-lines)
 
+(use-package direnv)
+(direnv-mode)
+
 ; go go vi mode
 (use-package evil
   :ensure t
@@ -31,30 +42,88 @@
   (setq evil-want-keybinding nil)
   :config
   (evil-mode 1))
-
 (use-package evil-collection
   :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
-
-(use-package which-key
+  :custom (evil-collection-setup-minibuffer t)
   :init
-    (which-key-mode))
-
-(use-package ivy)
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq ivy-count-format "(%d/%d) ")
+  (evil-collection-init))
 
 ;getting general from nix, not *elpa
 (use-package general
   :after evil
   :init
     (general-evil-setup)
-    ;spc by itself needs to be separate from the spc prefixes
-    (general-nvmap
-      "SPC" ctl-x-map)
+      ;spc by itself needs to be separate from the spc prefixes
+      (general-nvmap
+        "SPC" ctl-x-map)
+      (general-nvmap
+        :prefix "SPC"
+          "h" help-map)
+)
+
+
+(use-package which-key
+  :init
+    (which-key-mode))
+
+(use-package magit)
+(use-package evil-magit)
+
+(use-package projectile
+  :config
     (general-nvmap
       :prefix "SPC"
-        "h" help-map))
+        "p" 'projectile-command-map)
+    (projectile-mode +1)
+    (setq projectile-project-search-path '("~/code/" "~/work/"))
+)
+
+(use-package ivy)
+(use-package counsel)
+(use-package swiper)
+(ivy-mode 1)
+(counsel-mode)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
+(setq ivy-re-builders-alist
+      '((swiper . ivy--regex-plus)
+        (t      . ivy--regex-fuzzy)))
+
+;languages i might use
+(use-package php-mode)
+
+;all the ide stuff (language server protocol)
+(use-package lsp-mode
+  :after general
+  :commands lsp
+  :init
+    (setq evil-want-keybinding t)
+    (add-hook 'prog-mode-hook #'lsp)
+    (general-nvmap
+      :prefix "g"
+        "r" 'lsp-find-references)
+ )
+
+(use-package lsp-clients)
+(use-package lsp-ui :commands lsp-ui-mode
+  :init
+    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+(use-package company-lsp :commands company-lsp)
+;; PHP intelephense
+(defgroup lsp-php-iph nil
+  "PHP."
+  :group 'lsp-mode
+  :tag "PHP")
+
+(defcustom lsp-clients-php-iph-server-command
+  `("intelephense" "--stdio")
+  "Install directory for php-language-server."
+  :group 'lsp-php-ip
+  :type '(repeat string))
+
+(lsp-register-client
+ (make-lsp-client :new-connection (lsp-stdio-connection (lambda () lsp-clients-php-iph-server-command))
+                  :major-modes '(php-mode)
+                  :priority 0
+                  :server-id 'iph))
+

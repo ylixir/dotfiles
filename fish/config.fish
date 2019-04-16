@@ -34,8 +34,9 @@ end
 
 if status --is-interactive
   ssh_agent_start
+
   isWsl || not isFirstTty
-  if [ 0 -eq "$status" ] && [ -z $TMUX ]
+  if [ 0 -eq $status ] && [ -z $TMUX ] && [ -z $EMACS ]
     exec tmux
   end
 end
