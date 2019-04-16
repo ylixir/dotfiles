@@ -54,18 +54,29 @@ fi
 
 # now make sure bash starts fish when running from login mode
 cat > $HOME/.bashrc << eof
+_direnv_hook() {
+  local previous_exit_status=\$?
+  eval "\$("/Users/jallen/.nix-profile/bin/direnv" export bash)"
+  return \$previous_exit_status
+}
+
 if [ -z \$IN_NIX_SHELL ] && [ -z \$PIPENV_ACTIVE ]
 then
-  if [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ]
+  if [ -f \$HOME/.nix-profile/etc/profile.d/nix.sh ]
   then
-    export PATH=$HOME/.yarn/bin:$PATH
-    . $HOME/.nix-profile/etc/profile.d/nix.sh
+    export PATH=\$HOME/.yarn/bin:\$PATH
+    . \$HOME/.nix-profile/etc/profile.d/nix.sh
+    which launchctl && launchctl setenv PATH \$PATH
   fi
-
   exec `which fish`
 fi
+if ! [[ "\$PROMPT_COMMAND" =~ _direnv_hook ]]; then
+  PROMPT_COMMAND="_direnv_hook;\$PROMPT_COMMAND"
+fi
+
 eof
-eval "$(direnv hook bash)" >> $HOME/.bashrc
+#eval "$(direnv hook bash)" >> $HOME/.bashrc
+
 mkdir -p $HOME/.local/share/fonts
 cp -R fonts/* $HOME/.local/share/fonts/
 fc-cache -f -v
