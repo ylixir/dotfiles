@@ -65,22 +65,27 @@
   :after evil
   :init
     (general-evil-setup)
-    ;spc by itself needs to be separate from the spc prefixes
-    (general-nvmap
-      "SPC" ctl-x-map)
-    (general-nvmap
-      :prefix "SPC"
-        "h" help-map))
+      ;spc by itself needs to be separate from the spc prefixes
+      (general-nvmap
+        "SPC" ctl-x-map)
+      (general-nvmap
+        :prefix "SPC"
+          "h" help-map)
+    )
 
 ;languages i might use
 (use-package php-mode)
 
 ;all the ide stuff (language server protocol)
 (use-package lsp-mode
+  :after general
   :commands lsp
   :init
     (setq evil-want-keybinding t)
     (add-hook 'prog-mode-hook #'lsp)
+    (general-nvmap
+      :prefix "g"
+        "r" 'lsp-find-references)
  )
 
 (use-package lsp-clients)
@@ -105,3 +110,4 @@
                   :major-modes '(php-mode)
                   :priority 0
                   :server-id 'iph))
+
