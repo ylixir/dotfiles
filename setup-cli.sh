@@ -60,13 +60,12 @@ then
   then
     export PATH=$HOME/.yarn/bin:$PATH
     . $HOME/.nix-profile/etc/profile.d/nix.sh
-    eval "$(direnv hook bash)"
   fi
 
   exec `which fish`
 fi
 eof
-
+eval "$(direnv hook bash)" >> $HOME/.bashrc
 mkdir -p $HOME/.local/share/fonts
 cp -R fonts/* $HOME/.local/share/fonts/
 fc-cache -f -v
