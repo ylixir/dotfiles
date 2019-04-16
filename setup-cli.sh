@@ -3,7 +3,7 @@
 #note that this is very bash centric.
 if [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ]
 then
-  . $HOME/.nix-profile/etc/profile.d/nix.sh ]
+  . $HOME/.nix-profile/etc/profile.d/nix.sh
 fi
 
 if ! which nix-env
@@ -18,9 +18,11 @@ then
   fi
 fi
 
-
+rm -rf lorri
+git clone https://github.com/target/lorri.git -b rolling-release
 nix-env -f cli.nix -i --remove-all
-
+yarn config set prefix ~/.yarn
+yarn global add intelephense
 
 #mostly bash is the default, and our game is just
 #to be able to use fish, not make it the "default"
@@ -51,23 +53,19 @@ then
 fi
 
 # now make sure bash starts fish when running from login mode
-grep -F fish $HOME/.bashrc
-if [ $? != 0 ]
-then
-  cat >> $HOME/.bashrc << eof
-
+cat > $HOME/.bashrc << eof
 if [ -z \$IN_NIX_SHELL ] && [ -z \$PIPENV_ACTIVE ]
 then
   if [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ]
   then
-    . $HOME/.nix-profile/etc/profile.d/nix.sh ]
+    export PATH=$HOME/.yarn/bin:$PATH
+    . $HOME/.nix-profile/etc/profile.d/nix.sh
+    eval "$(direnv hook bash)"
   fi
 
   exec `which fish`
 fi
 eof
-
-fi
 
 mkdir -p $HOME/.local/share/fonts
 cp -R fonts/* $HOME/.local/share/fonts/

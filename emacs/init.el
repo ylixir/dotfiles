@@ -17,7 +17,7 @@
 
 ;i feel like this folder is gonna get cluttered
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-
+(setq speedbar-show-unknown-files t)
 
 ;zomg emacs has a port of the best theme evah!
 ;the second argument tells emacs that this theme is safe
@@ -30,6 +30,9 @@
 
 ;hack to get fish prompt working
 (add-hook 'term-mode-hook 'toggle-truncate-lines)
+
+(use-package direnv)
+(direnv-mode)
 
 ; go go vi mode
 (use-package evil
@@ -77,7 +80,28 @@
   :commands lsp
   :init
     (setq evil-want-keybinding t)
-    (add-hook 'prog-mode-hook #'lsp))
+    (add-hook 'prog-mode-hook #'lsp)
+ )
 
-(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-clients)
+(use-package lsp-ui :commands lsp-ui-mode
+  :init
+    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 (use-package company-lsp :commands company-lsp)
+;; PHP intelephense
+(defgroup lsp-php-iph nil
+  "PHP."
+  :group 'lsp-mode
+  :tag "PHP")
+
+(defcustom lsp-clients-php-iph-server-command
+  `("intelephense" "--stdio")
+  "Install directory for php-language-server."
+  :group 'lsp-php-ip
+  :type '(repeat string))
+
+(lsp-register-client
+ (make-lsp-client :new-connection (lsp-stdio-connection (lambda () lsp-clients-php-iph-server-command))
+                  :major-modes '(php-mode)
+                  :priority 0
+                  :server-id 'iph))

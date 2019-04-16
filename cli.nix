@@ -8,21 +8,26 @@ let
     emacs
     fish
     latex
+    lorri
     neovim
     nix
+    nodejs
     ps
     tmux
+    yarn
     ];
+  lorri = import ./lorri;
   emacs = pkgs.emacsWithPackages(e: (with e; [
-    php-mode
     company
     company-lsp
+    direnv
     evil
     evil-collection
     general
     ivy
     lsp-mode
     lsp-ui
+    php-mode
     use-package
     which-key
   ]));
