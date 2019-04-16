@@ -15,6 +15,7 @@ let
     ];
   emacs = pkgs.emacsWithPackages(e: (with e; [
     evil
+    evil-collection
     general
     ivy
     use-package

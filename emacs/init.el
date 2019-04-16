@@ -1,3 +1,11 @@
+;first we taketh away
+(blink-cursor-mode 0)
+(setq initial-scratch-message "")
+(setq inhibit-startup-message t)
+(setq visible-bell t)
+(scroll-bar-mode 0)
+(tool-bar-mode 0)
+
 ;we will be using "use-package" for dependencies
 (eval-when-compile
   (require 'package)
@@ -31,11 +39,10 @@
   (setq evil-want-keybinding nil)
   :config
   (evil-mode 1))
-
 (use-package evil-collection
   :after evil
-  :ensure t
-  :config
+  :custom (evil-collection-setup-minibuffer t)
+  :init
   (evil-collection-init))
 
 (use-package which-key
