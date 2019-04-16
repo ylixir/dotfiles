@@ -48,18 +48,6 @@
   :init
   (evil-collection-init))
 
-(use-package which-key
-  :init
-    (which-key-mode))
-
-(use-package ivy)
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq ivy-count-format "(%d/%d) ")
-(setq ivy-re-builders-alist
-      '((swiper . ivy--regex-plus)
-        (t      . ivy--regex-fuzzy)))
-
 ;getting general from nix, not *elpa
 (use-package general
   :after evil
@@ -71,7 +59,35 @@
       (general-nvmap
         :prefix "SPC"
           "h" help-map)
-    )
+)
+
+
+(use-package which-key
+  :init
+    (which-key-mode))
+
+(use-package magit)
+(use-package evil-magit)
+
+(use-package projectile
+  :config
+    (general-nvmap
+      :prefix "SPC"
+        "p" 'projectile-command-map)
+    (projectile-mode +1)
+    (setq projectile-project-search-path '("~/code/" "~/work/"))
+)
+
+(use-package ivy)
+(use-package counsel)
+(use-package swiper)
+(ivy-mode 1)
+(counsel-mode)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
+(setq ivy-re-builders-alist
+      '((swiper . ivy--regex-plus)
+        (t      . ivy--regex-fuzzy)))
 
 ;languages i might use
 (use-package php-mode)

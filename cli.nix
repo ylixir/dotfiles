@@ -2,6 +2,7 @@ let
   # https://unix.stackexchange.com/questions/183440/how-do-i-create-a-local-repository-for-nixos-nixpkgs
   pkgs = import <nixpkgs> {};
   homies = with pkgs; [
+    ag
     cacert
     curl
     direnv
@@ -20,14 +21,19 @@ let
   emacs = pkgs.emacsWithPackages(e: (with e; [
     company
     company-lsp
+    counsel
     direnv
     evil
     evil-collection
+    evil-magit
     general
     ivy
     lsp-mode
     lsp-ui
+    magit
     php-mode
+    projectile
+    swiper
     use-package
     which-key
   ]));
