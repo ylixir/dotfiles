@@ -14,10 +14,15 @@ let
     tmux
     ];
   emacs = pkgs.emacsWithPackages(e: (with e; [
+    php-mode
+    company
+    company-lsp
     evil
     evil-collection
     general
     ivy
+    lsp-mode
+    lsp-ui
     use-package
     which-key
   ]));

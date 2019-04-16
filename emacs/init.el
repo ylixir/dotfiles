@@ -53,6 +53,9 @@
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d) ")
+(setq ivy-re-builders-alist
+      '((swiper . ivy--regex-plus)
+        (t      . ivy--regex-fuzzy)))
 
 ;getting general from nix, not *elpa
 (use-package general
@@ -65,3 +68,16 @@
     (general-nvmap
       :prefix "SPC"
         "h" help-map))
+
+;languages i might use
+(use-package php-mode)
+
+;all the ide stuff (language server protocol)
+(use-package lsp-mode
+  :commands lsp
+  :init
+    (setq evil-want-keybinding t)
+    (add-hook 'prog-mode-hook #'lsp))
+
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package company-lsp :commands company-lsp)
