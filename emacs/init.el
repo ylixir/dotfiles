@@ -87,6 +87,7 @@
 (setq ivy-count-format "(%d/%d) ")
 (setq ivy-re-builders-alist
       '((swiper . ivy--regex-plus)
+        (counsel-ag . ivy--regex-plus)
         (t      . ivy--regex-fuzzy)))
 
 ;languages i might use
