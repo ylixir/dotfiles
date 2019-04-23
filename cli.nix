@@ -48,18 +48,6 @@ let
   latex = pkgs.texlive.combine {
       inherit (pkgs.texlive) scheme-small algorithms cm-super moderncv marvosym;
   };
-  neovim = pkgs.neovim.override {
-    viAlias = true;
-    configure = {
-      customRC = ''
-        autocmd BufRead,BufNewFile *.elm set filetype=elm
-        autocmd FileType elm :packadd elm-vim
-      '';
-      packages.myVimPackage = with pkgs.vimPlugins; {
-        start = [ ale ];
-        opt = [ elm-vim ];
-      };
-  };
-  };
+  neovim = import ./neovim pkgs;
 in
   homies
