@@ -19,7 +19,6 @@ let
     python2Packages.pynvim
     python3
     python3Packages.pynvim
-    tmux
     yarn
     ];
   lorri = import ./lorri;
@@ -42,14 +41,6 @@ let
     use-package
     which-key
   ]));
-  tmux = import ./tmux (with pkgs;
-    { inherit
-        makeWrapper
-        symlinkJoin
-        writeText
-        ;
-      tmux = pkgs.tmux;
-    });
   latex = pkgs.texlive.combine {
       inherit (pkgs.texlive) scheme-small algorithms cm-super moderncv marvosym;
   };
