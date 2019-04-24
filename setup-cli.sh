@@ -85,6 +85,9 @@ rm -rf $HOME/.config/fish
 mkdir -p $HOME/.config/fish
 cp -R fish/* $HOME/.config/fish/
 
+mkdir -p $HOME/.config/nvim/colors
+cp -R neovim/inkpot.vim $HOME/.config/nvim/colors/
+
 rm -rf $HOME/.emacs.d
 mkdir -p $HOME/.emacs.d
 cp -R emacs/* $HOME/.emacs.d/

@@ -1,0 +1,35 @@
+"relative line numbers
+set number relativenumber
+"toggle to absolute line numbers unless we are in normal focus
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
+set t_AB=^[[48;5;%dm
+set t_AF=^[[38;5;%dm
+set t_Co=256
+set termguicolors
+colorscheme inkpot
+
+set mouse=a
+let mapleader=" "
+
+"set up ale (language server)
+let g:ale_completion_enabled = 1
+let g:ale_linters = { 'php': ['php', 'psalm'] }
+nnoremap <silent> gd :ALEGoToDefinition<CR>
+
+"set up fzf (fuzzy finder)
+nmap <Leader>F :Files<CR>
+nmap <Leader>a :Ag<Space>
+nmap <Leader>b :Buffers<CR>
+nmap <Leader>f :GFiles<CR>
+
+"nerdtree
+autocmd vimenter * NERDTree
+
+autocmd BufRead,BufNewFile *.elm set filetype=elm
+autocmd FileType elm :packadd elm-vim
+
