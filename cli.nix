@@ -8,6 +8,7 @@ let
     direnv
     emacs
     fish
+    fzf
     latex
     lorri
     neovim

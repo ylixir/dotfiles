@@ -18,6 +18,10 @@ in pkgs.neovim.override {
     packages.myVimPackage = with pkgs.vimPlugins; {
       start =
       [ ale
+	fzf-vim
+	fzfWrapper
+	nerdtree
+	nerdtree-git-plugin
         vimspector
         ];
       opt = [ elm-vim ];
