@@ -11,11 +11,12 @@ set t_AB=^[[48;5;%dm
 set t_AF=^[[38;5;%dm
 set t_Co=256
 set termguicolors
-colorscheme inkpot
 set colorcolumn=80
 set cursorline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='violet'
+colorscheme inkpot
 
 "Rainbow parentheses (kien version, not junegunn)
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]

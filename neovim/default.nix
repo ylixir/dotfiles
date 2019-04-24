@@ -51,6 +51,7 @@ in pkgs.neovim.override {
         rainbow-parens
         supertab
         vim-airline
+        vim-airline-themes
         vim-parinfer
         vimspector
         ];
