@@ -50,6 +50,7 @@ in pkgs.neovim.override {
         fugitive
         rainbow-parens
         supertab
+        vim-airline
         vim-parinfer
         vimspector
         ];
