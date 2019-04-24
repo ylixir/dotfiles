@@ -36,4 +36,5 @@ if status --is-interactive
   ssh_agent_start
 end
 
+thefuck --alias | source
 direnv hook fish | source

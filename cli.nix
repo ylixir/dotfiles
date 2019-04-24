@@ -19,6 +19,7 @@ let
     python2Packages.pynvim
     python3
     python3Packages.pynvim
+    thefuck
     yarn
     ];
   lorri = import ./lorri;
