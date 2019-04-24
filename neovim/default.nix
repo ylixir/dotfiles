@@ -46,10 +46,11 @@ in pkgs.neovim.override {
 	nerdtree
 	nerdtree-git-plugin
 	vdebug
-        vimspector
 	vim-nix
         rainbow-parens
+        supertab
         vim-parinfer
+        vimspector
         ];
       opt = [ elm-vim ];
     };
