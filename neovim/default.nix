@@ -47,6 +47,7 @@ in pkgs.neovim.override {
 	nerdtree-git-plugin
 	vdebug
 	vim-nix
+        fugitive
         rainbow-parens
         supertab
         vim-parinfer
