@@ -1,8 +1,20 @@
 with builtins; pkgs:
 let
   buildVimPlugin = pkgs.vimUtils.buildVimPluginFrom2Nix;
+  vdebug = buildVimPlugin {
+    pname = "vdebug";
+    version = "2019-04-24";
+    src = pkgs.fetchFromGitHub {
+      owner = "vim-vdebug";
+      repo = "vdebug";
+      rev = "v1.5.2";
+      sha256 = "1zps2zjspqyc8qqw92xgwx4s7gz88qhqzvn0bg137k6aj6yzp60f";
+    };
+    dependencies = [];
+  };
   vimspector = buildVimPlugin {
-    name = "vimspector";
+    pname = "vimspector";
+    version = "2019-04-24";
     src = pkgs.fetchFromGitHub {
       owner = "puremourning";
       repo = "vimspector";
@@ -22,7 +34,9 @@ in pkgs.neovim.override {
 	fzfWrapper
 	nerdtree
 	nerdtree-git-plugin
+	vdebug
         vimspector
+	vim-nix
         ];
       opt = [ elm-vim ];
     };

@@ -27,8 +27,21 @@ nmap <Leader>a :Ag<Space>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :GFiles<CR>
 
-"nerdtree
-autocmd vimenter * NERDTree
+" Vdebug
+let g:vdebug_keymap = {
+\    "run" : "<Leader>/",
+\    "run_to_cursor" : "<Up>",
+\    "step_over" : "<Down>",
+\    "step_into" : "<Right>",
+\    "step_out" : "<Left>",
+\    "close" : "q",
+\    "detach" : "x",
+\    "set_breakpoint" : "<Leader>p",
+\    "eval_visual" : "<Leader>e"
+\}
+
+"nerdtree autoload (this seems annoying)
+"autocmd vimenter * NERDTree
 
 autocmd BufRead,BufNewFile *.elm set filetype=elm
 autocmd FileType elm :packadd elm-vim

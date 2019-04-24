@@ -15,6 +15,10 @@ let
     nix
     nodejs
     ps
+    python
+    python2Packages.pynvim
+    python3
+    python3Packages.pynvim
     tmux
     yarn
     ];
