@@ -12,6 +12,8 @@ set t_AF=^[[38;5;%dm
 set t_Co=256
 set termguicolors
 colorscheme inkpot
+set colorcolumn=80
+set cursorline
 
 "Rainbow parentheses (kien version, not junegunn)
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
