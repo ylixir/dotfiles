@@ -1,6 +1,17 @@
 with builtins; pkgs:
 let
   buildVimPlugin = pkgs.vimUtils.buildVimPluginFrom2Nix;
+  rainbow-parens = buildVimPlugin {
+    pname = "rainbow-parend";
+    version = "2019-04-24";
+    src = pkgs.fetchFromGitHub {
+      owner = "junegunn";
+      repo = "rainbow_parentheses.vim";
+      rev = "27e7cd73fec9d1162169180399ff8ea9fa28b003";
+      sha256 = "0izbjq6qbia013vmd84rdwjmwagln948jh9labhly0asnhqyrkb8";
+    };
+    dependencies = [];
+  };
   vdebug = buildVimPlugin {
     pname = "vdebug";
     version = "2019-04-24";
@@ -37,6 +48,8 @@ in pkgs.neovim.override {
 	vdebug
         vimspector
 	vim-nix
+        rainbow-parens
+        vim-parinfer
         ];
       opt = [ elm-vim ];
     };
