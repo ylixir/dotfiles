@@ -17,12 +17,6 @@ set -x PATH $cleanpath
 set -x EDITOR nvim
 set -x VISUAL nvim
 
-if [ -n "$EMACS" ]
-  set -x TERM eterm-color
-else
-  set -x TERM xterm-24bit
-end
-
 function isWsl
   uname -a | grep -q "Microsoft"
 end

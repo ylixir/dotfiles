@@ -92,9 +92,5 @@ rm -rf $HOME/.emacs.d
 mkdir -p $HOME/.emacs.d
 cp -R emacs/* $HOME/.emacs.d/
 
-# get pretty colors for emacs and such
-# https://www.gnu.org/software/emacs/manual/html_node/efaq/Colors-on-a-TTY.html
-tic -x -o ~/.terminfo terminfo-24bit.src
-
 git config --global user.email "jon@ylixir.io"
 git config --global user.name "Jon Allen"
