@@ -33,14 +33,31 @@ let mapleader=" "
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
 
-"set up ale (language server)
-let g:ale_linters = { 'php': ['php', 'psalm'] }
-nnoremap <silent> gd :ALEGoToDefinition<CR>
-nnoremap <silent> gr :ALEFindReferences<CR>
+"set up vim-lsp (and asyncomplete)
+nnoremap <silent> gd :LspDefinition<CR>
+nnoremap <silent> gr :LspReferences<CR>
+inoremap <expr> <Tab>    pumvisible() ? "\<C-y>" : "\<Tab>"
+set completeopt+=preview
+"intelephense is faster, better feature support
+au User lsp_setup call lsp#register_server({
+            \ 'name': 'intelephense',
+            \ 'cmd': {server_info->['intelephense','--stdio']},
+            \ 'whitelist': ['php'],
+            \ })
+"psalm is better at finding errors
+au User lsp_setup call lsp#register_server({
+            \ 'name': 'psalm',
+            \ 'cmd': {server_info->['php','vendor/bin/psalm-language-server']},
+            \ 'whitelist': ['php'],
+            \ })
+let g:lsp_signs_enabled = 1
+let g:lsp_signs_error = {'text': '✗'}
+let g:lsp_signs_warning = {'text': '!!'}
+let g:lsp_signs_hint = {'text': '!'}
+let g:lsp_diagnostics_echo_cursor = 1
 
-"autocompletion
-let g:ale_completion_enabled = 1
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+"vista (companion to vim-lsp)
+let g:vista_default_executive = 'vim_lsp'
 
 "set up fzf (fuzzy finder)
 nmap <Leader>F :Files<CR>
