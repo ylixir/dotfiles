@@ -7,6 +7,12 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
+"hack from reddit to keep terminal windows in the buffer list
+augroup custom_term
+    autocmd!
+    autocmd TermOpen * setlocal nonumber norelativenumber bufhidden=hide
+augroup END
+
 set t_AB=^[[48;5;%dm
 set t_AF=^[[38;5;%dm
 set t_Co=256
@@ -24,8 +30,8 @@ au VimEnter * RainbowParentheses
 
 set mouse=a
 let mapleader=" "
-
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
 
 "set up ale (language server)
 let g:ale_linters = { 'php': ['php', 'psalm'] }
