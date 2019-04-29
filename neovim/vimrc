@@ -65,6 +65,9 @@ nmap <Leader>a :Ag<Space>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :GFiles<CR>
 
+"slime
+let g:slime_target = "neovim"
+
 " Vdebug
 let g:vdebug_keymap = {
 \    "run" : "<Leader>/",

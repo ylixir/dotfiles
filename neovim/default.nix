@@ -120,6 +120,7 @@ in pkgs.neovim.override {
         vim-lsp
         vim-nix
         vim-parinfer
+        vim-slime
         vimspector
         vista
         ];
