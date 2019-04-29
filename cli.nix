@@ -6,7 +6,6 @@ let
     cacert
     curl
     direnv
-    emacs
     fish
     fzf
     latex
@@ -23,25 +22,6 @@ let
     yarn
     ];
   lorri = import ./lorri;
-  emacs = pkgs.emacsWithPackages(e: (with e; [
-    company
-    company-lsp
-    counsel
-    direnv
-    evil
-    evil-collection
-    evil-magit
-    general
-    ivy
-    lsp-mode
-    lsp-ui
-    magit
-    php-mode
-    projectile
-    swiper
-    use-package
-    which-key
-  ]));
   latex = pkgs.texlive.combine {
       inherit (pkgs.texlive) scheme-small algorithms cm-super moderncv marvosym;
   };

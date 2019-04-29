@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-#note that this is very bash centric.
 if [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ]
 then
   . $HOME/.nix-profile/etc/profile.d/nix.sh
@@ -87,10 +86,6 @@ cp -R fish/* $HOME/.config/fish/
 
 mkdir -p $HOME/.config/nvim/colors
 cp -R neovim/inkpot.vim $HOME/.config/nvim/colors/
-
-rm -rf $HOME/.emacs.d
-mkdir -p $HOME/.emacs.d
-cp -R emacs/* $HOME/.emacs.d/
 
 git config --global user.email "jon@ylixir.io"
 git config --global user.name "Jon Allen"
