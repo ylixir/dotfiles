@@ -123,7 +123,10 @@ in pkgs.neovim.override {
         vimspector
         vista
         ];
-      opt = [ elm-vim ];
+        opt =
+        [ elm-vim
+          vim-jsonnet
+          ];
     };
   };
 }
