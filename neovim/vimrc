@@ -21,7 +21,7 @@ set colorcolumn=80
 set cursorline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='violet'
+let g:airline_theme='bubblegum'
 colorscheme inkpot
 
 "Rainbow parentheses (kien version, not junegunn)
@@ -31,7 +31,7 @@ au VimEnter * RainbowParentheses
 set mouse=a
 let mapleader=" "
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
-nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
+nnoremap <silent> <leader>q :lclose<bar>bn<bar>bd #<CR>
 
 "set up language servers
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
@@ -78,5 +78,7 @@ let g:vdebug_keymap = {
 
 autocmd BufRead,BufNewFile *.elm set filetype=elm
 autocmd FileType elm :packadd elm-vim
+
+autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
 
