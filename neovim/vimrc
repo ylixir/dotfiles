@@ -33,31 +33,23 @@ let mapleader=" "
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
 
-"set up vim-lsp (and asyncomplete)
-nnoremap <silent> gd :LspDefinition<CR>
-nnoremap <silent> gr :LspReferences<CR>
-inoremap <expr> <Tab>    pumvisible() ? "\<C-y>" : "\<Tab>"
-set completeopt+=preview
+"set up language servers
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 "intelephense is faster, better feature support
-au User lsp_setup call lsp#register_server({
-            \ 'name': 'intelephense',
-            \ 'cmd': {server_info->['intelephense','--stdio']},
-            \ 'whitelist': ['php'],
-            \ })
-"psalm is better at finding errors
-au User lsp_setup call lsp#register_server({
-            \ 'name': 'psalm',
-            \ 'cmd': {server_info->['php','vendor/bin/psalm-language-server']},
-            \ 'whitelist': ['php'],
-            \ })
-let g:lsp_signs_enabled = 1
-let g:lsp_signs_error = {'text': '✗'}
-let g:lsp_signs_warning = {'text': '!!'}
-let g:lsp_signs_hint = {'text': '!'}
-let g:lsp_diagnostics_echo_cursor = 1
+let g:LanguageClient_serverCommands = {
+    \ 'php' : ['intelephense', '--stdio'],
+    \ }
+"psalm is better at finding errors but we can only rock one lang server now
+"https://github.com/autozimu/LanguageClient-neovim/issues/473
+"    \ 'php' : ['php', './vendor/bin/psalm-language-server'],
 
-"vista (companion to vim-lsp)
-let g:vista_default_executive = 'vim_lsp'
+"deoplete (autocompletion)
+let g:deoplete#enable_at_startup = 1
+
+"vista (display symbol tree)
+let g:vista_default_executive = 'lcn'
 
 "set up fzf (fuzzy finder)
 nmap <Leader>F :Files<CR>
