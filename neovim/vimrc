@@ -13,8 +13,8 @@ augroup custom_term
     autocmd TermOpen * setlocal nonumber norelativenumber bufhidden=hide
 augroup END
 
-set t_AB=^[[48;5;%dm
-set t_AF=^[[38;5;%dm
+"set t_AB=^[[48;5;%dm
+"set t_AF=^[[38;5;%dm
 set t_Co=256
 set termguicolors
 set colorcolumn=80
@@ -24,11 +24,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='bubblegum'
 colorscheme inkpot
 
-"Rainbow parentheses (kien version, not junegunn)
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-au VimEnter * RainbowParentheses
-
 set mouse=a
+set smartcase
 let mapleader=" "
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 set autoindent
@@ -53,6 +50,10 @@ let g:vdebug_keymap = {
 \}
 nnoremap <esc> :noh<return><esc>
 
+"Rainbow parentheses (kien version, not junegunn)
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+au VimEnter * RainbowParentheses
+
 "set up language servers
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
@@ -67,6 +68,7 @@ let g:LanguageClient_serverCommands = {
 
 "deoplete (autocompletion)
 let g:deoplete#enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 "vista (display symbol tree)
 let g:vista_default_executive = 'lcn'
