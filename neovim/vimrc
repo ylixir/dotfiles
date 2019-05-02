@@ -13,8 +13,7 @@ augroup custom_term
     autocmd TermOpen * setlocal nonumber norelativenumber bufhidden=hide
 augroup END
 
-"set t_AB=^[[48;5;%dm
-"set t_AF=^[[38;5;%dm
+syntax on
 set t_Co=256
 set termguicolors
 set colorcolumn=80
@@ -81,4 +80,3 @@ autocmd FileType elm :packadd elm-vim
 
 autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
-

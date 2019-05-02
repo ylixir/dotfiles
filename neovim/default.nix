@@ -69,6 +69,7 @@ in pkgs.neovim.override {
         vim-airline-themes
         vim-nix
         vim-parinfer
+        vim-polyglot
         vim-slime
         vimspector
         vista
