@@ -67,6 +67,9 @@ in pkgs.neovim.override {
         vdebug
         vim-airline
         vim-airline-themes
+        vim-devicons
+        vim-eunuch
+        vim-indent-guides
         vim-nix
         vim-parinfer
         vim-polyglot
