@@ -17,6 +17,8 @@ then
   fi
 fi
 
+nix-shell '<home-manager>' -A install
+
 rm -rf lorri
 git clone https://github.com/target/lorri.git -b rolling-release
 nix-env -f cli.nix -i --remove-all
