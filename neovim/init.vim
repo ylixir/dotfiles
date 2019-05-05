@@ -1,10 +1,17 @@
+"install vim-plug
+"if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+"    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+"        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"endif
+
 "relative line numbers
 set number relativenumber
 "toggle to absolute line numbers unless we are in normal focus
 augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
 "hack from reddit to keep terminal windows in the buffer list
@@ -13,7 +20,31 @@ augroup custom_term
     autocmd TermOpen * setlocal nonumber norelativenumber bufhidden=hide
 augroup END
 
-syntax on
+call plug#begin('~/.local/share/nvim/plugged')
+    Plug 'tpope/vim-sleuth'
+    Plug 'tpope/vim-eunuch'
+    Plug 'luochen1990/rainbow'
+    Plug 'Yggdroot/indentLine'
+    Plug 'autozimu/LanguageClient-neovim'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'tpope/vim-fugitive'
+    Plug 'scrooloose/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'eraserhd/parinfer-rust', {'do':  'cargo build --release'}
+"    vdebug
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+"    vim-devicons
+"    vim-nix
+    Plug 'sheerun/vim-polyglot'
+"    vim-slime
+"    vimspector
+"    vista
+call plug#end()
+" PlugUpdate
+
 set t_Co=256
 set termguicolors
 set colorcolumn=80
@@ -27,9 +58,20 @@ colorscheme inkpot
 set mouse=a
 set smartcase
 let mapleader=" "
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
+let g:indentLine_enabled = 1
+" Indenting defaults (does not override vim-sleuth's indenting detection)
+" Defaults to 4 spaces for most filetypes
+if get(g:, '_has_set_default_indent_settings', 0) == 0
+    " Set the indenting level to 2 spaces for the following file types.
+    autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,plantuml
+        \ setlocal expandtab tabstop=2 shiftwidth=2
+    set expandtab
+    set tabstop=4
+    set shiftwidth=4
+    let g:_has_set_default_indent_settings = 1
+endif
 set autoindent
-filetype plugin indent on
 
 nnoremap <silent> <leader>q :lclose<bar>bn<bar>bd #<CR>
 nnoremap <silent> <leader>t :NERDTreeFind<CR>
@@ -50,9 +92,8 @@ let g:vdebug_keymap = {
 \}
 nnoremap <esc> :noh<return><esc>
 
-"Rainbow parentheses (kien version, not junegunn)
+let g:rainbow_active = 1
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-au VimEnter * RainbowParentheses
 
 "set up language servers
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>

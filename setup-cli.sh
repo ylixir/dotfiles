@@ -5,6 +5,11 @@ then
   . $HOME/.nix-profile/etc/profile.d/nix.sh
 fi
 
+if [ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ]
+then
+  . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+fi
+
 if ! which nix-env
 then
   if . ./install-nix.sh
@@ -17,11 +22,32 @@ then
   fi
 fi
 
-nix-shell '<home-manager>' -A install
+( # enter subshell do avoid direcory juggling
+    if ! [ -d lorri ]
+    then
+      git clone https://github.com/target/lorri.git -b rolling-release
+    fi
+    cd lorri
+    git pull
+)
 
-rm -rf lorri
-git clone https://github.com/target/lorri.git -b rolling-release
-nix-env -f cli.nix -i --remove-all
+# clean out any unnecessary packages
+nix-env -f bones.nix -i --remove-all
+
+mkdir -p ~/.config/nixpkgs
+ln -sf `pwd`/home.nix ~/.config/nixpkgs/home.nix
+export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+nix-shell '<home-manager>' -A install
+. $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+echo switching!!!!!!!!
+home-manager switch
+
+fc-list
+exit
+mkdir -p $HOME/.config/nvim/colors
+cp -R neovim/inkpot.vim $HOME/.config/nvim/colors/
+
+exit
 yarn config set prefix ~/.yarn
 yarn global add intelephense
 
@@ -86,8 +112,6 @@ rm -rf $HOME/.config/fish
 mkdir -p $HOME/.config/fish
 cp -R fish/* $HOME/.config/fish/
 
-mkdir -p $HOME/.config/nvim/colors
-cp -R neovim/inkpot.vim $HOME/.config/nvim/colors/
 
 git config --global user.email "jon@ylixir.io"
 git config --global user.name "Jon Allen"
