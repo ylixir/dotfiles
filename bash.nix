@@ -17,6 +17,11 @@ pkgs:{
         #TODO make sure os x still needs this
         # which launchctl &> /dev/null && launchctl setenv PATH $PATH
       fi
+    fi
+
+    if [ -z $FISHLVL ]
+    then
+      export FISHLVL=1
       exec `which fish`
     fi
     '';
