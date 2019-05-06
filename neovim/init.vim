@@ -25,9 +25,9 @@ augroup END
 
 call plug#begin('~/.local/share/nvim/plugged')
     Plug 'ryanoasis/vim-devicons' "first according to docs
-    Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'LnL7/vim-nix'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'Yggdroot/indentLine'
     Plug 'autozimu/LanguageClient-neovim'
     Plug 'eraserhd/parinfer-rust', {'do':  'cargo build --release'}
@@ -36,6 +36,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'liuchengxu/vista.vim'
     Plug 'luochen1990/rainbow'
+    Plug 'mhinz/vim-signify'
     Plug 'puremourning/vimspector'
     Plug 'scrooloose/nerdtree'
     Plug 'sheerun/vim-polyglot'
@@ -46,25 +47,25 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-vdebug/vdebug'
 call plug#end()
-" PlugUpdate
+PlugInstall
 
 set t_Co=256
 set termguicolors
 set colorcolumn=80
 set cursorline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='bubblegum'
-let g:indent_guides_enable_on_vim_startup = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='bubblegum'
+let g:indentLine_enabled = 1
+let g:indent_guides_enable_on_vim_startup = 1
 colorscheme inkpot
 
 set mouse=a
 set smartcase
 let mapleader=" "
 
-let g:indentLine_enabled = 1
 " Indenting defaults (does not override vim-sleuth's indenting detection)
 " Defaults to 4 spaces for most filetypes
 if get(g:, '_has_set_default_indent_settings', 0) == 0
@@ -97,8 +98,8 @@ let g:vdebug_keymap = {
 \}
 nnoremap <esc> :noh<return><esc>
 
+"rainbow parens
 let g:rainbow_active = 1
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 "set up language servers
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
