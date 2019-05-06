@@ -48,7 +48,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-vdebug/vdebug'
 call plug#end()
-PlugInstall
 
 set t_Co=256
 set termguicolors
