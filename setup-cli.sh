@@ -5,6 +5,11 @@ then
   . $HOME/.nix-profile/etc/profile.d/nix.sh
 fi
 
+if [ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ]
+then
+  . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+fi
+
 if ! which nix-env
 then
   if . ./install-nix.sh
@@ -17,11 +22,25 @@ then
   fi
 fi
 
-rm -rf lorri
-git clone https://github.com/target/lorri.git -b rolling-release
-nix-env -f cli.nix -i --remove-all
-yarn config set prefix ~/.yarn
-yarn global add intelephense
+( # enter subshell do avoid direcory juggling
+    if ! [ -d lorri ]
+    then
+      git clone https://github.com/target/lorri.git -b rolling-release
+    fi
+    cd lorri
+    git pull
+)
+
+# clean out any unnecessary packages
+nix-env -f bones.nix -i --remove-all
+
+mkdir -p ~/.config/nixpkgs
+ln -sf `pwd`/home.nix ~/.config/nixpkgs/home.nix
+export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+nix-shell '<home-manager>' -A install
+. $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+echo switching!!!!!!!!
+home-manager switch
 
 #mostly bash is the default, and our game is just
 #to be able to use fish, not make it the "default"
@@ -35,57 +54,7 @@ then
   fi
 fi
 
-# make sure that we fire bashrc, even on a login
-if [ -e $HOME/.bash_profile ]
-then
-  profile="$HOME/.bash_profile"
-elif [ -e $HOME/.bash_login ]
-then
-  profile="$HOME/.bash_login"
-else
-  profile="$HOME/.profile"
-fi
-grep -F bashrc $profile
-if [ $? != 0 ]
-then
-  printf ". %s\n" $HOME/.bashrc >> $profile
-fi
-
-# now make sure bash starts fish when running from login mode
-cat > $HOME/.bashrc << eof
-_direnv_hook() {
-  local previous_exit_status=\$?
-  eval "\$("/Users/jallen/.nix-profile/bin/direnv" export bash)"
-  return \$previous_exit_status
-}
-
-if [ -z \$IN_NIX_SHELL ] && [ -z \$PIPENV_ACTIVE ]
-then
-  if [ -f \$HOME/.nix-profile/etc/profile.d/nix.sh ]
-  then
-    export PATH=\$HOME/.yarn/bin:\$PATH
-    . \$HOME/.nix-profile/etc/profile.d/nix.sh
-    which launchctl && launchctl setenv PATH \$PATH
-  fi
-  exec `which fish`
-fi
-if ! [[ "\$PROMPT_COMMAND" =~ _direnv_hook ]]; then
-  PROMPT_COMMAND="_direnv_hook;\$PROMPT_COMMAND"
-fi
-
-eof
-#eval "$(direnv hook bash)" >> $HOME/.bashrc
-
 mkdir -p $HOME/.local/share/fonts
 cp -R fonts/* $HOME/.local/share/fonts/
 fc-cache -f -v
 
-rm -rf $HOME/.config/fish
-mkdir -p $HOME/.config/fish
-cp -R fish/* $HOME/.config/fish/
-
-mkdir -p $HOME/.config/nvim/colors
-cp -R neovim/inkpot.vim $HOME/.config/nvim/colors/
-
-git config --global user.email "jon@ylixir.io"
-git config --global user.name "Jon Allen"

@@ -8,8 +8,8 @@ let
     direnv
     fish
     fzf
-    latex
-    lorri
+    #latex
+    #lorri
     neovim
     nix
     nodejs
@@ -20,6 +20,7 @@ let
     python3Packages.pynvim
     thefuck
     yarn
+    #home-manager
     ];
   lorri = import ./lorri;
   latex = pkgs.texlive.combine {

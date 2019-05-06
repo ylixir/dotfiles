@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 function isWsl {
   uname -a | grep -q Microsoft
@@ -15,3 +15,6 @@ fi
 
 #https://nixos.org/nix/download.html
 curl https://nixos.org/nix/install | sh
+. ~/.nix-profile/etc/profile.d/nix.sh
+nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
