@@ -13,9 +13,9 @@
   #TODO fix fonts
   fonts.fontconfig.enable = true;
 
-#  home.file = {
-#    ".config/nvim/init.vim".source = neovim/init.vim;
-#  };
+  home.file = {
+    ".config/nvim/colors/inkpot.vim".source = neovim/inkpot.vim;
+  };
   programs.bash = (import ./bash.nix pkgs);
   programs.direnv.enable = true;
   programs.fish = (import ./fish.nix pkgs);
