@@ -20,7 +20,6 @@ pkgs:{
   profileExtra = ''
     #home-manager doesn't work without this
     export NIX_PATH=$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH
-    export PATH=$PATH:$HOME/.yarn/bin
     . $HOME/.nix-profile/etc/profile.d/nix.sh
     '';
   initExtra = ''

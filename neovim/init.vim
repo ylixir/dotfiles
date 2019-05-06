@@ -28,7 +28,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'Yggdroot/indentLine'
-    Plug 'autozimu/LanguageClient-neovim'
+    Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
     Plug 'eraserhd/parinfer-rust', {'do':  'cargo build --release'}
     Plug 'jiangmiao/auto-pairs'
     Plug 'jpalardy/vim-slime'
@@ -110,11 +110,11 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 "intelephense is faster, better feature support
 let g:LanguageClient_serverCommands = {
-    \ 'php' : ['intelephense', '--stdio'],
+    \ 'php' : ['npx', '--quiet', 'intelephense', '--stdio'],
     \ }
 "psalm is better at finding errors but we can only rock one lang server now
+"     \ 'php' : ['php', './vendor/bin/psalm-language-server'],
 "https://github.com/autozimu/LanguageClient-neovim/issues/473
-"    \ 'php' : ['php', './vendor/bin/psalm-language-server'],
 
 "deoplete (autocompletion)
 let g:deoplete#enable_at_startup = 1

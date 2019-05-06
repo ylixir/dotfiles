@@ -8,9 +8,9 @@
     clang
     fontconfig
     nerdfonts
+    nodejs
     ps
     thefuck
-    yarn
   ];
 
   #TODO fix fonts
