@@ -24,13 +24,13 @@ augroup custom_term
 augroup END
 
 call plug#begin('~/.local/share/nvim/plugged')
-    Plug 'ryanoasis/vim-devicons' "first according to docs
     Plug 'LnL7/vim-nix'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'Yggdroot/indentLine'
     Plug 'autozimu/LanguageClient-neovim'
     Plug 'eraserhd/parinfer-rust', {'do':  'cargo build --release'}
+    Plug 'jiangmiao/auto-pairs'
     Plug 'jpalardy/vim-slime'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
@@ -38,6 +38,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'luochen1990/rainbow'
     Plug 'mhinz/vim-signify'
     Plug 'puremourning/vimspector'
+    Plug 'ryanoasis/vim-devicons' "first according to docs
     Plug 'scrooloose/nerdtree'
     Plug 'sheerun/vim-polyglot'
     Plug 'tpope/vim-eunuch'
@@ -78,6 +79,9 @@ if get(g:, '_has_set_default_indent_settings', 0) == 0
     let g:_has_set_default_indent_settings = 1
 endif
 set autoindent
+
+" fly mode saves some typing, m-b to undo
+let g:AutoPairsFlyMode = 1
 
 nnoremap <silent> <leader>q :lclose<bar>bn<bar>bd #<CR>
 nnoremap <silent> <leader>t :NERDTreeFind<CR>
