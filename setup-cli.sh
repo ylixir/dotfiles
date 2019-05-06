@@ -58,6 +58,6 @@ mkdir -p $HOME/.local/share/fonts
 cp -R fonts/* $HOME/.local/share/fonts/
 fc-cache -f -v
 
-exit
+//TODO let nix handle this properly
 yarn config set prefix ~/.yarn
 yarn global add intelephense

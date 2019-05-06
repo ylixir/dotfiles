@@ -1,8 +1,8 @@
 pkgs: {
   enable = true;
 
-  # code for darwin
-  loginShellInit = ''
+  interactiveShellInit = ''
+    # code for darwin
     set -l cleanpath
     # make sure nix paths are in the front
     for v in $PATH
@@ -18,9 +18,6 @@ pkgs: {
     end
 
     set -x PATH $cleanpath
-    '';
-
-  interactiveShellInit = ''
     set -x EDITOR nvim
     set -x VISUAL nvim
     setenv SSH_ENV $HOME/.ssh/environment

@@ -1,3 +1,10 @@
+"vim plug doesn't seem to be available when installed from nix
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 "make sure terminal can pop a fish shell
 let $FISHLVL=''
 
@@ -17,27 +24,27 @@ augroup custom_term
 augroup END
 
 call plug#begin('~/.local/share/nvim/plugged')
-    Plug 'tpope/vim-sleuth'
-    Plug 'tpope/vim-eunuch'
-    Plug 'luochen1990/rainbow'
+    Plug 'ryanoasis/vim-devicons' "first according to docs
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'LnL7/vim-nix'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Yggdroot/indentLine'
     Plug 'autozimu/LanguageClient-neovim'
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'tpope/vim-fugitive'
-    Plug 'scrooloose/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'eraserhd/parinfer-rust', {'do':  'cargo build --release'}
-    Plug 'vim-vdebug/vdebug'
+    Plug 'jpalardy/vim-slime'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
+    Plug 'liuchengxu/vista.vim'
+    Plug 'luochen1990/rainbow'
+    Plug 'puremourning/vimspector'
+    Plug 'scrooloose/nerdtree'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'tpope/vim-eunuch'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-sleuth'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'LnL7/vim-nix'
-    Plug 'sheerun/vim-polyglot'
-    Plug 'jpalardy/vim-slime'
-    Plug 'puremourning/vimspector'
-    Plug 'liuchengxu/vista.vim'
+    Plug 'vim-vdebug/vdebug'
 call plug#end()
 " PlugUpdate
 
@@ -49,6 +56,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='bubblegum'
 let g:indent_guides_enable_on_vim_startup = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 colorscheme inkpot
 
 set mouse=a

@@ -6,7 +6,7 @@ pkgs:{
     customRC = builtins.readFile ./init.vim;
     packages.myVimPackage = with pkgs.vimPlugins; {
       # loaded on launch
-      start = [ vim-plug ];
+      start = [ ];
       # manually loadable by calling `:packadd $plugin-name`
       opt = [ ];
     };

@@ -1,23 +1,36 @@
 pkgs:{
   enable = true;
-  initExtra = ''
+  shellOptions = [
+    # Append to history file rather than replacing it.
+    "histappend"
+    
+    # check the window size after each command and, if
+    # necessary, update the values of LINES and COLUMNS.
+    "checkwinsize"
+    
+    # Extended globbing.
+    "extglob"
+    # TODO fix this to work on a mac
+    #"globstar"
+    
+    # Warn if closing shell with running jobs.
+    # TODO fix this to work on a mac
+    #"checkjobs"
+    ];
+  profileExtra = ''
     #home-manager doesn't work without this
     export NIX_PATH=$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH
 
-    #ls default dir color is unreadable on black background
-    LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
 
     if [ -z $IN_NIX_SHELL ] && [ -z $PIPENV_ACTIVE ]
     then
-      if [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ]
-      then
-        export PATH=$HOME/.yarn/bin:$PATH
-        . $HOME/.nix-profile/etc/profile.d/nix.sh
-
-        #TODO make sure os x still needs this
-        # which launchctl &> /dev/null && launchctl setenv PATH $PATH
-      fi
+      export PATH=$HOME/.yarn/bin:$PATH
+      . $HOME/.nix-profile/etc/profile.d/nix.sh
     fi
+    '';
+  initExtra = ''
+    #ls default dir color is unreadable on black background
+    LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
 
     if [ -z $FISHLVL ]
     then

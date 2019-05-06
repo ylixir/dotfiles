@@ -3,12 +3,14 @@
   home.packages = with pkgs; [
     (import ./lorri {})
     ag
+    bash #TODO open pr to fix this with home-manager
     cargo
     clang
     fontconfig
     nerdfonts
     ps
     thefuck
+    yarn
   ];
 
   #TODO fix fonts
