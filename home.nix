@@ -4,6 +4,7 @@
     (import ./lorri {})
     ag
     cargo
+    clang
     fontconfig
     nerdfonts
     ps
