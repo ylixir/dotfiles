@@ -42,10 +42,6 @@ nix-shell '<home-manager>' -A install
 echo switching!!!!!!!!
 home-manager switch
 
-exit
-yarn config set prefix ~/.yarn
-yarn global add intelephense
-
 #mostly bash is the default, and our game is just
 #to be able to use fish, not make it the "default"
 echo $SHELL | grep bash
@@ -62,3 +58,6 @@ mkdir -p $HOME/.local/share/fonts
 cp -R fonts/* $HOME/.local/share/fonts/
 fc-cache -f -v
 
+exit
+yarn config set prefix ~/.yarn
+yarn global add intelephense

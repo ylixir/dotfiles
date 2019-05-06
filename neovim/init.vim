@@ -27,17 +27,17 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'eraserhd/parinfer-rust', {'do':  'cargo build --release'}
-"    vdebug
+    Plug 'vim-vdebug/vdebug'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-"    vim-devicons
-"    vim-nix
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'LnL7/vim-nix'
     Plug 'sheerun/vim-polyglot'
-"    vim-slime
-"    vimspector
-"    vista
+    Plug 'jpalardy/vim-slime'
+    Plug 'puremourning/vimspector'
+    Plug 'liuchengxu/vista.vim'
 call plug#end()
 " PlugUpdate
 
