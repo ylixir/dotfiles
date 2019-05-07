@@ -7,6 +7,7 @@
     cargo
     clang
     font-manager
+    konsole
     nodejs
     ps
     thefuck
