@@ -6,12 +6,10 @@
     bash #TODO open pr to fix this with home-manager
     cargo
     clang
-    font-manager
-    konsole
     nodejs
     ps
     thefuck
-  ];
+  ] ++ (if pkgs.system == "x86_64-darwin" then [] else [ pkgs.konsole ]) ;
 
   home.file = {
     ".config/nvim/colors/inkpot.vim".source = neovim/inkpot.vim;
