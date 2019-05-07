@@ -56,5 +56,5 @@ fi
 
 mkdir -p $HOME/.local/share/fonts
 cp -R fonts/* $HOME/.local/share/fonts/
-fc-cache -f -v
+fc-cache -f -v $HOME/.local/share/fonts/
 

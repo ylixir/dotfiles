@@ -6,15 +6,11 @@
     bash #TODO open pr to fix this with home-manager
     cargo
     clang
-    fontconfig
-    nerdfonts
+    font-manager
     nodejs
     ps
     thefuck
   ];
-
-  #TODO fix fonts
-  fonts.fontconfig.enable = true;
 
   home.file = {
     ".config/nvim/colors/inkpot.vim".source = neovim/inkpot.vim;
