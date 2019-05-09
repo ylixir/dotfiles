@@ -33,14 +33,15 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'jiangmiao/auto-pairs'
     Plug 'jpalardy/vim-slime'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'w0rp/ale',
     Plug 'junegunn/fzf.vim'
-    Plug 'liuchengxu/vista.vim'
     Plug 'luochen1990/rainbow'
     Plug 'mhinz/vim-signify'
     Plug 'puremourning/vimspector'
     Plug 'ryanoasis/vim-devicons' "first according to docs
     Plug 'scrooloose/nerdtree'
     Plug 'sheerun/vim-polyglot'
+    Plug 'tpope/vim-dispatch'
     Plug 'tpope/vim-eunuch'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-sleuth'
@@ -80,8 +81,13 @@ if get(g:, '_has_set_default_indent_settings', 0) == 0
 endif
 set autoindent
 
-" fly mode saves some typing, m-b to undo
-let g:AutoPairsFlyMode = 1
+inoremap ;; <C-o>m`<C-o>A;<C-o>``
+inoremap ,, <C-o>m`<C-o>A,<C-o>``
+
+"deoplete (autocompletion)
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 
 nnoremap <silent> <leader>q :lclose<bar>bn<bar>bd #<CR>
 nnoremap <silent> <leader>t :NERDTreeFind<CR>
@@ -113,16 +119,9 @@ nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 let g:LanguageClient_serverCommands = {
     \ 'php' : ['npx', '--quiet', 'intelephense', '--stdio'],
     \ }
-"psalm is better at finding errors but we can only rock one lang server now
-"     \ 'php' : ['php', './vendor/bin/psalm-language-server'],
+"psalm is better at finding errors but LanguageClient can only rock one lang server now
 "https://github.com/autozimu/LanguageClient-neovim/issues/473
-
-"deoplete (autocompletion)
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-"vista (display symbol tree)
-let g:vista_default_executive = 'lcn'
+let g:ale_linters = { 'php': ['php', 'psalm'] }
 
 "slime
 let g:slime_target = "neovim"

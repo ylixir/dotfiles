@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     (import ./lorri {})
     ag
+    asciinema
     bash #TODO open pr to fix this with home-manager
     cargo
     clang
