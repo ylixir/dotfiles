@@ -24,6 +24,7 @@ augroup custom_term
 augroup END
 
 call plug#begin('~/.local/share/nvim/plugged')
+    Plug 'ryanoasis/vim-devicons' "first according to docs
     Plug 'LnL7/vim-nix'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -38,7 +39,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'luochen1990/rainbow'
     Plug 'mhinz/vim-signify'
     Plug 'puremourning/vimspector'
-    Plug 'ryanoasis/vim-devicons' "first according to docs
     Plug 'scrooloose/nerdtree'
     Plug 'sheerun/vim-polyglot'
     Plug 'tpope/vim-dispatch'
@@ -62,6 +62,9 @@ let g:airline_theme='bubblegum'
 let g:indentLine_enabled = 1
 let g:indent_guides_enable_on_vim_startup = 1
 colorscheme inkpot
+
+let g:AutoPairsMapCR=0
+imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
 
 set mouse=a
 set ignorecase
