@@ -86,6 +86,9 @@ if get(g:, '_has_set_default_indent_settings', 0) == 0
     let g:_has_set_default_indent_settings = 1
 endif
 set autoindent
+set nofoldenable
+let php_folding=1
+set foldmethod=syntax
 
 inoremap ;; <C-o>m`<C-o>A;<C-o>``
 inoremap ,, <C-o>m`<C-o>A,<C-o>``
@@ -95,6 +98,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 "c-_ is the same as c-/
 tnoremap <c-_> <c-\><c-n>
+nnoremap <c-a> <c-o>
+nnoremap <c-o> :vs<cr>
+nnoremap <c-u> :sp<cr>
+nnoremap <c-t> :te<cr>
 
 nnoremap <silent> <leader>q :lclose<bar>bn<bar>bd #<CR>
 nnoremap <silent> <leader>t :NERDTreeFind<CR>
@@ -135,3 +142,5 @@ let g:slime_target = "neovim"
 
 autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
+
+autocmd TermOpen term://* startinsert
