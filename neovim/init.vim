@@ -63,8 +63,8 @@ let g:indentLine_enabled = 1
 let g:indent_guides_enable_on_vim_startup = 1
 colorscheme inkpot
 
-let g:AutoPairsMapCR=0
-imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+"let g:AutoPairsMapCR=0
+"imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
 "deoplete (autocompletion)
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
