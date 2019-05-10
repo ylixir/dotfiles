@@ -89,6 +89,10 @@ set autoindent
 
 inoremap ;; <C-o>m`<C-o>A;<C-o>``
 inoremap ,, <C-o>m`<C-o>A,<C-o>``
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 nnoremap <silent> <leader>q :lclose<bar>bn<bar>bd #<CR>
 nnoremap <silent> <leader>t :NERDTreeFind<CR>
