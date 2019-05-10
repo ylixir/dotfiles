@@ -131,8 +131,5 @@ let g:ale_linters = { 'php': ['php', 'psalm'] }
 "slime
 let g:slime_target = "neovim"
 
-autocmd BufRead,BufNewFile *.elm set filetype=elm
-autocmd FileType elm :packadd elm-vim
-
 autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
