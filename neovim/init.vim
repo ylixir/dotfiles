@@ -65,6 +65,9 @@ colorscheme inkpot
 
 let g:AutoPairsMapCR=0
 imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+"deoplete (autocompletion)
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 set mouse=a
 set ignorecase
@@ -86,11 +89,6 @@ set autoindent
 
 inoremap ;; <C-o>m`<C-o>A;<C-o>``
 inoremap ,, <C-o>m`<C-o>A,<C-o>``
-
-"deoplete (autocompletion)
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
 
 nnoremap <silent> <leader>q :lclose<bar>bn<bar>bd #<CR>
 nnoremap <silent> <leader>t :NERDTreeFind<CR>
