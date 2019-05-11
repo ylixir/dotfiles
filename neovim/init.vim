@@ -25,20 +25,18 @@ augroup END
 
 call plug#begin('~/.local/share/nvim/plugged')
     Plug 'ryanoasis/vim-devicons' "first according to docs
-    Plug 'LnL7/vim-nix'
+
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'Yggdroot/indentLine'
     Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
     Plug 'eraserhd/parinfer-rust', {'do':  'cargo build --release'}
     Plug 'jiangmiao/auto-pairs'
-    Plug 'jpalardy/vim-slime'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'w0rp/ale',
     Plug 'junegunn/fzf.vim'
     Plug 'luochen1990/rainbow'
     Plug 'mhinz/vim-signify'
-    Plug 'puremourning/vimspector'
     Plug 'scrooloose/nerdtree'
     Plug 'sheerun/vim-polyglot'
     Plug 'tpope/vim-dispatch'
@@ -89,6 +87,8 @@ set autoindent
 set nofoldenable
 let php_folding=1
 set foldmethod=syntax
+set splitright
+set splitbelow
 
 inoremap ;; <C-o>m`<C-o>A;<C-o>``
 inoremap ,, <C-o>m`<C-o>A,<C-o>``
@@ -136,9 +136,6 @@ let g:LanguageClient_serverCommands = {
 "psalm is better at finding errors but LanguageClient can only rock one lang server now
 "https://github.com/autozimu/LanguageClient-neovim/issues/473
 let g:ale_linters = { 'php': ['php', 'psalm'] }
-
-"slime
-let g:slime_target = "neovim"
 
 autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
