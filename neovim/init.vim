@@ -1,9 +1,45 @@
-"vim plug doesn't seem to be available when installed from nix
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+" install package manager as required
+function! PackInit() abort
+	silent packadd minpac
+	if !exists('*minpac#init')
+		"exe '!mkdir -p ~/.config/nvim/pack/minpac/opt'
+		exe '!git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac'
+		packadd minpac
+	endif
+	call minpac#init()
+			" minpac must have {'type': 'opt'} so that it can be loaded with `packadd`.
+			call minpac#add('k-takata/minpac', {'type': 'opt'})
+			call minpac#add('ryanoasis/vim-devicons') "first according to docs
+
+			call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
+			call minpac#add('Xuyuanp/nerdtree-git-plugin')
+			call minpac#add('Yggdroot/indentLine')
+			call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': '!bash install.sh'})
+			call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
+			call minpac#add('jiangmiao/auto-pairs')
+			call minpac#add('junegunn/fzf')
+			call minpac#add('w0rp/ale')
+			call minpac#add('junegunn/fzf.vim')
+			call minpac#add('luochen1990/rainbow')
+			call minpac#add('mhinz/vim-signify')
+			call minpac#add('scrooloose/nerdtree')
+			call minpac#add('sheerun/vim-polyglot')
+			call minpac#add('tpope/vim-dispatch')
+			call minpac#add('tpope/vim-eunuch')
+			call minpac#add('tpope/vim-fugitive')
+			call minpac#add('tpope/vim-sleuth')
+			call minpac#add('vim-airline/vim-airline')
+			call minpac#add('vim-airline/vim-airline-themes')
+			call minpac#add('vim-vdebug/vdebug')
+	call minpac#update()
+endfunction
+
+" Define user commands for updating/cleaning the plugins.
+" Each of them calls PackInit() to load minpac and register
+" the information of plugins, then performs the task.
+command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
+command! PackClean  call PackInit() | call minpac#clean()
+command! PackStatus call PackInit() | call minpac#status()
 
 "make sure terminal can pop a fish shell
 let $FISHLVL=''
@@ -22,31 +58,6 @@ augroup custom_term
     autocmd!
     autocmd TermOpen * setlocal nonumber norelativenumber bufhidden=hide
 augroup END
-
-call plug#begin('~/.local/share/nvim/plugged')
-    Plug 'ryanoasis/vim-devicons' "first according to docs
-
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'Yggdroot/indentLine'
-    Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-    Plug 'eraserhd/parinfer-rust', {'do':  'cargo build --release'}
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'w0rp/ale',
-    Plug 'junegunn/fzf.vim'
-    Plug 'luochen1990/rainbow'
-    Plug 'mhinz/vim-signify'
-    Plug 'scrooloose/nerdtree'
-    Plug 'sheerun/vim-polyglot'
-    Plug 'tpope/vim-dispatch'
-    Plug 'tpope/vim-eunuch'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-sleuth'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'vim-vdebug/vdebug'
-call plug#end()
 
 set t_Co=256
 set termguicolors
