@@ -2,6 +2,7 @@
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
     (import ./lorri {})
+    (import neovim/gtk.nix pkgs)
     ag
     asciinema
     bash #TODO open pr to fix this with home-manager

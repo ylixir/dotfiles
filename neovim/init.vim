@@ -34,6 +34,9 @@ function! PackInit() abort
 	call minpac#update()
 endfunction
 
+" this won't work in the terminal
+silent call rpcnotify(1, 'Gui', 'Font', 'Monoid Nerd Font 14')
+
 " Define user commands for updating/cleaning the plugins.
 " Each of them calls PackInit() to load minpac and register
 " the information of plugins, then performs the task.
