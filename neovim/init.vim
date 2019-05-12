@@ -1,37 +1,37 @@
 " install package manager as required
 function! PackInit() abort
-	silent packadd minpac
-	if !exists('*minpac#init')
-		"exe '!mkdir -p ~/.config/nvim/pack/minpac/opt'
-		exe '!git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac'
-		packadd minpac
-	endif
-	call minpac#init()
-			" minpac must have {'type': 'opt'} so that it can be loaded with `packadd`.
-			call minpac#add('k-takata/minpac', {'type': 'opt'})
-			call minpac#add('ryanoasis/vim-devicons') "first according to docs
+  silent packadd minpac
+  if !exists('*minpac#init')
+    "exe '!mkdir -p ~/.config/nvim/pack/minpac/opt'
+    exe '!git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac'
+    packadd minpac
+  endif
+  call minpac#init()
+    " minpac must have {'type': 'opt'} so that it can be loaded with `packadd`.
+    call minpac#add('k-takata/minpac', {'type': 'opt'})
+    call minpac#add('ryanoasis/vim-devicons') "first according to docs
 
-			call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
-			call minpac#add('Xuyuanp/nerdtree-git-plugin')
-			call minpac#add('Yggdroot/indentLine')
-			call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': '!bash install.sh'})
-			call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
-			call minpac#add('jiangmiao/auto-pairs')
-			call minpac#add('junegunn/fzf')
-			call minpac#add('w0rp/ale')
-			call minpac#add('junegunn/fzf.vim')
-			call minpac#add('luochen1990/rainbow')
-			call minpac#add('mhinz/vim-signify')
-			call minpac#add('scrooloose/nerdtree')
-			call minpac#add('sheerun/vim-polyglot')
-			call minpac#add('tpope/vim-dispatch')
-			call minpac#add('tpope/vim-eunuch')
-			call minpac#add('tpope/vim-fugitive')
-			call minpac#add('tpope/vim-sleuth')
-			call minpac#add('vim-airline/vim-airline')
-			call minpac#add('vim-airline/vim-airline-themes')
-			call minpac#add('vim-vdebug/vdebug')
-	call minpac#update()
+    call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
+    call minpac#add('Xuyuanp/nerdtree-git-plugin')
+    call minpac#add('Yggdroot/indentLine')
+    call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': '!bash install.sh'})
+    call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
+    call minpac#add('jiangmiao/auto-pairs')
+    call minpac#add('junegunn/fzf')
+    call minpac#add('w0rp/ale')
+    call minpac#add('junegunn/fzf.vim')
+    call minpac#add('luochen1990/rainbow')
+    call minpac#add('mhinz/vim-signify')
+    call minpac#add('scrooloose/nerdtree')
+    call minpac#add('sheerun/vim-polyglot')
+    call minpac#add('tpope/vim-dispatch')
+    call minpac#add('tpope/vim-eunuch')
+    call minpac#add('tpope/vim-fugitive')
+    call minpac#add('tpope/vim-sleuth')
+    call minpac#add('vim-airline/vim-airline')
+    call minpac#add('vim-airline/vim-airline-themes')
+    call minpac#add('vim-vdebug/vdebug')
+  call minpac#update()
 endfunction
 
 " this won't work in the terminal
@@ -51,15 +51,15 @@ let $FISHLVL=''
 set number relativenumber
 "toggle to absolute line numbers unless we are in normal focus
 augroup numbertoggle
-    autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
 "hack from reddit to keep terminal windows in the buffer list
 augroup custom_term
-    autocmd!
-    autocmd TermOpen * setlocal nonumber norelativenumber bufhidden=hide
+  autocmd!
+  autocmd TermOpen * setlocal nonumber norelativenumber bufhidden=hide
 augroup END
 
 set t_Co=256
@@ -89,13 +89,13 @@ let mapleader=" "
 " Indenting defaults (does not override vim-sleuth's indenting detection)
 " Defaults to 4 spaces for most filetypes
 if get(g:, '_has_set_default_indent_settings', 0) == 0
-    " Set the indenting level to 2 spaces for the following file types.
-    autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,plantuml
-        \ setlocal expandtab tabstop=2 shiftwidth=2
-    set expandtab
-    set tabstop=4
-    set shiftwidth=4
-    let g:_has_set_default_indent_settings = 1
+  " Set the indenting level to 2 spaces for the following file types.
+  autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,plantuml
+    \ setlocal expandtab tabstop=2 shiftwidth=2
+  set expandtab
+  set tabstop=4
+  set shiftwidth=4
+  let g:_has_set_default_indent_settings = 1
 endif
 set autoindent
 set nofoldenable
@@ -145,8 +145,8 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 "intelephense is faster, better feature support
 let g:LanguageClient_serverCommands = {
-    \ 'php' : ['npx', '--quiet', 'intelephense', '--stdio'],
-    \ }
+  \ 'php' : ['npx', '--quiet', 'intelephense', '--stdio'],
+  \ }
 "psalm is better at finding errors but LanguageClient can only rock one lang server now
 "https://github.com/autozimu/LanguageClient-neovim/issues/473
 let g:ale_linters = { 'php': ['php', 'psalm'] }
