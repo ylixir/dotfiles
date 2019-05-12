@@ -13,6 +13,9 @@ function! PackInit() abort
 
     call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
+    call minpac#add('atelierbram/Base2Tone-vim')
+    call minpac#add('ayu-theme/ayu-vim')
+    call minpac#add('yous/vim-open-color')
     call minpac#add('Yggdroot/indentLine')
     call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': '!bash install.sh'})
     call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
@@ -73,7 +76,10 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 let g:indentLine_enabled = 1
 let g:indent_guides_enable_on_vim_startup = 1
-colorscheme inkpot
+"colorscheme inkpot
+"colorscheme open-color
+"colorscheme ayu
+colorscheme Base2Tone_EveningDark
 
 "let g:AutoPairsMapCR=0
 "imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
