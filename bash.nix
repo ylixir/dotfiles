@@ -19,6 +19,7 @@ pkgs:{
     ];
   profileExtra = ''
     #home-manager doesn't work without this
+    export NVIM_GTK_NO_HEADERBAR=1
     export NIX_PATH=$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH
     . $HOME/.nix-profile/etc/profile.d/nix.sh
     '';

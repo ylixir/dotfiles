@@ -13,17 +13,18 @@ function! PackInit() abort
 
     call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
-    call minpac#add('atelierbram/Base2Tone-vim')
-    call minpac#add('ayu-theme/ayu-vim')
-    call minpac#add('yous/vim-open-color')
     call minpac#add('Yggdroot/indentLine')
+    call minpac#add('atelierbram/Base2Tone-vim')
     call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': '!bash install.sh'})
+    call minpac#add('ayu-theme/ayu-vim')
     call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
+    call minpac#add('itchyny/lightline.vim')
     call minpac#add('jiangmiao/auto-pairs')
     call minpac#add('junegunn/fzf')
-    call minpac#add('w0rp/ale')
     call minpac#add('junegunn/fzf.vim')
+    call minpac#add('liuchengxu/vim-which-key')
     call minpac#add('luochen1990/rainbow')
+    call minpac#add('mengelbrecht/lightline-bufferline')
     call minpac#add('mhinz/vim-signify')
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('sheerun/vim-polyglot')
@@ -31,14 +32,17 @@ function! PackInit() abort
     call minpac#add('tpope/vim-eunuch')
     call minpac#add('tpope/vim-fugitive')
     call minpac#add('tpope/vim-sleuth')
-    call minpac#add('vim-airline/vim-airline')
-    call minpac#add('vim-airline/vim-airline-themes')
     call minpac#add('vim-vdebug/vdebug')
+    call minpac#add('w0rp/ale')
+    call minpac#add('yous/vim-open-color')
   call minpac#update()
 endfunction
 
 " this won't work in the terminal
 silent call rpcnotify(1, 'Gui', 'Font', 'Monoid Nerd Font 14')
+" the gi still sucks
+silent call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
+silent call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
 
 " Define user commands for updating/cleaning the plugins.
 " Each of them calls PackInit() to load minpac and register
@@ -71,9 +75,7 @@ set colorcolumn=80
 set cursorline
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
+set noshowmode
 let g:indentLine_enabled = 1
 let g:indent_guides_enable_on_vim_startup = 1
 "colorscheme inkpot
@@ -81,8 +83,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 "colorscheme ayu
 colorscheme Base2Tone_EveningDark
 
-"let g:AutoPairsMapCR=0
-"imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
 "deoplete (autocompletion)
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -110,6 +110,7 @@ set foldmethod=syntax
 set splitright
 set splitbelow
 
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 inoremap ;; <C-o>m`<C-o>A;<C-o>``
 inoremap ,, <C-o>m`<C-o>A,<C-o>``
 nnoremap <C-j> <C-w>j
