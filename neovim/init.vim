@@ -24,8 +24,8 @@ function! PackInit() abort
     call minpac#add('junegunn/fzf.vim')
     call minpac#add('liuchengxu/vim-which-key')
     call minpac#add('luochen1990/rainbow')
-    call minpac#add('mengelbrecht/lightline-bufferline')
     call minpac#add('mhinz/vim-signify')
+    call minpac#add('mildred/vim-bufmru')
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('sheerun/vim-polyglot')
     call minpac#add('tpope/vim-dispatch')
@@ -142,6 +142,37 @@ let g:vdebug_keymap = {
 \    "eval_visual" : "<Leader>e"
 \}
 nnoremap <esc> :noh<return><esc>
+
+set showtabline=2
+let g:lightline#bufferline#show_number=1
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'readonly', 'filename', 'modified' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \              [ 'percent' ],
+  \              [ 'fileformat', 'fileencoding', 'filetype' ] ] },
+  \ 'inactive': {
+  \   'left': [ [ 'filename' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \              [ 'percent' ] ] },
+  \ 'tabline': {
+  \   'left': [ [ 'mrubuffers' ] ],
+  \   'right': [ [ 'bufferclose','tabnum' ] ] },
+  \ 'component_expand': {
+  \   'mrubuffers': 'bufmru#lightline#buffers',
+  \   'bufferclose': 'bufmru#lightline#close',
+  \   'tabnum': 'bufmru#lightline#tabnum' },
+  \ 'component_type': {
+  \   'buffers': 'tabsel',
+  \   'mrubuffers': 'tabsel',
+  \   },
+  \ 'component_raw': {
+  \   'mrubuffers':     1,
+  \   'bufferclose':    1,
+  \   'tabnum': 1,
+  \   },
+  \ }
 
 "rainbow parens
 let g:rainbow_active = 1
