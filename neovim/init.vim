@@ -56,6 +56,8 @@ let $FISHLVL=''
 
 "relative line numbers
 set number relativenumber
+set list
+set listchars=tab:├─
 "toggle to absolute line numbers unless we are in normal focus
 augroup numbertoggle
   autocmd!
