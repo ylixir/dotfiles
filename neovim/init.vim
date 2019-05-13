@@ -39,10 +39,10 @@ function! PackInit() abort
 endfunction
 
 " this won't work in the terminal
-silent call rpcnotify(1, 'Gui', 'Font', 'Monoid Nerd Font 14')
+silent! call rpcnotify(1, 'Gui', 'Font', 'Monoid Nerd Font 14')
 " the gi still sucks
-silent call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
-silent call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
+silent! call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
+silent! call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
 
 " Define user commands for updating/cleaning the plugins.
 " Each of them calls PackInit() to load minpac and register

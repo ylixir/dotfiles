@@ -2,7 +2,6 @@
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
     (import ./lorri {})
-    (import neovim/gtk.nix pkgs)
     ag
     asciinema
     bash #TODO open pr to fix this with home-manager
@@ -11,7 +10,7 @@
     nodejs
     ps
     thefuck
-  ] ++ (if pkgs.system == "x86_64-darwin" then [] else [ pkgs.konsole ]) ;
+  ] ++ (if pkgs.system == "x86_64-darwin" then [] else [ (import neovim/gtk.nix pkgs) ]) ;
 
   home.file = {
     ".config/fish/functions/fzf_key_bindings.fish".source = builtins.fetchurl "https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish";
