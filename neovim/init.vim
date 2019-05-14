@@ -58,6 +58,7 @@ let $FISHLVL=''
 
 "relative line numbers
 set number relativenumber
+set signcolumn=yes
 set list
 set listchars=tab:├─
 "toggle to absolute line numbers unless we are in normal focus
@@ -197,3 +198,4 @@ autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
 
 autocmd TermOpen term://* startinsert
+
