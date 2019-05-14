@@ -26,6 +26,7 @@ function! PackInit() abort
     call minpac#add('luochen1990/rainbow')
     call minpac#add('mhinz/vim-signify')
     call minpac#add('mildred/vim-bufmru')
+    call minpac#add('moll/vim-bbye')
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('sheerun/vim-polyglot')
     call minpac#add('tpope/vim-dispatch')
@@ -126,8 +127,8 @@ nnoremap <c-o> :vs<cr>
 nnoremap <c-u> :sp<cr>
 nnoremap <c-t> :te<cr>
 
-nnoremap <silent> <leader>q :lclose<bar>bn<bar>bd #<CR>
 nnoremap <silent> <leader>t :NERDTreeFind<CR>
+nnoremap <silent> <leader>q :Bdelete<CR>
 nmap <Leader>F :Files<CR>
 nmap <Leader>a :Ag<Space>
 nmap <Leader>b :Buffers<CR>
