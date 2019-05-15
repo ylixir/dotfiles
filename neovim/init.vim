@@ -26,6 +26,7 @@ function! PackInit() abort
     call minpac#add('liuchengxu/vim-which-key')
     call minpac#add('luochen1990/rainbow')
     call minpac#add('mhinz/vim-signify')
+    call minpac#add('mhinz/vim-startify')
     call minpac#add('mildred/vim-bufmru')
     call minpac#add('moll/vim-bbye')
     call minpac#add('scrooloose/nerdtree')
@@ -78,6 +79,8 @@ set t_Co=256
 set termguicolors
 set colorcolumn=80
 set cursorline
+let g:startify_session_persistence = 1
+let g:startify_change_to_vcs_root = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 set noshowmode
