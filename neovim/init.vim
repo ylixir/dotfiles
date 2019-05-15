@@ -42,16 +42,16 @@ endfunction
 
 " this won't work in the terminal
 silent! call rpcnotify(1, 'Gui', 'Font', 'Monoid Nerd Font 14')
-" the gi still sucks
+" the gui still sucks
 silent! call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
 silent! call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
 
 " Define user commands for updating/cleaning the plugins.
 " Each of them calls PackInit() to load minpac and register
 " the information of plugins, then performs the task.
-command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
-command! PackClean  call PackInit() | call minpac#clean()
-command! PackStatus call PackInit() | call minpac#status()
+command! PlugUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
+command! PlugClean  call PackInit() | call minpac#clean()
+command! PlugStatus call PackInit() | call minpac#status()
 
 "make sure terminal can pop a fish shell
 let $FISHLVL=''
