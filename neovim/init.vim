@@ -17,7 +17,7 @@ function! PackInit() abort
     call minpac#add('atelierbram/Base2Tone-vim')
     call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': '!bash install.sh'})
     call minpac#add('ayu-theme/ayu-vim')
-    call minpac#add('direnv/direnv')
+    call minpac#add('direnv/direnv.vim')
     call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
     call minpac#add('itchyny/lightline.vim')
     call minpac#add('jiangmiao/auto-pairs')
