@@ -43,6 +43,8 @@ endfunction
 
 " this won't work in the terminal
 silent! call rpcnotify(1, 'Gui', 'Font', 'Monoid Nerd Font 14')
+silent! VVset fontfamily='Monoid Nerd Font'
+silent! VVset fontsize=10
 " the gui still sucks
 silent! call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
 silent! call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
