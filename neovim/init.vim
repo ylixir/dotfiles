@@ -20,7 +20,6 @@ function! PackInit() abort
     call minpac#add('direnv/direnv.vim')
     call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
     call minpac#add('itchyny/lightline.vim')
-    call minpac#add('jiangmiao/auto-pairs')
     call minpac#add('junegunn/fzf')
     call minpac#add('junegunn/fzf.vim')
     call minpac#add('liuchengxu/vim-which-key')
@@ -31,6 +30,7 @@ function! PackInit() abort
     call minpac#add('moll/vim-bbye')
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('sheerun/vim-polyglot')
+    call minpac#add('tmsvg/pear-tree')
     call minpac#add('tpope/vim-dispatch')
     call minpac#add('tpope/vim-eunuch')
     call minpac#add('tpope/vim-fugitive')
@@ -117,6 +117,10 @@ let php_folding=1
 set foldmethod=syntax
 set splitright
 set splitbelow
+
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 inoremap ;; <C-o>m`<C-o>A;<C-o>``
