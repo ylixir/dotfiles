@@ -7,10 +7,6 @@ function! PackInit() abort
     packadd minpac
   endif
   call minpac#init()
-    " minpac must have {'type': 'opt'} so that it can be loaded with `packadd`.
-    call minpac#add('k-takata/minpac', {'type': 'opt'})
-    call minpac#add('ryanoasis/vim-devicons') "first according to docs
-
     call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
     call minpac#add('Yggdroot/indentLine')
@@ -22,12 +18,15 @@ function! PackInit() abort
     call minpac#add('itchyny/lightline.vim')
     call minpac#add('junegunn/fzf')
     call minpac#add('junegunn/fzf.vim')
+    call minpac#add('k-takata/minpac', {'type': 'opt'})
     call minpac#add('liuchengxu/vim-which-key')
     call minpac#add('luochen1990/rainbow')
     call minpac#add('mhinz/vim-signify')
     call minpac#add('mhinz/vim-startify')
     call minpac#add('mildred/vim-bufmru')
     call minpac#add('moll/vim-bbye')
+    call minpac#add('rhysd/vim-clang-format')
+    call minpac#add('ryanoasis/vim-devicons') "first according to docs
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('sheerun/vim-polyglot')
     call minpac#add('tmsvg/pear-tree')
@@ -83,8 +82,7 @@ set colorcolumn=80
 set cursorline
 let g:startify_session_persistence = 1
 let g:startify_change_to_vcs_root = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:webdevicons_enable_nerdtree = 0
 set noshowmode
 let g:indentLine_enabled = 1
 let g:indent_guides_enable_on_vim_startup = 1
@@ -162,7 +160,7 @@ let g:lightline#bufferline#show_number=1
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'readonly', 'filename', 'modified' ] ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
   \   'right': [ [ 'lineinfo' ],
   \              [ 'percent' ],
   \              [ 'fileformat', 'fileencoding', 'filetype' ] ] },
@@ -173,20 +171,34 @@ let g:lightline = {
   \ 'tabline': {
   \   'left': [ [ 'mrubuffers' ] ],
   \   'right': [ [ 'bufferclose','tabnum' ] ] },
+  \
   \ 'component_expand': {
   \   'mrubuffers': 'bufmru#lightline#buffers',
   \   'bufferclose': 'bufmru#lightline#close',
   \   'tabnum': 'bufmru#lightline#tabnum' },
-  \ 'component_type': {
-  \   'buffers': 'tabsel',
-  \   'mrubuffers': 'tabsel',
+  \ 'component_function': {
+  \   'filetype': 'MyFiletype',
+  \   'fileformat': 'MyFileformat',
+  \   'gitbranch': 'fugitive#head',
   \   },
   \ 'component_raw': {
   \   'mrubuffers':     1,
   \   'bufferclose':    1,
   \   'tabnum': 1,
   \   },
+  \ 'component_type': {
+  \   'buffers': 'tabsel',
+  \   'mrubuffers': 'tabsel',
+  \   },
   \ }
+
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! MyFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
 
 "rainbow parens
 let g:rainbow_active = 1
@@ -205,6 +217,7 @@ let g:ale_linters = { 'php': ['php', 'psalm'] }
 
 autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
+autocmd FileType c,cpp ClangFormatAutoEnable
 
 autocmd TermOpen term://* startinsert
 
