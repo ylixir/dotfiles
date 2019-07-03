@@ -142,6 +142,7 @@ nmap <Leader>F :Files<CR>
 nmap <Leader>a :Ag<Space>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :GFiles<CR>
+nnoremap <leader>w :silent %!prettier --stdin --stdin-filepath % --trailing-comma all --single-quote --no-semi<CR>
 let g:vdebug_keymap = {
 \    "run" : "<Leader>/",
 \    "run_to_cursor" : "<Up>",

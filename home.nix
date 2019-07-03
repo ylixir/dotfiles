@@ -11,8 +11,9 @@ in {
     cargo
     clang
     nodePackages.node2nix
-    node-pkgs.javascript-typescript-langserver
     node-pkgs.intelephense
+    node-pkgs.javascript-typescript-langserver
+    node-pkgs.prettier
     nodejs-12_x
     ps
     thefuck

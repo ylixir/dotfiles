@@ -1,4 +1,5 @@
 [
     "javascript-typescript-langserver",
-    "intelephense"
+    "intelephense",
+    "prettier"
 ]

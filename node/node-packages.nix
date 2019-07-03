@@ -1446,4 +1446,22 @@ in
     bypassCache = true;
     reconstructLock = true;
   };
+  prettier = nodeEnv.buildNodePackage {
+    name = "prettier";
+    packageName = "prettier";
+    version = "1.18.2";
+    src = fetchurl {
+      url = "https://registry.npmjs.org/prettier/-/prettier-1.18.2.tgz";
+      sha512 = "OeHeMc0JhFE9idD4ZdtNibzY0+TPHSpSSb9h8FqtP+YnoZZ1sl8Vc9b1sasjfymH3SonAF4QcA2+mzHPhMvIiw==";
+    };
+    buildInputs = globalBuildInputs;
+    meta = {
+      description = "Prettier is an opinionated code formatter";
+      homepage = https://prettier.io/;
+      license = "MIT";
+    };
+    production = true;
+    bypassCache = true;
+    reconstructLock = true;
+  };
 }
