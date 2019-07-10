@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let 
+  node-pkgs = (import ./node {});
+in {
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
     (import ./lorri {})
@@ -7,7 +10,11 @@
     bash #TODO open pr to fix this with home-manager
     cargo
     clang
-    nodejs
+    nodePackages.node2nix
+    node-pkgs.intelephense
+    node-pkgs.javascript-typescript-langserver
+    node-pkgs.prettier
+    nodejs-12_x
     ps
     thefuck
   ] ++ (if pkgs.system == "x86_64-darwin" then [] else [ (import neovim/gtk.nix pkgs) ]) ;

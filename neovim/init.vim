@@ -142,6 +142,7 @@ nmap <Leader>F :Files<CR>
 nmap <Leader>a :Ag<Space>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :GFiles<CR>
+nnoremap <leader>w :silent %!prettier --stdin --stdin-filepath % --trailing-comma all --single-quote --no-semi<CR>
 let g:vdebug_keymap = {
 \    "run" : "<Leader>/",
 \    "run_to_cursor" : "<Up>",
@@ -209,10 +210,13 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 "intelephense is faster, better feature support
 let g:LanguageClient_serverCommands = {
-  \ 'php' : ['npx', '--quiet', 'intelephense', '--stdio'],
+  \ 'php' : ['intelephense', '--stdio'],
+  \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'typescript': ['javascript-typescript-stdio'],
   \ }
 "psalm is better at finding errors but LanguageClient can only rock one lang server now
 "https://github.com/autozimu/LanguageClient-neovim/issues/473
+let g:ale_linters_explicit = 1
 let g:ale_linters = { 'php': ['php', 'psalm'] }
 
 autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
