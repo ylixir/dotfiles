@@ -7,11 +7,11 @@ function! PackInit() abort
     packadd minpac
   endif
   call minpac#init()
-    call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
+    "call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
     call minpac#add('Yggdroot/indentLine')
     call minpac#add('atelierbram/Base2Tone-vim')
-    call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': '!bash install.sh'})
+    "call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': '!bash install.sh'})
     call minpac#add('ayu-theme/ayu-vim')
     call minpac#add('direnv/direnv.vim')
     call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
@@ -35,9 +35,13 @@ function! PackInit() abort
     call minpac#add('tpope/vim-fugitive')
     call minpac#add('tpope/vim-sleuth')
     call minpac#add('vim-vdebug/vdebug')
-    call minpac#add('w0rp/ale')
-    call minpac#add('yous/vim-open-color')
+    call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
+    "call minpac#add('w0rp/ale')
+    "call minpac#add('yous/vim-open-color')
   call minpac#update()
+  CocInstall coc-solargraph
+  CocInstall coc-tsserver
+  CocInstall coc-json
 endfunction
 
 " this won't work in the terminal
@@ -92,8 +96,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 colorscheme Base2Tone_EveningDark
 
 "deoplete (autocompletion)
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"let g:deoplete#enable_at_startup = 1
+
+"not works for deoplete and coc at least
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 set mouse=a
 set ignorecase
@@ -205,19 +212,23 @@ endfunction
 let g:rainbow_active = 1
 
 "set up language servers
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+"nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+"nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 "intelephense is faster, better feature support
-let g:LanguageClient_serverCommands = {
-  \ 'php' : ['intelephense', '--stdio'],
-  \ 'javascript': ['javascript-typescript-stdio'],
-  \ 'typescript': ['javascript-typescript-stdio'],
-  \ }
+"let g:LanguageClient_serverCommands = {
+"  \ 'php' : ['intelephense', '--stdio'],
+"  \ 'javascript': ['javascript-typescript-stdio'],
+"  \ 'typescript': ['javascript-typescript-stdio'],
+"  \ }
 "psalm is better at finding errors but LanguageClient can only rock one lang server now
 "https://github.com/autozimu/LanguageClient-neovim/issues/473
-let g:ale_linters_explicit = 1
-let g:ale_linters = { 'php': ['php', 'psalm'] }
+"let g:ale_linters_explicit = 1
+"let g:ale_linters = { 'php': ['php', 'psalm'] }
+
+nnoremap <silent> K :call CocActionAsync('doHover')<cr>
+nnoremap <silent> gd :call CocActionAsync('jumpDefinition')<cr>
+nnoremap <silent> gr :call CocActionAsync('jumpReferences')<cr>
 
 autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
