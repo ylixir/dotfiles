@@ -6,6 +6,7 @@ in {
   home.packages = with pkgs; [
     (import ./lorri {})
     ag
+    adoptopenjdk-bin
     bash #TODO open pr to fix this with home-manager
     cargo
     gnumake
