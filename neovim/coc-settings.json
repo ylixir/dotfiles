@@ -1,0 +1,18 @@
+{
+  "codeLens.enable": true,
+  "diagnostic.virtualText": true,
+
+  "solargraph.diagnostics": true,
+  "solargraph.hover": true,
+
+    "languageserver": {
+    "elmLS": {
+      "command": "elm-language-server",
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "elmAnalyseTrigger": "change"
+      }
+    }
+  },
+}
