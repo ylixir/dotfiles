@@ -2,5 +2,9 @@
     "@elm-tooling/elm-language-server",
     "intelephense",
     "javascript-typescript-langserver",
-    "prettier"
+    "prettier",
+    "react-native",
+    "react-native-cli",
+    "yarn",
+    {"mjml":"4.4.0-beta.1"}
 ]

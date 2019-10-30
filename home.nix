@@ -15,9 +15,13 @@ in {
     node-pkgs.intelephense # php language server
     node-pkgs.javascript-typescript-langserver
     node-pkgs.prettier
+    #node-pkgs.react-native #ugh, really shouldn't be globally installed, needed by xcode
+    #node-pkgs.react-native-cli #only one of this or react-native-cli can be installed
+    #node-pkgs."mjml-4.4.0-beta.1" #why is this global? needed by altru
     nodejs-12_x
     ps
     solargraph # ruby language server
+    #watchman # needed by react-native to compile
   ] ++ (if pkgs.system == "x86_64-darwin" then [] else [ (import neovim/gtk.nix pkgs) ]) ;
 
   home.file = {
