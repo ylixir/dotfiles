@@ -7,11 +7,9 @@ function! PackInit() abort
     packadd minpac
   endif
   call minpac#init()
-    "call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
     call minpac#add('Yggdroot/indentLine')
     call minpac#add('atelierbram/Base2Tone-vim')
-    "call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': '!bash install.sh'})
     call minpac#add('ayu-theme/ayu-vim')
     call minpac#add('direnv/direnv.vim')
     call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
@@ -20,6 +18,7 @@ function! PackInit() abort
     call minpac#add('junegunn/fzf.vim')
     call minpac#add('k-takata/minpac', {'type': 'opt'})
     call minpac#add('liuchengxu/vim-which-key')
+    call minpac#add('liuchengxu/vista.vim')
     call minpac#add('luochen1990/rainbow')
     call minpac#add('mhinz/vim-signify')
     call minpac#add('mhinz/vim-startify')
@@ -33,11 +32,11 @@ function! PackInit() abort
     call minpac#add('tpope/vim-dispatch')
     call minpac#add('tpope/vim-eunuch')
     call minpac#add('tpope/vim-fugitive')
+    call minpac#add('tpope/vim-repeat')
     call minpac#add('tpope/vim-sleuth')
+    call minpac#add('tpope/vim-surround')
     call minpac#add('vim-vdebug/vdebug')
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
-    "call minpac#add('w0rp/ale')
-    "call minpac#add('yous/vim-open-color')
   call minpac#update()
   CocInstall coc-solargraph
   CocInstall coc-tsserver
@@ -107,6 +106,8 @@ set ignorecase
 set smartcase
 let mapleader=" "
 
+let g:vista_fzf_preview = ['right:50%']
+let g:vista_default_executive = 'coc'
 " Indenting defaults (does not override vim-sleuth's indenting detection)
 " Defaults to 4 spaces for most filetypes
 if get(g:, '_has_set_default_indent_settings', 0) == 0
@@ -143,32 +144,37 @@ nnoremap <c-o> :vs<cr>
 nnoremap <c-u> :sp<cr>
 nnoremap <c-t> :te<cr>
 
-nnoremap <silent> <leader>t :NERDTreeFind<CR>
+nnoremap <silent> <expr> <leader>t g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 nnoremap <silent> <leader>q :Bdelete<CR>
-nmap <Leader>F :Files<CR>
-nmap <Leader>a :Ag<Space>
-nmap <Leader>b :Buffers<CR>
-nmap <Leader>f :GFiles<CR>
+nnoremap <silent> <leader>v :Vista!!<cr>
+nmap <leader>F :Files<CR>
+nmap <leader>a :Ag<Space>
+nmap <leader>b :Buffers<CR>
+nmap <leader>f :GFiles<CR>
 nnoremap <leader>w :silent %!prettier --stdin --stdin-filepath % --trailing-comma all --single-quote --no-semi<CR>
 let g:vdebug_keymap = {
-\    "run" : "<Leader>/",
+\    "run" : "<leader>/",
 \    "run_to_cursor" : "<Up>",
 \    "step_over" : "<Down>",
 \    "step_into" : "<Right>",
 \    "step_out" : "<Left>",
 \    "close" : "q",
 \    "detach" : "x",
-\    "set_breakpoint" : "<Leader>p",
-\    "eval_visual" : "<Leader>e"
+\    "set_breakpoint" : "<leader>p",
+\    "eval_visual" : "<leader>e"
 \}
 nnoremap <esc> :noh<return><esc>
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
 
 set showtabline=2
 let g:lightline#bufferline#show_number=1
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ],
   \   'right': [ [ 'lineinfo' ],
   \              [ 'percent' ],
   \              [ 'fileformat', 'fileencoding', 'filetype' ] ] },
@@ -188,6 +194,7 @@ let g:lightline = {
   \   'filetype': 'MyFiletype',
   \   'fileformat': 'MyFileformat',
   \   'gitbranch': 'fugitive#head',
+  \   'method': 'NearestMethodOrFunction',
   \   },
   \ 'component_raw': {
   \   'mrubuffers':     1,
