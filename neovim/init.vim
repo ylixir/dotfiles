@@ -9,6 +9,7 @@ function! PackInit() abort
   call minpac#init()
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
     call minpac#add('Yggdroot/indentLine')
+    call minpac#add('YorickPeterse/happy_hacking.vim')
     call minpac#add('atelierbram/Base2Tone-vim')
     call minpac#add('ayu-theme/ayu-vim')
     call minpac#add('direnv/direnv.vim')
@@ -20,12 +21,12 @@ function! PackInit() abort
     call minpac#add('liuchengxu/vim-which-key')
     call minpac#add('liuchengxu/vista.vim')
     call minpac#add('luochen1990/rainbow')
-    call minpac#add('mhinz/vim-signify')
+    call minpac#add('airblade/vim-gitgutter')
     call minpac#add('mhinz/vim-startify')
     call minpac#add('mildred/vim-bufmru')
     call minpac#add('moll/vim-bbye')
     call minpac#add('rhysd/vim-clang-format')
-    call minpac#add('ryanoasis/vim-devicons') "first according to docs
+    call minpac#add('ryanoasis/vim-devicons', {'name': 'z-vim-devicons'}) "last according to docs
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('sheerun/vim-polyglot')
     call minpac#add('tmsvg/pear-tree')
@@ -85,14 +86,18 @@ set colorcolumn=80
 set cursorline
 let g:startify_session_persistence = 1
 let g:startify_change_to_vcs_root = 1
-let g:webdevicons_enable_nerdtree = 0
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_conceal_nerdtree_brackets = 0
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 set noshowmode
 let g:indentLine_enabled = 1
 let g:indent_guides_enable_on_vim_startup = 1
 "colorscheme inkpot
 "colorscheme open-color
 "colorscheme ayu
-colorscheme Base2Tone_EveningDark
+"colorscheme Base2Tone_EveningDark
+"colorscheme darkglass
+colorscheme happy_hacking
 
 "deoplete (autocompletion)
 "let g:deoplete#enable_at_startup = 1

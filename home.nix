@@ -23,6 +23,7 @@ in {
   home.file = {
     ".config/fish/functions/fzf_key_bindings.fish".source = builtins.fetchurl "https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish";
     ".config/nvim/colors/inkpot.vim".source = neovim/inkpot.vim;
+    ".config/nvim/colors/darkglass.vim".source = neovim/darkglass.vim;
     ".config/nvim/init.vim".source = neovim/init.vim;
     ".config/nvim/coc-settings.json".source = neovim/coc-settings.json;
   };
