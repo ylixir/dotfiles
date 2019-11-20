@@ -15,7 +15,7 @@ in {
     node-pkgs.intelephense # php language server
     node-pkgs.javascript-typescript-langserver
     node-pkgs.prettier
-    nodejs-12_x
+    nodejs_latest
     ps
     solargraph # ruby language server
   ] ++ (if pkgs.system == "x86_64-darwin" then [] else [ (import neovim/gtk.nix pkgs) ]) ;
