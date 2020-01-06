@@ -9,12 +9,14 @@ in {
     adoptopenjdk-bin
     bash #TODO open pr to fix this with home-manager
     cargo
+    thefuck
     gnumake
     nodePackages.node2nix
     node-pkgs."@elm-tooling/elm-language-server"
     node-pkgs.intelephense # php language server
     node-pkgs.javascript-typescript-langserver
     node-pkgs.prettier
+    node-pkgs.typescript-tslint-plugin
     nodejs_latest
     ps
     solargraph # ruby language server
@@ -28,6 +30,7 @@ in {
     ".config/nvim/coc-settings.json".source = neovim/coc-settings.json;
   };
   programs.bash = (import ./bash.nix pkgs);
+  programs.bat.enable = true;
   programs.direnv.enable = true;
   programs.fish = (import ./fish.nix pkgs);
   programs.fzf.enable = true;

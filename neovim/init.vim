@@ -43,6 +43,7 @@ function! PackInit() abort
   CocInstall coc-tsserver
   CocInstall coc-json
   CocInstall coc-angular
+  CocInstall coc-tslint-plugin
 endfunction
 
 " this won't work in the terminal
