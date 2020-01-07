@@ -190,7 +190,8 @@ nmap <leader>F :Files<CR>
 nmap <leader>a :Rag<Space>
 nmap <leader>b :Buffers<CR>
 nmap <leader>f :GFiles<CR>
-nnoremap <leader>w :silent %!prettier --stdin --stdin-filepath % --trailing-comma all --single-quote --no-semi<CR>
+
+" nnoremap <leader>w :silent %!prettier --stdin --stdin-filepath % --trailing-comma all --single-quote --no-semi<CR>
 let g:vdebug_keymap = {
 \    "run" : "<leader>/",
 \    "run_to_cursor" : "<Up>",
@@ -275,6 +276,7 @@ let g:rainbow_active = 1
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
 nnoremap <silent> gd :call CocActionAsync('jumpDefinition')<cr>
 nnoremap <silent> gr :call CocActionAsync('jumpReferences')<cr>
+nnoremap <leader>w :call CocActionAsync('doQuickfix')<cr>
 
 autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
