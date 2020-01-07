@@ -168,14 +168,10 @@ function! FloatingFZF()
   " to be used in the floating window
   let buf = nvim_create_buf(v:false, v:true)
 
-  " 90% of the height
-  let height = float2nr(&lines * 0.9)
-  " 60% of the height
-  let width = float2nr(&columns * 0.6)
-  " horizontal position (centralized)
+  let height = float2nr(&lines * 0.6)
+  let width = float2nr(&columns * 0.9)
   let horizontal = float2nr((&columns - width) / 2)
-  " vertical position (one line down of the top)
-  let vertical = 1
+  let vertical = float2nr((&lines - height) / 2)
 
   let opts = {
         \ 'relative': 'editor',
@@ -194,7 +190,8 @@ nmap <leader>F :Files<CR>
 nmap <leader>a :Rag<Space>
 nmap <leader>b :Buffers<CR>
 nmap <leader>f :GFiles<CR>
-nnoremap <leader>w :silent %!prettier --stdin --stdin-filepath % --trailing-comma all --single-quote --no-semi<CR>
+
+" nnoremap <leader>w :silent %!prettier --stdin --stdin-filepath % --trailing-comma all --single-quote --no-semi<CR>
 let g:vdebug_keymap = {
 \    "run" : "<leader>/",
 \    "run_to_cursor" : "<Up>",
@@ -279,6 +276,7 @@ let g:rainbow_active = 1
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
 nnoremap <silent> gd :call CocActionAsync('jumpDefinition')<cr>
 nnoremap <silent> gr :call CocActionAsync('jumpReferences')<cr>
+nnoremap <leader>w :call CocActionAsync('doQuickfix')<cr>
 
 autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
