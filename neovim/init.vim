@@ -9,9 +9,8 @@ function! PackInit() abort
   call minpac#init()
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
     call minpac#add('Yggdroot/indentLine')
-    call minpac#add('YorickPeterse/happy_hacking.vim')
+    call minpac#add('airblade/vim-gitgutter')
     call minpac#add('atelierbram/Base2Tone-vim')
-    call minpac#add('ayu-theme/ayu-vim')
     call minpac#add('direnv/direnv.vim')
     call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
     call minpac#add('itchyny/lightline.vim')
@@ -21,10 +20,11 @@ function! PackInit() abort
     call minpac#add('liuchengxu/vim-which-key')
     call minpac#add('liuchengxu/vista.vim')
     call minpac#add('luochen1990/rainbow')
-    call minpac#add('airblade/vim-gitgutter')
     call minpac#add('mhinz/vim-startify')
     call minpac#add('mildred/vim-bufmru')
+    call minpac#add('wadackel/vim-dogrun')
     call minpac#add('moll/vim-bbye')
+    call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
     call minpac#add('rhysd/vim-clang-format')
     call minpac#add('ryanoasis/vim-devicons', {'name': 'z-vim-devicons'}) "last according to docs
     call minpac#add('scrooloose/nerdtree')
@@ -37,7 +37,6 @@ function! PackInit() abort
     call minpac#add('tpope/vim-sleuth')
     call minpac#add('tpope/vim-surround')
     call minpac#add('vim-vdebug/vdebug')
-    call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
   call minpac#update()
   CocInstall coc-solargraph
   CocInstall coc-tsserver
@@ -93,13 +92,11 @@ let g:webdevicons_conceal_nerdtree_brackets = 0
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 set noshowmode
 let g:indentLine_enabled = 1
+let g:indentLine_fileTypeExclude = ['markdown','startify','nerdtree']
 let g:indent_guides_enable_on_vim_startup = 1
-"colorscheme inkpot
-"colorscheme open-color
-"colorscheme ayu
+
 "colorscheme Base2Tone_EveningDark
-"colorscheme darkglass
-colorscheme happy_hacking
+colorscheme dogrun
 
 "deoplete (autocompletion)
 "let g:deoplete#enable_at_startup = 1
@@ -149,7 +146,7 @@ tnoremap <c-_> <c-\><c-n>
 nnoremap <c-a> <c-o>
 nnoremap <c-o> :vs<cr>
 nnoremap <c-u> :sp<cr>
-nnoremap <c-t> :te<cr>
+nnoremap <c-t> :te<cr>i
 
 nnoremap <silent> <expr> <leader>t g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 nnoremap <silent> <leader>q :Bdelete<CR>
@@ -212,6 +209,7 @@ endfunction
 set showtabline=2
 let g:lightline#bufferline#show_number=1
 let g:lightline = {
+  \ 'colorscheme': 'dogrun',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ],
@@ -282,5 +280,5 @@ autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
 autocmd FileType c,cpp ClangFormatAutoEnable
 
-autocmd TermOpen term://* startinsert
+"autocmd TermOpen term://* startinsert
 
