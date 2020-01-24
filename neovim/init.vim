@@ -149,6 +149,7 @@ nnoremap <c-u> :sp<cr>
 nnoremap <c-t> :te<cr>i
 
 nnoremap <silent> <expr> <leader>t g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
+
 nnoremap <silent> <leader>q :Bdelete<CR>
 nnoremap <silent> <leader>v :Vista!!<cr>
 
@@ -279,6 +280,4 @@ nnoremap <leader>w :call CocActionAsync('doQuickfix')<cr>
 autocmd BufRead,BufNewFile *.jsonnet set filetype=jsonnet
 autocmd FileType jsonnet :packadd vim-jsonnet
 autocmd FileType c,cpp ClangFormatAutoEnable
-
-"autocmd TermOpen term://* startinsert
 
