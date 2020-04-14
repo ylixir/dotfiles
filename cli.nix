@@ -9,7 +9,6 @@ let
     fish
     fzf
     #latex
-    #lorri
     neovim
     nix
     nodejs
@@ -22,7 +21,6 @@ let
     yarn
     #home-manager
     ];
-  lorri = import ./lorri;
   latex = pkgs.texlive.combine {
       inherit (pkgs.texlive) scheme-small algorithms cm-super moderncv marvosym;
   };

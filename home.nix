@@ -1,25 +1,29 @@
 { pkgs, ... }:
 let 
   node-pkgs = (import ./node {});
+  unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) {};
 in {
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
-    (import ./lorri {})
-    ag
+    # node-pkgs."@elm-tooling/elm-language-server"
     adoptopenjdk-bin
+    ag
     bash #TODO open pr to fix this with home-manager
     cargo
-    thefuck
+    elmPackages.elm-format
+    elmPackages.elm-language-server
     gnumake
-    nodePackages.node2nix
-    node-pkgs."@elm-tooling/elm-language-server"
+    niv
     node-pkgs.intelephense # php language server
     node-pkgs.javascript-typescript-langserver
     node-pkgs.prettier
     node-pkgs.typescript-tslint-plugin
+    nodePackages.node2nix
     nodejs_latest
     ps
     solargraph # ruby language server
+    thefuck
+    unstable.lorri
   ] ++ (if pkgs.system == "x86_64-darwin" then [] else [ (import neovim/gtk.nix pkgs) ]) ;
 
   home.file = {

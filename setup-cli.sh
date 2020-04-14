@@ -22,15 +22,6 @@ then
   fi
 fi
 
-( # enter subshell do avoid direcory juggling
-    if ! [ -d lorri ]
-    then
-      git clone https://github.com/target/lorri.git -b rolling-release
-    fi
-    cd lorri
-    git pull
-)
-
 # clean out any unnecessary packages
 nix-env -f bones.nix -i --remove-all
 
