@@ -64,21 +64,21 @@ command! PlugStatus call PackInit() | call minpac#status()
 let $FISHLVL=''
 
 "relative line numbers
-set number relativenumber
+set number
 set signcolumn=yes
 set list
 set listchars=tab:├─
 "toggle to absolute line numbers unless we are in normal focus
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
+"augroup numbertoggle
+"  autocmd!
+"  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+"augroup END
 
 "hack from reddit to keep terminal windows in the buffer list
 augroup custom_term
   autocmd!
-  autocmd TermOpen * setlocal nonumber norelativenumber bufhidden=hide
+  autocmd TermOpen * setlocal number bufhidden=hide
 augroup END
 
 set t_Co=256
@@ -127,6 +127,7 @@ set autoindent
 set nofoldenable
 let php_folding=1
 set foldmethod=syntax
+set foldcolumn=1
 set splitright
 set splitbelow
 
