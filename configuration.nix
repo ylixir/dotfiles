@@ -66,6 +66,8 @@ in
     gcc
     gnumake
     home-manager
+    steam
+    minecraft
     vim
     xclip
   ];
@@ -99,6 +101,9 @@ in
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+  hardware.pulseaudio.support32Bit = true;
 
   # Enable the X11 windowing system.
   # services.tlp.enable = true;
