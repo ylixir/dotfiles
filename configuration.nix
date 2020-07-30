@@ -43,6 +43,7 @@ in
 
   nix.allowedUsers = [ "ylixir" ];
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.firefox.enablePlasmaBrowserIntegration = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -62,14 +63,18 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     firefox
-    git
     gcc
+    git
     gnumake
+    hexchat
     home-manager
-    steam
     minecraft
+    slack
+    steam
+    thunderbird
     vim
     xclip
+    zoom-us
   ];
   environment.variables = {
     MOZ_USE_XINPUT2 = "1";
@@ -100,6 +105,7 @@ in
 
   # Enable sound.
   sound.enable = true;
+  hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
