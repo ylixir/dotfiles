@@ -26,7 +26,9 @@ in {
     solargraph # ruby language server
     thefuck
     unstable.lorri
-  ] ++ (if pkgs.system == "x86_64-darwin" then [] else [ (import neovim/gtk.nix pkgs) ]) ;
+  ] ++ (if pkgs.system == "x86_64-darwin" then [] else [
+    #(import neovim/gtk.nix pkgs)
+  ]) ;
 
   home.file = {
     ".config/fish/functions/fzf_key_bindings.fish".source = builtins.fetchurl "https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish";
