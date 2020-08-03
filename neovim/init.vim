@@ -36,6 +36,7 @@ function! PackInit() abort
     call minpac#add('tpope/vim-repeat')
     call minpac#add('tpope/vim-sleuth')
     call minpac#add('tpope/vim-surround')
+    call minpac#add('tpope/vim-vividchalk')
     call minpac#add('vim-vdebug/vdebug')
   call minpac#update()
   CocInstall coc-solargraph
@@ -96,7 +97,8 @@ let g:indentLine_fileTypeExclude = ['markdown','startify','nerdtree']
 let g:indent_guides_enable_on_vim_startup = 1
 
 "colorscheme Base2Tone_EveningDark
-colorscheme dogrun
+"colorscheme dogrun
+colorscheme vividchalk
 
 "deoplete (autocompletion)
 "let g:deoplete#enable_at_startup = 1

@@ -13,6 +13,7 @@ in {
     elmPackages.elm-format
     elmPackages.elm-language-server
     gnumake
+    ocamlformat
     niv
     node-pkgs.intelephense # php language server
     node-pkgs.javascript-typescript-langserver
@@ -21,6 +22,7 @@ in {
     nodePackages.node2nix
     nodejs_latest
     ps
+    rls
     solargraph # ruby language server
     thefuck
     unstable.lorri
