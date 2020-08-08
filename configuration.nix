@@ -34,7 +34,10 @@ in
   networking.hostName = "cecaelia"; # Define your hostname.
   networking.interfaces.wlo1.useDHCP = true;
   networking.useDHCP = false; # deprecated
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # network manager and wpa supplicant are mutually exclusive
+  networking.networkmanager.enable = true;
+  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  # generate pskRaw hashes with wpa_passphrase
   networking.wireless.networks = {
     TP-Link_B2DE = {
       pskRaw = "5cde700fd7307f7949e00af49c5fa4a973a2de69406cd1c4d10a80404f5870ac";
@@ -62,6 +65,7 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    google-chrome
     firefox
     gcc
     git
@@ -70,10 +74,12 @@ in
     home-manager
     minecraft
     slack
+    spotify
     steam
     thunderbird
     vim
     xclip
+    xournalpp
     zoom-us
   ];
   environment.variables = {
@@ -127,12 +133,21 @@ in
   };
 
   # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    autoLogin.enable = true;
+    autoLogin.relogin = true;
+    autoLogin.user = "ylixir";
+  };
   services.xserver.desktopManager.plasma5.enable = true;
   # services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
+  users.users.root = {
+    hashedPassword = "*";
+  };
+  # generate password with `mkpasswd -m sha-512`
   users.users.ylixir = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" ];
