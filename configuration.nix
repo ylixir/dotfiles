@@ -4,7 +4,11 @@
 
 { config, pkgs, ... }:
 let
-  unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) {};
+  unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) {
+    config.allowUnfree = true;
+    config.firefox.enablePlasmaBrowserIntegration = true;
+    config.i18n.defaultLocale = "fr_FR.UTF-8";
+  };
 in
 {
   imports =
@@ -20,7 +24,7 @@ in
       allowDiscards = true;
     };
   };
-  boot.kernelPackages = unstable.linuxPackages_testing;
+  boot.kernelPackages = unstable.linuxPackages_zen;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
@@ -54,6 +58,7 @@ in
 
   # Select internationalisation properties.
   i18n.defaultLocale = "fr_FR.UTF-8";
+  nixpkgs.config.i18n.defaultLocale = "fr_FR.UTF-8";
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -65,18 +70,20 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    google-chrome
-    firefox
+    exfat
     gcc
     git
     gnumake
+    google-chrome
     hexchat
     home-manager
     minecraft
+    ntfs3g
     slack
     spotify
     steam
-    thunderbird
+    unstable.firefox-devedition-bin
+    unstable.thunderbird-bin
     vim
     xclip
     xournalpp
@@ -84,6 +91,7 @@ in
   ];
   environment.variables = {
     MOZ_USE_XINPUT2 = "1";
+    MOZ_LEGACY_PROFILES = "1";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
