@@ -22,8 +22,8 @@ function! PackInit() abort
     call minpac#add('luochen1990/rainbow')
     call minpac#add('mhinz/vim-startify')
     call minpac#add('mildred/vim-bufmru')
-    call minpac#add('wadackel/vim-dogrun')
     call minpac#add('moll/vim-bbye')
+    call minpac#add('morhetz/gruvbox')
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
     call minpac#add('rhysd/vim-clang-format')
     call minpac#add('ryanoasis/vim-devicons', {'name': 'z-vim-devicons'}) "last according to docs
@@ -37,6 +37,7 @@ function! PackInit() abort
     call minpac#add('tpope/vim-sleuth')
     call minpac#add('tpope/vim-surround')
     call minpac#add('tpope/vim-vividchalk')
+    call minpac#add('wadackel/vim-dogrun')
     call minpac#add('vim-vdebug/vdebug')
   call minpac#update()
   CocInstall coc-solargraph
@@ -98,7 +99,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 "colorscheme Base2Tone_EveningDark
 "colorscheme dogrun
-colorscheme vividchalk
+colorscheme gruvbox
 
 "deoplete (autocompletion)
 "let g:deoplete#enable_at_startup = 1
