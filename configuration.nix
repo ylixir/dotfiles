@@ -71,6 +71,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     binutils
+    clang
     exfat
     gcc
     git

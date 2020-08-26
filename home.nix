@@ -14,6 +14,7 @@ in {
     elmPackages.elm-language-server
     gnumake
     ocamlformat
+    neovim-qt
     niv
     node-pkgs.intelephense # php language server
     node-pkgs.javascript-typescript-langserver

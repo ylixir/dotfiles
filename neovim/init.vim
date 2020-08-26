@@ -15,7 +15,7 @@ function! PackInit() abort
     call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
     call minpac#add('itchyny/lightline.vim')
     call minpac#add('junegunn/fzf')
-    call minpac#add('junegunn/fzf.vim')
+    call minpac#add('junegunn/fzf.vim', {'rev':'23dda8602f138a9d75dd03803a79733ee783e356'})
     call minpac#add('k-takata/minpac', {'type': 'opt'})
     call minpac#add('liuchengxu/vim-which-key')
     call minpac#add('liuchengxu/vista.vim')
@@ -48,8 +48,8 @@ function! PackInit() abort
 endfunction
 
 " this won't work in the terminal
-silent! call rpcnotify(1, 'Gui', 'Font', 'Monoid Nerd Font 14')
-silent! VVset fontfamily='Monoid Nerd Font'
+silent! call rpcnotify(1, 'Gui', 'Font', 'Hack:h10')
+silent! VVset fontfamily='Hack'
 silent! VVset fontsize=10
 " the gui still sucks
 silent! call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
@@ -83,7 +83,7 @@ augroup custom_term
   autocmd TermOpen * setlocal number bufhidden=hide
 augroup END
 
-set t_Co=256
+set t_Co=256 "fzf needs this?
 set termguicolors
 set colorcolumn=80
 set cursorline
@@ -99,6 +99,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 "colorscheme Base2Tone_EveningDark
 "colorscheme dogrun
+"colorscheme vividchalk
 colorscheme gruvbox
 
 "deoplete (autocompletion)
