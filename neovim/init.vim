@@ -103,6 +103,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 "colorscheme vividchalk
 set background=light
 colorscheme fairy-garden
+
+"needed for colorscheme override
+filetype plugin indent on
+syntax on
+
 hi ColorColumn guibg=#f9c19b
 hi VertSplit guibg=#f9c19b
 
