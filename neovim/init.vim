@@ -103,6 +103,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 "colorscheme vividchalk
 set background=light
 colorscheme fairy-garden
+hi ColorColumn guibg=#f9c19b
 
 "deoplete (autocompletion)
 "let g:deoplete#enable_at_startup = 1
