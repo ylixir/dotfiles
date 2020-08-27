@@ -28,6 +28,7 @@ function! PackInit() abort
     call minpac#add('rhysd/vim-clang-format')
     call minpac#add('ryanoasis/vim-devicons', {'name': 'z-vim-devicons'}) "last according to docs
     call minpac#add('scrooloose/nerdtree')
+    call minpac#add('sainnhe/archived-colors')
     call minpac#add('sheerun/vim-polyglot')
     call minpac#add('tmsvg/pear-tree')
     call minpac#add('tpope/vim-dispatch')
@@ -100,7 +101,8 @@ let g:indent_guides_enable_on_vim_startup = 1
 "colorscheme Base2Tone_EveningDark
 "colorscheme dogrun
 "colorscheme vividchalk
-colorscheme gruvbox
+set background=light
+colorscheme fairy-garden
 
 "deoplete (autocompletion)
 "let g:deoplete#enable_at_startup = 1
@@ -215,7 +217,7 @@ endfunction
 set showtabline=2
 let g:lightline#bufferline#show_number=1
 let g:lightline = {
-  \ 'colorscheme': 'dogrun',
+  \ 'colorscheme': 'fairy_garden',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ],
