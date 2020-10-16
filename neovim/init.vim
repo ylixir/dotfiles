@@ -46,6 +46,7 @@ function! PackInit() abort
   CocInstall coc-json
   CocInstall coc-angular
   CocInstall coc-tslint-plugin
+  CocInstall coc-vetur
 endfunction
 
 " this won't work in the terminal
@@ -65,6 +66,7 @@ command! PlugStatus call PackInit() | call minpac#status()
 
 "make sure terminal can pop a fish shell
 let $FISHLVL=''
+set path+=./src
 
 "relative line numbers
 set number
