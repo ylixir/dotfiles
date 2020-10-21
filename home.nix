@@ -1,10 +1,14 @@
 { pkgs, ... }:
 let 
   node-pkgs = (import ./node {});
-  unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) {};
+  osx = if pkgs.system == "x86_64-darwin" then true else false;
+  stable = if osx
+	then import (fetchTarball https://nixos.org/channels/nixpkgs-20.09-darwin/nixexprs.tar.xz) {}
+	else import (fetchTarball https://nixos.org/channels/nixos-20.09/nixexprs.tar.xz) {};
+  unstable = import (fetchTarball https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz) {};
 in {
   programs.home-manager.enable = true;
-  home.packages = with pkgs; [
+  home.packages = with stable; [
     # node-pkgs."@elm-tooling/elm-language-server"
     adoptopenjdk-bin
     ag
@@ -14,7 +18,6 @@ in {
     elmPackages.elm-language-server
     gnumake
     ocamlformat
-    neovim-qt
     niv
     node-pkgs.intelephense # php language server
     node-pkgs.javascript-typescript-langserver
@@ -26,8 +29,10 @@ in {
     rls
     solargraph # ruby language server
     thefuck
-    unstable.lorri
-  ] ++ (if pkgs.system == "x86_64-darwin" then [] else [
+    lorri
+  ] ++ (if osx then [
+  ] else [
+    neovim-qt
     #(import neovim/gtk.nix pkgs)
   ]) ;
 
@@ -36,11 +41,12 @@ in {
     ".config/nvim/init.vim".source = neovim/init.vim;
     ".config/nvim/coc-settings.json".source = neovim/coc-settings.json;
   };
-  programs.bash = (import ./bash.nix pkgs);
+  programs.bash = (import ./bash.nix stable);
   programs.bat.enable = true;
   programs.direnv.enable = true;
-  programs.fish = (import ./fish.nix pkgs);
+  programs.fish = (import ./fish.nix stable);
   programs.fzf.enable = true;
-  programs.git = (import ./git.nix pkgs);
-  programs.neovim = (import ./neovim pkgs);
+  programs.git = (import ./git.nix stable);
+  programs.neovim = (import ./neovim stable);
+  manual.manpages.enable = !osx;
 }
