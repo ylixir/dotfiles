@@ -41,11 +41,12 @@ function! PackInit() abort
     call minpac#add('wadackel/vim-dogrun')
     call minpac#add('vim-vdebug/vdebug')
   call minpac#update()
-  CocInstall coc-solargraph
-  CocInstall coc-tsserver
-  CocInstall coc-json
   CocInstall coc-angular
+  CocInstall coc-eslint
+  CocInstall coc-json
+  CocInstall coc-solargraph
   CocInstall coc-tslint-plugin
+  CocInstall coc-tsserver
   CocInstall coc-vetur
 endfunction
 
