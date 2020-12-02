@@ -227,7 +227,7 @@ endfunction
 set showtabline=2
 let g:lightline#bufferline#show_number=1
 let g:lightline = {
-  \ 'colorscheme': 'papercolor',
+  \ 'colorscheme': 'PaperColor',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ],
