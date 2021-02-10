@@ -36,11 +36,10 @@ in {
     #(import neovim/gtk.nix pkgs)
   ]) ;
 
-  home.file = {
-    ".config/fish/functions/fzf_key_bindings.fish".source = builtins.fetchurl "https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish";
-    ".config/nvim/init.vim".source = neovim/init.vim;
-    ".config/nvim/coc-settings.json".source = neovim/coc-settings.json;
-  };
+  xdg.configFile."fish/functions/fzf_key_bindings.fish".source = builtins.fetchurl "https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish";
+  xdg.configFile."nvim/init.vim".source = neovim/init.vim;
+  xdg.configFile."nvim/coc-settings.json".source = neovim/coc-settings.json;
+
   programs.bash = (import ./bash.nix stable);
   programs.bat.enable = true;
   programs.direnv.enable = true;
