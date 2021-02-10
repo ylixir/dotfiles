@@ -51,7 +51,7 @@ function! PackInit() abort
 endfunction
 
 " this won't work in the terminal
-silent! call rpcnotify(1, 'Gui', 'Font', 'Hack:h10')
+silent! call rpcnotify(1, 'Gui', 'Font', 'JuliaMono:h10')
 silent! VVset fontfamily='Hack'
 silent! VVset fontsize=10
 " the gui still sucks

@@ -4,10 +4,32 @@
 
 { config, pkgs, ... }:
 let
+  julia-mono-custom = ({ lib, fetchzip } :
+    let
+      version = "0.022";
+    in fetchzip {
+      name = "JuliaMono-${version}";
+      url = "https://github.com/cormullion/juliamono/releases/download/v${version}/JuliaMono.zip";
+      sha256 = "0h4ahvfh3brw209nggnc5gmyfnxbfw9n6kgnp2ic9niqgzm57igw";
+
+      postFetch = ''
+        mkdir -p $out/share/fonts/truetype
+        unzip -j $downloadedFile \*.ttf -d $out/share/fonts/truetype
+      '';
+
+      meta = {
+        description = "A monospaced font for scientific and technical computing";
+        maintainers = with lib.maintainers; [ suhr ];
+        platforms = with lib.platforms; all;
+        homepage = "https://juliamono.netlify.app/";
+        license = lib.licenses.ofl;
+      };
+    });
   unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) {
     config.allowUnfree = true;
     config.firefox.enablePlasmaBrowserIntegration = true;
     config.i18n.defaultLocale = "fr_FR.UTF-8";
+    overlays = [(self: super: {julia-mono-custom = julia-mono-custom;})];
   };
 in
 {
@@ -24,7 +46,7 @@ in
       allowDiscards = true;
     };
   };
-  boot.kernelPackages = unstable.linuxPackages_zen;
+  boot.kernelPackages = unstable.linuxPackages_5_9;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
@@ -95,6 +117,10 @@ in
     MOZ_USE_XINPUT2 = "1";
     MOZ_LEGACY_PROFILES = "1";
   };
+
+  fonts.fonts = with pkgs; [
+    julia-mono-custom
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
