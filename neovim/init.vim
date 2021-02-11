@@ -12,7 +12,7 @@ function! PackInit() abort
     call minpac#add('airblade/vim-gitgutter')
     call minpac#add('atelierbram/Base2Tone-vim')
     call minpac#add('direnv/direnv.vim')
-    call minpac#add('eraserhd/parinfer-rust', {'do':  '!cargo build --release'})
+    call minpac#add('eraserhd/parinfer-rust', {'do':  '!nix-shell --run "cargo build --release"'})
     call minpac#add('itchyny/lightline.vim')
     call minpac#add('junegunn/fzf')
     call minpac#add('junegunn/fzf.vim', {'rev':'23dda8602f138a9d75dd03803a79733ee783e356'})
