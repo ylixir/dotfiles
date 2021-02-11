@@ -4,32 +4,10 @@
 
 { config, pkgs, ... }:
 let
-  julia-mono-custom = ({ lib, fetchzip } :
-    let
-      version = "0.022";
-    in fetchzip {
-      name = "JuliaMono-${version}";
-      url = "https://github.com/cormullion/juliamono/releases/download/v${version}/JuliaMono.zip";
-      sha256 = "0h4ahvfh3brw209nggnc5gmyfnxbfw9n6kgnp2ic9niqgzm57igw";
-
-      postFetch = ''
-        mkdir -p $out/share/fonts/truetype
-        unzip -j $downloadedFile \*.ttf -d $out/share/fonts/truetype
-      '';
-
-      meta = {
-        description = "A monospaced font for scientific and technical computing";
-        maintainers = with lib.maintainers; [ suhr ];
-        platforms = with lib.platforms; all;
-        homepage = "https://juliamono.netlify.app/";
-        license = lib.licenses.ofl;
-      };
-    });
   unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) {
     config.allowUnfree = true;
     config.firefox.enablePlasmaBrowserIntegration = true;
     config.i18n.defaultLocale = "fr_FR.UTF-8";
-    overlays = [(self: super: {julia-mono-custom = julia-mono-custom;})];
   };
 in
 {
@@ -46,7 +24,7 @@ in
       allowDiscards = true;
     };
   };
-  boot.kernelPackages = unstable.linuxPackages_5_9;
+  boot.kernelPackages = unstable.linuxPackages_5_10;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
@@ -101,6 +79,7 @@ in
     google-chrome
     hexchat
     home-manager
+    llvmPackages.libclang
     minecraft
     ntfs3g
     slack
@@ -119,7 +98,7 @@ in
   };
 
   fonts.fonts = with pkgs; [
-    julia-mono-custom
+    unstable.julia-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -149,8 +128,10 @@ in
   sound.enable = true;
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+  hardware.opengl.extraPackages = with pkgs; [ libva ];
   hardware.pulseaudio.support32Bit = true;
 
   # Enable the X11 windowing system.
