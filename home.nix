@@ -3,8 +3,8 @@ let
   node-pkgs = (import ./node {});
   osx = if pkgs.system == "x86_64-darwin" then true else false;
   stable = if osx
-	then import (fetchTarball https://nixos.org/channels/nixpkgs-20.09-darwin/nixexprs.tar.xz) {}
-	else import (fetchTarball https://nixos.org/channels/nixos-20.09/nixexprs.tar.xz) {};
+	then import (fetchTarball https://nixos.org/channels/nixpkgs-21.05-darwin/nixexprs.tar.xz) {}
+	else import (fetchTarball https://nixos.org/channels/nixos-21.05/nixexprs.tar.xz) {};
   unstable = import (fetchTarball https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz) {};
 in {
   programs.home-manager.enable = true;
@@ -39,6 +39,7 @@ in {
 
   xdg.configFile."fish/functions/fzf_key_bindings.fish".source = builtins.fetchurl "https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish";
   xdg.configFile."nvim/init.vim".source = neovim/init.vim;
+  xdg.configFile."nvim/filetype.vim".source = neovim/filetype.vim;
   xdg.configFile."nvim/coc-settings.json".source = neovim/coc-settings.json;
 
   programs.bash = (import ./bash.nix stable);

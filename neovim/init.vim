@@ -30,7 +30,7 @@ function! PackInit() abort
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('sainnhe/archived-colors')
     call minpac#add('sheerun/vim-polyglot')
-    call minpac#add('tmsvg/pear-tree')
+    "call minpac#add('tmsvg/pear-tree')
     call minpac#add('tpope/vim-dispatch')
     call minpac#add('tpope/vim-eunuch')
     call minpac#add('tpope/vim-fugitive')
