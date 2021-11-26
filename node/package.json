@@ -1,6 +1,4 @@
 [
-    "@elm-tooling/elm-language-server",
-    "intelephense",
     "javascript-typescript-langserver",
     "prettier",
     "typescript-tslint-plugin"

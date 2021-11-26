@@ -79,5 +79,17 @@ pkgs: {
     end
     '';
 
-  promptInit = builtins.readFile (builtins.fetchurl "https://raw.githubusercontent.com/oh-my-fish/theme-coffeeandcode/master/fish_prompt.fish");
+    plugins = [
+      {
+        name = "coffee and cream";
+        src = pkgs.fetchFromGitHub {
+          owner = "oh-my-fish";
+          repo = "theme-coffeeandcode";
+          rev = "e0705eb7de756485e6e51fd8c167eacec46d334c";
+          sha256 = "D8rZufX55JEgLcjse7uzNwj3/QUQnIHnrfI+eqx+iUg=";
+        };
+      }
+    ];
+
+  #promptInit = builtins.readFile (builtins.fetchurl "https://raw.githubusercontent.com/oh-my-fish/theme-coffeeandcode/master/functions/fish_prompt.fish");
 }

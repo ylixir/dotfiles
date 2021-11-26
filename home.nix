@@ -16,10 +16,10 @@ in {
     cargo
     elmPackages.elm-format
     elmPackages.elm-language-server
+    gcc
     gnumake
     ocamlformat
     niv
-    node-pkgs.intelephense # php language server
     node-pkgs.javascript-typescript-langserver
     node-pkgs.prettier
     node-pkgs.typescript-tslint-plugin
@@ -30,6 +30,7 @@ in {
     solargraph # ruby language server
     thefuck
     lorri
+    unstable.nix_2_4
   ] ++ (if osx then [
   ] else [
     neovim-qt

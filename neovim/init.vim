@@ -41,6 +41,7 @@ function! PackInit() abort
     call minpac#add('wadackel/vim-dogrun')
     call minpac#add('vim-vdebug/vdebug')
   call minpac#update()
+  CocInstall coc-rust-analyzer
   CocInstall coc-angular
   CocInstall coc-eslint
   CocInstall coc-json
