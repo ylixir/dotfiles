@@ -23,3 +23,9 @@ now to set up ssh key:
 `bash <(curl https://raw.githubusercontent.com/ylixir/dotfiles/nix/make-ssh-key.sh)`
 then `cat ~/.ssh/id_rsa.pub | clip.exe`
 
+to commit before configuring git you must (this didn't work):
+`git commit --author="Jon Allen <jon@ylixir.io>" -m "initial readme notes"`
+
+to switch to the home-manager config: `home-manager switch --flake path:/home/ylixir/code/dotfiles/` or `home-manager switch --flake path:./`
+without home-manager installed: `nix build '.#homeConfigurations."ylixir".activationPackage' && result/activate`
+note: i couldn't build nix in a git directory with no head
