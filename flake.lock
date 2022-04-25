@@ -36,10 +36,27 @@
         "type": "github"
       }
     },
+    "paq-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1650495672,
+        "narHash": "sha256-N8vFcdCz9qmezYGEVBH8AKaKcLdF1jpgvRGPokdK3s4=",
+        "owner": "savq",
+        "repo": "paq-nvim",
+        "rev": "b0954c1dcaffba13da206d3a2c61755ca3b8d8df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "savq",
+        "repo": "paq-nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "paq-nvim": "paq-nvim"
       }
     }
   },
