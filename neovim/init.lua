@@ -45,19 +45,20 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', {noremap=true, silent=true})
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', {noremap=true, silent=true})
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap=true, silent=true})
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', {noremap=true, silent=true})
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<cr>', {noremap=true, silent=true})
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', {noremap=true, silent=true})
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', {noremap=true, silent=true})
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', {noremap=true, silent=true})
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap=true, silent=true})
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', {noremap=true, silent=true})
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>w', '<cmd>lua vim.lsp.buf.formatting()<cr>', {noremap=true, silent=true})
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>', {noremap=true, silent=true})
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>', {noremap=true, silent=true})
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>', {noremap=true, silent=true})
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<cr>', {noremap=true, silent=true})
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', {noremap=true, silent=true})
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', {noremap=true, silent=true})
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', {noremap=true, silent=true})
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>w', '<cmd>lua vim.lsp.buf.formatting()<cr>', {noremap=true, silent=true})
 end
 
 -- plugin keymaps
@@ -66,9 +67,20 @@ vim.api.nvim_set_keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin')
 vim.api.nvim_set_keymap("n", "<leader>a", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>h", "<cmd>lua require('telescope.builtin').help_tags()<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>s", ":SessionManager load_session<cr>", {noremap=true})
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>q", ":Bdelete<cr>", {noremap=true})
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>", ":WhichKey '<space>'<cr>", {noremap=true})
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>v", ":Vista!!<cr>", {noremap=true})
+
+-- autocomplet mappings
+--[[
+vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
+vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
+]]
 
 require "paq" {
   -- "savq/paq-nvim"; -- PaqSync, this plugin is managed in flake.nix
@@ -78,6 +90,7 @@ require "paq" {
 
   "L3MON4D3/LuaSnip"; -- mostly here to make nvim-cmp happy
   "NMAC427/guess-indent.nvim"; -- guess auto indent settings
+  "Shatur/neovim-session-manager";
   "direnv/direnv.vim";
   "hrsh7th/nvim-cmp";
     "hrsh7th/cmp-buffer";
@@ -89,36 +102,12 @@ require "paq" {
   "lewis6991/gitsigns.nvim";
   "lukas-reineke/indent-blankline.nvim"; -- show vertical indent lines
   "neovim/nvim-lspconfig";
+  "nvim-telescope/telescope-ui-select.nvim";
   "nvim-telescope/telescope.nvim";
   "tpope/vim-fugitive"; -- maybe neogit and/or gitsigns can replace this? it's just not discoverable
 }
 
-require("guess-indent").setup {}
-require("nvim-tree").setup {}
-require("indent_blankline").setup {
-  show_current_context = true,
-  show_current_context_start = true,
-}
-require("nvim-treesitter.configs").setup {
-  -- A list of parser names, or "all"
-  ensure_installed = "all",
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  indent = { enable = true },
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  }
-}
-require("telescope").setup {}
-require("gitsigns").setup {
-  current_line_blame = true,
-}
-
--- autocompletion
-local cmp = require("cmp")
+local cmp = require("cmp") -- autocompletion
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -131,13 +120,20 @@ cmp.setup {
   }, {
     {name='buffer'}
   },
+  mapping = {
+    ['<tab>'] = cmp.mapping(cmp.mapping.select_next_item()),
+    ['<s-tab>'] = cmp.mapping(cmp.mapping.select_prev_item()),
+  },
 }
+-- this is annoying
+--[[
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
   }
 })
+]]
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -146,7 +142,18 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   })
 })
+
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+require("gitsigns").setup {
+  current_line_blame = true,
+}
+require("guess-indent").setup {}
+require("indent_blankline").setup {
+  show_current_context = true,
+  show_current_context_start = true,
+}
+
 for _, lsp in pairs {"rnix", "solargraph", "tsserver", "vuels", "angularls"} do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
@@ -166,3 +173,21 @@ require('lspconfig').sumneko_lua.setup {
     }
   }
 }
+
+require("nvim-tree").setup {}
+require("nvim-treesitter.configs").setup {
+  -- A list of parser names, or "all"
+  ensure_installed = "all",
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  indent = { enable = true },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  }
+}
+require('session_manager').setup {}
+require("telescope").setup {}
+require("telescope").load_extension("ui-select")
