@@ -34,3 +34,15 @@ in order to build the nix file for node dependencies `node2nix -i node-packages.
 
 the wsl user _must_ be uid 1000 or we get permissions errors. to fix this you may need to delete the user form /etc/password and then `find /home -uid 1001 -exec chown 1000 {} +` and `find /nix -uid 1001 -exec chown 1000 {} +`
 careful about doing that to / because it will hop into /mnt/c
+
+
+notes for mac
+had to create user specific config
+had to activate with `nix --experimental-features "nix-command flakes" build '.#homeConfigurations."jonallen@MacBook-Pro-2".activationPackage'`
+had to `nix-env --uninstall curl`
+had to enable flakes by adding nixFlakes to programs and making a nix.conf enabling them
+neovim and lua language server won't install for some reason
+
+couldn't set nix.conf up during bootstrap, had to create manually. then delete and symlink to nix version after bootstrap
+after bootstrap, language server installs. neovim still blocked
+neovim_unwrapped works
