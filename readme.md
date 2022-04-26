@@ -29,3 +29,5 @@ to commit before configuring git you must (this didn't work):
 to switch to the home-manager config: `home-manager switch --flake path:/home/ylixir/code/dotfiles/` or `home-manager switch --flake path:./`
 without home-manager installed: `nix build '.#homeConfigurations."ylixir".activationPackage' && result/activate`
 note: i couldn't build nix in a git directory with no head
+
+in order to build the nix file for node dependencies `node2nix -i node-packages.json -o node-packages.nix` from the node directory

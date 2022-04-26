@@ -11,24 +11,51 @@
       url = "github:savq/paq-nvim";
       flake = false;
     };
+    # nodeExtra = {
+    #   url = "./node/";
+    #   flake = false;
+    # };
   };
 
-  outputs = { self, nixpkgs, home-manager, paq-nvim }: {
+  outputs = { self, nixpkgs, home-manager, paq-nvim }:
+  {
     homeConfigurations = {
       "ylixir" = home-manager.lib.homeManagerConfiguration {
-        configuration = {pkgs, ...}: {
+        configuration = {pkgs, ...}:
+        let
+          nodeExtra = import ./node {pkgs=pkgs;};
+        in
+        {
           programs.home-manager.enable = true;
           home.packages = with pkgs; [
-            fish
-            neovim
-            thefuck
+            gcc
+            gnumake
             curl
+            fd # wanted by telescope-nvim
+            fish
             home-manager
+            lorri
+            neovim
+            node2nix
+            nodeExtra."@angular/language-server-11.x" # pulls dependencies from node_modules (version has to match)
+            nodejs
+            nodePackages.typescript-language-server
+            nodePackages.typescript # needed by the language server
+            nodePackages.vue-language-server
+            ripgrep
+            rnix-lsp # nix language server
+            rubyPackages.solargraph # ruby language server
+            sumneko-lua-language-server
+            thefuck
           ];
 
           programs = {
             bash = (import ./bash.nix pkgs);
         
+            direnv = {
+              enable = true;
+            };
+
             fzf = {
               enable = true;
             };

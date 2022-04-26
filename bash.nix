@@ -3,16 +3,16 @@ pkgs:{
   shellOptions = [
     # Append to history file rather than replacing it.
     "histappend"
-    
+ 
     # check the window size after each command and, if
     # necessary, update the values of LINES and COLUMNS.
     "checkwinsize"
-    
+ 
     # Extended globbing.
     "extglob"
     # TODO fix this to work on a mac
     #"globstar"
-    
+ 
     # Warn if closing shell with running jobs.
     # TODO fix this to work on a mac
     #"checkjobs"
