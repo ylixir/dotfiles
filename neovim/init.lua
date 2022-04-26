@@ -104,6 +104,7 @@ require "paq" {
   "neovim/nvim-lspconfig";
   "nvim-telescope/telescope-ui-select.nvim";
   "nvim-telescope/telescope.nvim";
+  "phha/zenburn.nvim"; -- color scheme
   "tpope/vim-fugitive"; -- maybe neogit and/or gitsigns can replace this? it's just not discoverable
 }
 
@@ -191,3 +192,4 @@ require("nvim-treesitter.configs").setup {
 require('session_manager').setup {}
 require("telescope").setup {}
 require("telescope").load_extension("ui-select")
+require("zenburn").setup {}
