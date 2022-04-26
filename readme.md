@@ -31,3 +31,6 @@ without home-manager installed: `nix build '.#homeConfigurations."ylixir".activa
 note: i couldn't build nix in a git directory with no head
 
 in order to build the nix file for node dependencies `node2nix -i node-packages.json -o node-packages.nix` from the node directory
+
+the wsl user _must_ be uid 1000 or we get permissions errors. to fix this you may need to delete the user form /etc/password and then `find /home -uid 1001 -exec chown 1000 {} +` and `find /nix -uid 1001 -exec chown 1000 {} +`
+careful about doing that to / because it will hop into /mnt/c
