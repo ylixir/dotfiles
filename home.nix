@@ -45,7 +45,7 @@ in {
   programs.bash = (import ./bash.nix stable);
   programs.bat.enable = true;
   programs.direnv.enable = true;
-  programs.fish = (import ./fish.nix stable);
+  programs.fish = (import ./fish.nix unstable);
   programs.fzf.enable = true;
   programs.git = (import ./git.nix stable);
   programs.neovim = (import ./neovim stable);
