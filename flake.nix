@@ -17,10 +17,6 @@
       url = "github:savq/paq-nvim";
       flake = false;
     };
-    # nodeExtra = {
-    #   url = "./node/";
-    #   flake = false;
-    # };
   };
 
   outputs = { self, nixpkgs, home-manager, paq-nvim }:
@@ -30,6 +26,11 @@
       configuration = {pkgs, ...}:
       let
         nodeExtra = import ./node {pkgs=pkgs;};
+        # leaving leaf for an example for future me
+        # leaf-fish = pkgs.fetchurl {
+        #   url = "https://raw.githubusercontent.com/daschw/leaf.nvim/7d4384784159906519d0b275fe760030146ecfa8/extras/fish/leaf-lighter.fish";
+        #   sha256 = "1666wxd6yc02ry2b81sikhplzvlwdf4a7rmk2xrwqczihqjpkb7d";
+        # };
       in
       {
         programs.home-manager.enable = true;

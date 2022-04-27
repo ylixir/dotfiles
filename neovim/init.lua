@@ -38,7 +38,6 @@ vim.api.nvim_set_keymap("n", "<c-t>", ":te<cr>i", {noremap=true})
 vim.api.nvim_set_keymap("n", "<esc>", ":noh<cr><esc>", {noremap=true}) -- hide last search
 
 -- lsp mappings
-vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<cr>', {noremap=true, silent=true})
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -47,12 +46,11 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', {noremap=true, silent=true})
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<cr>', {noremap=true, silent=true})
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', {noremap=true, silent=true})
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', {noremap=true, silent=true})
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', {noremap=true, silent=true})
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap=true, silent=true})
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', {noremap=true, silent=true})
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>w', '<cmd>lua vim.lsp.buf.formatting()<cr>', {noremap=true, silent=true})
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>p', '<cmd>lua vim.lsp.buf.formatting()<cr>', {noremap=true, silent=true})
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>', {noremap=true, silent=true})
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>', {noremap=true, silent=true})
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>', {noremap=true, silent=true})
@@ -62,12 +60,14 @@ local on_attach = function(client, bufnr)
 end
 
 -- plugin keymaps
-vim.api.nvim_set_keymap("n", "<leader>t", ":NvimTreeFindFileToggle<cr>", {noremap=true, silent=true})
-vim.api.nvim_set_keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>a", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>h", "<cmd>lua require('telescope.builtin').help_tags()<cr>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>s", ":SessionManager load_session<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>t", ":NvimTreeFindFileToggle<cr>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n", "<leader>w", "<cmd>lua vim.lsp.buf.code_action()<cr>", {noremap=true, silent=true})
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>q", ":Bdelete<cr>", {noremap=true})
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>", ":WhichKey '<space>'<cr>", {noremap=true})
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>v", ":Vista!!<cr>", {noremap=true})
@@ -104,8 +104,12 @@ require "paq" {
   "neovim/nvim-lspconfig";
   "nvim-telescope/telescope-ui-select.nvim";
   "nvim-telescope/telescope.nvim";
-  "phha/zenburn.nvim"; -- color scheme
   "tpope/vim-fugitive"; -- maybe neogit and/or gitsigns can replace this? it's just not discoverable
+
+  -- colorschemes
+  "daschw/leaf.nvim";
+  "mcchrish/zenbones.nvim";
+    "rktjmp/lush.nvim";
 }
 
 local cmp = require("cmp") -- autocompletion
@@ -155,15 +159,19 @@ require("indent_blankline").setup {
   show_current_context_start = true,
 }
 
+require("leaf").setup({
+    theme = "lighter", -- default, alternatives: "dark", "lighter", "darker", "lightest", "darkest"
+})
+vim.opt.background = "light"
+vim.cmd("colorscheme rosebones")
+
 for _, lsp in pairs {"rnix", "solargraph", "tsserver", "vuels", "angularls"} do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
-
--- lua needs extra config to make it shut up about vim not being defined
-require('lspconfig').sumneko_lua.setup {
+require('lspconfig').sumneko_lua.setup { -- lua needs extra config to make it shut up about vim not being defined
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -189,7 +197,9 @@ require("nvim-treesitter.configs").setup {
     additional_vim_regex_highlighting = false,
   }
 }
-require('session_manager').setup {}
+
+require('session_manager').setup {
+  autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
+}
 require("telescope").setup {}
 require("telescope").load_extension("ui-select")
-require("zenburn").setup {}
