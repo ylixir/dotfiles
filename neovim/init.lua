@@ -177,12 +177,19 @@ require("leaf").setup({
 vim.opt.background = "light"
 vim.cmd("colorscheme rosebones")
 
-for _, lsp in pairs { "rnix", "solargraph", "vuels", "angularls", "eslint" } do
+for _, lsp in pairs { "rnix", "solargraph", "vuels", "angularls" } do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
+
+require('lspconfig').eslint.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "html" }
+}
+
 require('lspconfig').tsserver.setup { -- lua needs extra config to make it shut up about vim not being defined
   on_attach = function(client, bufnr)
     -- avoid conflicts between prettier and tsserver
