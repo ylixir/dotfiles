@@ -102,6 +102,7 @@ require "paq" {
   "L3MON4D3/LuaSnip"; -- mostly here to make nvim-cmp happy
   "NMAC427/guess-indent.nvim"; -- guess auto indent settings
   "Shatur/neovim-session-manager";
+  "arkav/lualine-lsp-progress";
   "direnv/direnv.vim";
   "hrsh7th/nvim-cmp";
   "hrsh7th/cmp-buffer";
@@ -111,10 +112,12 @@ require "paq" {
   "saadparwaiz1/cmp_luasnip";
   "jose-elias-alvarez/null-ls.nvim";
   "kyazdani42/nvim-tree.lua";
+  "kyazdani42/nvim-web-devicons";
   "lewis6991/gitsigns.nvim";
   "lukas-reineke/indent-blankline.nvim"; -- show vertical indent lines
   "moll/vim-bbye";
   "neovim/nvim-lspconfig";
+  "nvim-lualine/lualine.nvim";
   "nvim-telescope/telescope-ui-select.nvim";
   "nvim-telescope/telescope.nvim";
   "tpope/vim-fugitive"; -- maybe neogit and/or gitsigns can replace this? it's just not discoverable
@@ -178,7 +181,7 @@ require("leaf").setup({
 vim.opt.background = "light"
 vim.cmd("colorscheme rosebones")
 
-for _, lsp in pairs { "rnix", "solargraph", "vuels", "angularls" } do
+for _, lsp in pairs { "rnix", "solargraph", "vuels", "angularls", "eslint" } do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -205,12 +208,43 @@ require('lspconfig').sumneko_lua.setup { -- lua needs extra config to make it sh
     }
   }
 }
+
+require('lualine').setup {
+  options = { theme = "rosebones" },
+  sections = {
+    lualine_a = {'filename'},
+    lualine_b = {'diff', 'diagnostics'},
+    lualine_c = {'lsp_progress'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location', 'branch', 'mode'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {'filename'},
+    lualine_b = {'buffers'},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {'branch'},
+    lualine_z = {'tabs'}
+  },
+  extensions = {'nvim-tree', 'fugitive'},
+}
+
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
-    null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.code_actions.eslint,
-    null_ls.builtins.formatting.prettier
+    -- null_ls.builtins.diagnostics.eslint,
+    -- null_ls.builtins.code_actions.eslint,
+    -- null_ls.builtins.formatting.prettier
+    null_ls.builtins.formatting.prettier_d_slim
   },
   on_attach = on_attach
 })

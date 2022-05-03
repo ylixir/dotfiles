@@ -46,6 +46,8 @@
           nodeExtra."@angular/language-server-11.x" # pulls dependencies from node_modules (version has to match)
           nodeExtra."eslint"
           nodeExtra."prettier"
+          nodeExtra."prettier_d_slim"
+          nodeExtra."vscode-langservers-extracted"
           nodejs
           nodePackages.node2nix
           nodePackages.typescript-language-server
