@@ -44,6 +44,8 @@
           lorri
           neovim-unwrapped
           nodeExtra."@angular/language-server-11.x" # pulls dependencies from node_modules (version has to match)
+          nodeExtra."eslint"
+          nodeExtra."prettier"
           nodejs
           nodePackages.node2nix
           nodePackages.typescript-language-server
