@@ -62,10 +62,6 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', {noremap=true, silent=true})
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', {noremap=true, silent=true})
   ]]
-
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-  end
 end
 
 -- plugin keymaps
@@ -212,30 +208,30 @@ require('lspconfig').sumneko_lua.setup { -- lua needs extra config to make it sh
 require('lualine').setup {
   options = { theme = "rosebones" },
   sections = {
-    lualine_a = {'filename'},
-    lualine_b = {'diff', 'diagnostics'},
-    lualine_c = {'lsp_progress'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location', 'branch', 'mode'}
+    lualine_a = { 'filename' },
+    lualine_b = { 'diff', 'diagnostics' },
+    lualine_c = { 'lsp_progress' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location', 'branch', 'mode' }
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {}
   },
   tabline = {
-    lualine_a = {'filename'},
-    lualine_b = {'buffers'},
+    lualine_a = { 'filename' },
+    lualine_b = { 'buffers' },
     lualine_c = {},
     lualine_x = {},
-    lualine_y = {'branch'},
-    lualine_z = {'tabs'}
+    lualine_y = { 'branch' },
+    lualine_z = { 'tabs' }
   },
-  extensions = {'nvim-tree', 'fugitive'},
+  extensions = { 'nvim-tree', 'fugitive' },
 }
 
 local null_ls = require("null-ls")
@@ -244,9 +240,13 @@ null_ls.setup({
     -- null_ls.builtins.diagnostics.eslint,
     -- null_ls.builtins.code_actions.eslint,
     -- null_ls.builtins.formatting.prettier
-    null_ls.builtins.formatting.prettier_d_slim
+    null_ls.builtins.formatting.prettierd
   },
-  on_attach = on_attach
+  on_attach = function(client)
+    if client.resolved_capabilities.document_formatting then
+      vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+    end
+  end
 })
 
 require("nvim-tree").setup {}

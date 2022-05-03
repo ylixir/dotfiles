@@ -1,7 +1,7 @@
 [
   "eslint",
   "prettier",
-  "prettier_d_slim",
+  "@fsouza/prettierd",
   "vscode-langservers-extracted",
   { "@angular/language-server": "11.x" }
 ]
