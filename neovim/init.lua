@@ -177,7 +177,7 @@ require("leaf").setup({
 vim.opt.background = "light"
 vim.cmd("colorscheme rosebones")
 
-for _, lsp in pairs { "rnix", "solargraph", "vuels", "angularls" } do
+for _, lsp in pairs { "rnix", "solargraph", "volar", "angularls", "purescriptls", "rust_analyzer" } do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,

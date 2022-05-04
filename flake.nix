@@ -44,18 +44,20 @@
           lorri
           neovim-unwrapped
           nodeExtra."@angular/language-server-11.x" # pulls dependencies from node_modules (version has to match)
+          nodeExtra."@fsouza/prettierd"
+          nodeExtra."@volar/vue-language-server"
           nodeExtra."eslint"
           nodeExtra."prettier"
-          nodeExtra."@fsouza/prettierd"
           nodeExtra."vscode-langservers-extracted"
           nodejs
           nodePackages.node2nix
+          nodePackages.purescript-language-server
           nodePackages.typescript-language-server
           nodePackages.typescript # needed by the language server
-          nodePackages.vue-language-server
           ripgrep
           rnix-lsp # nix language server
           rubyPackages.solargraph # ruby language server
+          rust-analyzer
           sumneko-lua-language-server
           thefuck
           nixFlakes

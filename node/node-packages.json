@@ -1,7 +1,8 @@
 [
+  "@fsouza/prettierd",
+  "@volar/vue-language-server",
   "eslint",
   "prettier",
-  "@fsouza/prettierd",
   "vscode-langservers-extracted",
   { "@angular/language-server": "11.x" }
 ]
