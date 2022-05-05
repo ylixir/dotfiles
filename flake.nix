@@ -41,6 +41,7 @@
           fd # wanted by telescope-nvim
           fish
           home-manager
+          kitty
           lorri
           neovim-unwrapped
           nodeExtra."@angular/language-server-11.x" # pulls dependencies from node_modules (version has to match)
