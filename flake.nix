@@ -65,7 +65,7 @@
 
         programs = {
           bash = (import ./bash.nix pkgs);
-      
+
           direnv = {
             enable = true;
           };
