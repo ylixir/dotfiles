@@ -217,7 +217,7 @@ require('lualine').setup {
   sections = {
     lualine_a = { 'filename' },
     lualine_b = { 'diff', 'diagnostics' },
-    lualine_c = { 'lsp_progress' },
+    lualine_c = { require('nvim-treesitter').statusline },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location', 'mode' }
@@ -234,7 +234,7 @@ require('lualine').setup {
     lualine_a = { 'filename' },
     lualine_b = { 'buffers' },
     lualine_c = {},
-    lualine_x = {},
+    lualine_x = { 'lsp_progress' },
     lualine_y = { 'branch' },
     lualine_z = { 'tabs' }
   },
@@ -264,7 +264,6 @@ null_ls.setup({
   end
 })
 
--- require("nvim-tree").setup {}
 require("nvim-treesitter.configs").setup {
   -- A list of parser names, or "all"
   ensure_installed = "all",
