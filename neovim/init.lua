@@ -220,7 +220,7 @@ require('lualine').setup {
     lualine_c = { 'lsp_progress' },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
-    lualine_z = { 'location', 'branch', 'mode' }
+    lualine_z = { 'location', 'mode' }
   },
   inactive_sections = {
     lualine_a = {},
