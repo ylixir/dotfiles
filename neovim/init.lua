@@ -12,6 +12,7 @@ vim.opt.cursorline = true
 vim.opt.mouse = "a" -- hold shift to disable (aka for pasting in windows terminal)
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.title = true
 
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
@@ -75,7 +76,8 @@ vim.api.nvim_set_keymap("n", "<leader>h", "<cmd>lua require('telescope.builtin')
 vim.api.nvim_set_keymap("n", "<leader>q", ":Bwipeout<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>lua require('telescope.builtin').pickers()<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>s", ":SessionManager load_session<cr>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>t", ":NvimTreeFindFileToggle<cr>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>t", ":NvimTreeFindFileToggle<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>t", ":Neotree toggle<cr>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>", ":WhichKey '<space>'<cr>", {noremap=true})
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>v", ":Vista!!<cr>", {noremap=true})
 
@@ -96,30 +98,31 @@ require "paq" {
   { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" };
 
   "L3MON4D3/LuaSnip"; -- mostly here to make nvim-cmp happy
+  "MunifTanjim/nui.nvim"; -- neo-tree needs this
   "NMAC427/guess-indent.nvim"; -- guess auto indent settings
   "Shatur/neovim-session-manager";
   "arkav/lualine-lsp-progress";
   "direnv/direnv.vim";
-  "hrsh7th/nvim-cmp";
   "hrsh7th/cmp-buffer";
   "hrsh7th/cmp-cmdline";
   "hrsh7th/cmp-nvim-lsp";
   "hrsh7th/cmp-path";
-  "saadparwaiz1/cmp_luasnip";
+  "hrsh7th/nvim-cmp";
   "jose-elias-alvarez/null-ls.nvim";
-  "kyazdani42/nvim-tree.lua";
   "kyazdani42/nvim-web-devicons";
   "lewis6991/gitsigns.nvim";
   "lukas-reineke/indent-blankline.nvim"; -- show vertical indent lines
   "moll/vim-bbye";
   "neovim/nvim-lspconfig";
   "nvim-lualine/lualine.nvim";
+  "nvim-neo-tree/neo-tree.nvim";
   "nvim-telescope/telescope-ui-select.nvim";
   "nvim-telescope/telescope.nvim";
+  "saadparwaiz1/cmp_luasnip";
   "tpope/vim-fugitive"; -- maybe neogit and/or gitsigns can replace this? it's just not discoverable
+  -- "kyazdani42/nvim-tree.lua";
 
   -- colorschemes
-  "daschw/leaf.nvim";
   "mcchrish/zenbones.nvim";
   "rktjmp/lush.nvim";
 }
@@ -171,9 +174,6 @@ require("indent_blankline").setup {
   show_current_context_start = true,
 }
 
-require("leaf").setup({
-  theme = "lighter", -- default, alternatives: "dark", "lighter", "darker", "lightest", "darkest"
-})
 vim.opt.background = "light"
 vim.cmd("colorscheme rosebones")
 
@@ -238,9 +238,17 @@ require('lualine').setup {
     lualine_y = { 'branch' },
     lualine_z = { 'tabs' }
   },
-  extensions = { 'nvim-tree', 'fugitive' },
+  --  extensions = { 'nvim-tree', 'fugitive' },
+  extensions = { 'fugitive' },
 }
 
+vim.g.neo_tree_remove_legacy_commands = 1
+require("neo-tree").setup {
+  filesystem = {
+    follow_current_file = true,
+    use_libuv_file_watcher = true,
+  },
+}
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
@@ -256,7 +264,7 @@ null_ls.setup({
   end
 })
 
-require("nvim-tree").setup {}
+-- require("nvim-tree").setup {}
 require("nvim-treesitter.configs").setup {
   -- A list of parser names, or "all"
   ensure_installed = "all",
