@@ -215,12 +215,12 @@ require('lspconfig').sumneko_lua.setup { -- lua needs extra config to make it sh
 require('lualine').setup {
   options = { theme = "rosebones" },
   sections = {
-    lualine_a = { 'filename' },
-    lualine_b = { 'diff', 'diagnostics' },
-    lualine_c = { require('nvim-treesitter').statusline },
-    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_a = { 'diff', 'diagnostics' },
+    lualine_b = {},
+    lualine_c = { 'lsp_progress', require('nvim-treesitter').statusline },
+    lualine_x = {  },
     lualine_y = { 'progress' },
-    lualine_z = { 'location', 'mode' }
+    lualine_z = { 'location' }
   },
   inactive_sections = {
     lualine_a = {},
@@ -231,10 +231,11 @@ require('lualine').setup {
     lualine_z = {}
   },
   tabline = {
-    lualine_a = { 'filename' },
+    -- would be nice fo have filename and filetyep together like in the buffers
+    lualine_a = { 'encoding', 'filetype', 'fileformat', 'filename' },
     lualine_b = { 'buffers' },
     lualine_c = {},
-    lualine_x = { 'lsp_progress' },
+    lualine_x = {},
     lualine_y = { 'branch' },
     lualine_z = { 'tabs' }
   },
