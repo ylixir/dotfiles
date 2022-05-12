@@ -101,6 +101,7 @@ require "paq" {
   "MunifTanjim/nui.nvim"; -- neo-tree needs this
   "NMAC427/guess-indent.nvim"; -- guess auto indent settings
   "Shatur/neovim-session-manager";
+  "SmiteshP/nvim-gps";
   "arkav/lualine-lsp-progress";
   "direnv/direnv.vim";
   "hrsh7th/cmp-buffer";
@@ -114,17 +115,18 @@ require "paq" {
   "lukas-reineke/indent-blankline.nvim"; -- show vertical indent lines
   "moll/vim-bbye";
   "neovim/nvim-lspconfig";
+  "norcalli/nvim-colorizer.lua";
   "nvim-lualine/lualine.nvim";
   "nvim-neo-tree/neo-tree.nvim";
   "nvim-telescope/telescope-ui-select.nvim";
   "nvim-telescope/telescope.nvim";
+  "p00f/nvim-ts-rainbow";
   "saadparwaiz1/cmp_luasnip";
   "tpope/vim-fugitive"; -- maybe neogit and/or gitsigns can replace this? it's just not discoverable
-  -- "kyazdani42/nvim-tree.lua";
 
   -- colorschemes
   "mcchrish/zenbones.nvim";
-  "rktjmp/lush.nvim";
+  "rktjmp/lush.nvim"; -- used by zenbones
 }
 
 local cmp = require("cmp") -- autocompletion
@@ -164,6 +166,10 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+require("colorizer").setup {
+  'css', 'javascript', 'html', 'scss', 'vue'
+}
 
 require("gitsigns").setup {
   current_line_blame = true,
@@ -215,10 +221,16 @@ require('lspconfig').sumneko_lua.setup { -- lua needs extra config to make it sh
 require('lualine').setup {
   options = { theme = "rosebones" },
   sections = {
-    lualine_a = { 'diff', 'diagnostics' },
+    lualine_a = { 'diff' },
     lualine_b = {},
-    lualine_c = { 'lsp_progress', require('nvim-treesitter').statusline },
-    lualine_x = {  },
+    lualine_c = {
+      'lsp_progress',
+      {
+        require('nvim-gps').get_location,
+        cond = require('nvim-gps').is_available
+      },
+    },
+    lualine_x = { 'diagnostics' },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
   },
@@ -232,7 +244,12 @@ require('lualine').setup {
   },
   tabline = {
     -- would be nice fo have filename and filetyep together like in the buffers
-    lualine_a = { 'encoding', 'filetype', 'fileformat', 'filename' },
+    lualine_a = {
+      { 'fileformat', separator = '' },
+      { 'encoding', separator = '' },
+      { 'filetype', icon_only = true },
+      { 'filename' }
+    },
     lualine_b = { 'buffers' },
     lualine_c = {},
     lualine_x = {},
@@ -265,6 +282,8 @@ null_ls.setup({
   end
 })
 
+require('nvim-gps').setup {}
+
 require("nvim-treesitter.configs").setup {
   -- A list of parser names, or "all"
   ensure_installed = "all",
@@ -276,7 +295,12 @@ require("nvim-treesitter.configs").setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
-  }
+  },
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+  },
 }
 
 require('session_manager').setup {
