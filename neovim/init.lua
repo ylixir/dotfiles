@@ -46,6 +46,9 @@ local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+  -- highlight word under cursor
+  require('illuminate').on_attach(client)
+
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', { noremap = true, silent = true })
@@ -63,8 +66,6 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>', {noremap=true, silent=true})
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>', {noremap=true, silent=true})
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<cr>', {noremap=true, silent=true})
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', {noremap=true, silent=true})
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', {noremap=true, silent=true})
   ]]
 end
 
@@ -84,7 +85,7 @@ vim.api.nvim_set_keymap("n", "<leader>s", ":SessionManager load_session<cr>", { 
 vim.api.nvim_set_keymap("n", "<leader>t", ":Neotree toggle<cr>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>", ":WhichKey '<space>'<cr>", {noremap=true})
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>v", ":Vista!!<cr>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>v", ":SymbolsOutline<cr>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n", "<leader>v", ":SymbolsOutline<cr>", { noremap = true, silent = true })
 
 -- autocomplet mappings
 --[[
@@ -105,6 +106,7 @@ require "paq" {
   "L3MON4D3/LuaSnip"; -- mostly here to make nvim-cmp happy
   "MunifTanjim/nui.nvim"; -- neo-tree needs this
   "NMAC427/guess-indent.nvim"; -- guess auto indent settings
+  "RRethy/vim-illuminate";
   "Shatur/neovim-session-manager";
   "SmiteshP/nvim-gps";
   "arkav/lualine-lsp-progress";
@@ -173,9 +175,7 @@ cmp.setup.cmdline(':', {
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require("colorizer").setup {
-  'css', 'javascript', 'html', 'scss', 'vue', 'svg', 'typescript'
-}
+require("colorizer").setup({ '*' }, { css = true })
 
 require("gitsigns").setup {
   current_line_blame = true,
