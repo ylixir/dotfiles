@@ -67,6 +67,7 @@ end
 
 -- plugin keymaps
 vim.api.nvim_set_keymap("n", "<leader>a", "<cmd>lua require('telescope.builtin').live_grep()<cr>", { noremap = true })
+vim.api.nvim_set_keymap("v", "<leader>a", '"zy:Telescope live_grep default_text=<C-r>z<cr>', { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>E", "<cmd>lua vim.diagnostic.goto_next()<cr>", { noremap = true, silent = true })
@@ -80,6 +81,7 @@ vim.api.nvim_set_keymap("n", "<leader>s", ":SessionManager load_session<cr>", { 
 vim.api.nvim_set_keymap("n", "<leader>t", ":Neotree toggle<cr>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>", ":WhichKey '<space>'<cr>", {noremap=true})
 -- vim.api.nvim_set_keymap("n", "<silent> <leader>v", ":Vista!!<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>v", ":SymbolsOutline<cr>", {noremap=true, silent=true})
 
 -- autocomplet mappings
 --[[
@@ -122,6 +124,7 @@ require "paq" {
   "nvim-telescope/telescope.nvim";
   "p00f/nvim-ts-rainbow";
   "saadparwaiz1/cmp_luasnip";
+  "simrat39/symbols-outline.nvim";
   "tpope/vim-fugitive"; -- maybe neogit and/or gitsigns can replace this? it's just not discoverable
 
   -- colorschemes
@@ -168,7 +171,7 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require("colorizer").setup {
-  'css', 'javascript', 'html', 'scss', 'vue'
+  'css', 'javascript', 'html', 'scss', 'vue', 'svg', 'typescript'
 }
 
 require("gitsigns").setup {
