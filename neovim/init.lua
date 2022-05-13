@@ -23,8 +23,11 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.g.mapleader = " "
+--[[ theory: these are causing a ruckus with autocomplete
+-- fix if true: https://jdhao.github.io/2020/11/23/neovim_better_mapping_for_leaving_insert_mode/
 vim.api.nvim_set_keymap("i", ",,", "<c-o>m`<c-o>A,<c-o>``", { noremap = true })
 vim.api.nvim_set_keymap("i", ";;", "<c-o>m`<c-o>A;<c-o>``", { noremap = true })
+]]
 -- vim.api.nvim_set_keymap("i", "<s-tab>", vim.fn.pumvisible() and "<c-p>" or "<s-tab>", {noremap=true, expr=true})
 -- vim.api.nvim_set_keymap("i", "<tab>", vim.fn.pumvisible() and "<c-n>" or "<tab>", {noremap=true, expr=true})
 vim.api.nvim_set_keymap("n", "<c-h>", "<c-w>h", { noremap = true })
@@ -248,10 +251,10 @@ require('lualine').setup {
   tabline = {
     -- would be nice fo have filename and filetyep together like in the buffers
     lualine_a = {
+      -- { 'filetype', icon_only = true },
       { 'fileformat', separator = '' },
       { 'encoding', separator = '' },
-      { 'filetype', icon_only = true },
-      { 'filename' }
+      -- { 'filename' }
     },
     lualine_b = { 'buffers' },
     lualine_c = {},
