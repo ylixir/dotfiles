@@ -35,7 +35,9 @@ vim.api.nvim_set_keymap("n", "<c-j>", "<c-w>j", { noremap = true })
 vim.api.nvim_set_keymap("n", "<c-k>", "<c-w>k", { noremap = true })
 vim.api.nvim_set_keymap("n", "<c-l>", "<c-w>l", { noremap = true })
 vim.api.nvim_set_keymap("t", "<c-_>", "<c-\\><c-n>", { noremap = true }) -- c-_ is the same as c-/
-vim.api.nvim_set_keymap("n", "<c-a>", "<c-o>", { noremap = true })
+-- these are back/forward mouse buttons not to be confused with left/rightmous
+vim.api.nvim_set_keymap("n", "<m-left>", "<c-o>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<m-right>", "<c-i>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<c-o>", ":vs<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<c-u>", ":sp<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<c-t>", ":te<cr>i", { noremap = true })
