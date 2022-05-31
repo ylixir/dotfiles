@@ -73,7 +73,7 @@ end
 
 -- plugin keymaps
 vim.api.nvim_set_keymap("n", "<leader>a", "<cmd>lua require('telescope.builtin').live_grep()<cr>", { noremap = true })
-vim.api.nvim_set_keymap("v", "<leader>a", '"zy:Telescope live_grep default_text=<C-r>z<cr>', { noremap = true })
+vim.api.nvim_set_keymap("v", "<leader>a", '"zy:lua require("telescope.builtin").live_grep({default_text="<C-r>z"})<cr>', { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>E", "<cmd>lua vim.diagnostic.goto_next()<cr>", { noremap = true, silent = true })
