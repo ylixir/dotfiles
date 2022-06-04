@@ -108,7 +108,7 @@
         system = "x86_64-linux";
         homeDirectory = "/home/ylixir";
         username = "ylixir";
-        stateVersion = "21.11";
+        stateVersion = "22.05";
       };
       # altru macbook
       "jonallen" = home-manager.lib.homeManagerConfiguration {
@@ -116,7 +116,7 @@
         system = "x86_64-darwin";
         homeDirectory = "/Users/jonallen";
         username = "jonallen";
-        stateVersion = "21.11";
+        stateVersion = "22.05";
       };
     };
   };
