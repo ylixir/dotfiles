@@ -97,6 +97,7 @@
         # configFile is ~/.config/ and dataFile is ~/.local/share/
         xdg.configFile."nvim/init.lua".source = ./neovim/init.lua;
         xdg.configFile."kitty/kitty.conf".source = ./kitty.conf;
+        xdg.configFile."kitty/rose-pine-dawn.conf".source = ./rose-pine-dawn.conf;
         xdg.dataFile."nvim/site/pack/paqs/start/paq-nvim".source = paq-nvim;
 
         xdg.configFile."fish/config.fish".source = ./fish/config.fish;
