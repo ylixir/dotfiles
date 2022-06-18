@@ -118,6 +118,14 @@
         username = "jonallen";
         stateVersion = "22.05";
       };
+      # icims m1 macbook
+      "jallen" = home-manager.lib.homeManagerConfiguration {
+	configuration = configuration;
+        system = "aarch64-darwin";
+        homeDirectory = "/Users/jallen";
+        username = "jallen";
+        stateVersion = "22.05";
+      };
     };
   };
 }
