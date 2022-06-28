@@ -191,7 +191,7 @@ require("indent_blankline").setup {
 vim.opt.background = "light"
 vim.cmd("colorscheme rosebones")
 
-for _, lsp in pairs { "rnix", "solargraph", "volar", "angularls", "purescriptls", "rust_analyzer" } do
+for _, lsp in pairs { "rnix", "solargraph", "angularls", "purescriptls", "rust_analyzer" } do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -205,6 +205,17 @@ require('lspconfig').eslint.setup {
 }
 
 require('lspconfig').tsserver.setup { -- lua needs extra config to make it shut up about vim not being defined
+  on_attach = function(client, bufnr)
+    -- avoid conflicts between prettier and tsserver
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+}
+
+require('lspconfig').volar.setup { -- lua needs extra config to make it shut up about vim not being defined
   on_attach = function(client, bufnr)
     -- avoid conflicts between prettier and tsserver
     client.resolved_capabilities.document_formatting = false
