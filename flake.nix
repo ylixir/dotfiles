@@ -109,29 +109,35 @@
         xdg.configFile."fish/functions/fish_prompt.fish".source = ./fish/functions/fish_prompt.fish;
       };
     in {
-      # cecaelia
+      # cecaelia, perchta
       "ylixir" = home-manager.lib.homeManagerConfiguration {
-	configuration = configuration;
-        system = "x86_64-linux";
-        homeDirectory = "/home/ylixir";
-        username = "ylixir";
-        stateVersion = "22.05";
-      };
-      # altru macbook
-      "jonallen" = home-manager.lib.homeManagerConfiguration {
-	configuration = configuration;
-        system = "x86_64-darwin";
-        homeDirectory = "/Users/jonallen";
-        username = "jonallen";
-        stateVersion = "22.05";
+        # system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [
+          configuration
+          {
+            home = {
+              homeDirectory = "/home/ylixir";
+              username = "ylixir";
+              stateVersion = "22.05";
+            };
+          }
+        ];
       };
       # icims m1 macbook
       "jallen" = home-manager.lib.homeManagerConfiguration {
-	configuration = configuration;
-        system = "aarch64-darwin";
+        # system = "aarch64-darwin";
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        modules = [
+          configuration
+          {
+            home = {
         homeDirectory = "/Users/jallen";
         username = "jallen";
         stateVersion = "22.05";
+            };
+          }
+        ];
       };
     };
   };
