@@ -1,6 +1,7 @@
 -- without this, the terminal will open in bash, not fish
 vim.env.FISHLVL = ''
 
+vim.opt.guifont = "Ellograph CF:h12"
 vim.opt.termguicolors = true
 vim.opt.showtabline = 2 -- 2 means always show tabs
 vim.opt.number = true
