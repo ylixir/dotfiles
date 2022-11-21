@@ -40,10 +40,12 @@
           curl
           fd # wanted by telescope-nvim
           fish
+          gnvim # this is nice in WSL
           home-manager
           kitty
           lorri
           neovim-unwrapped
+          nixFlakes
           nodeExtra."@angular/language-server-11.x" # pulls dependencies from node_modules (version has to match)
           nodeExtra."@fsouza/prettierd"
           nodeExtra."@volar/vue-language-server"
@@ -61,7 +63,8 @@
           rust-analyzer
           sumneko-lua-language-server
           thefuck
-          nixFlakes
+          xsel
+          xclip # to enable clipboard in WSL
         ];
 
         programs = {
@@ -81,6 +84,8 @@
             includes = [
               { contents = { user = { name = "Jon Allen"; email = "jon@ylixir.io"; }; };
                 condition = "gitdir:~/code/"; }
+              { contents = { user = { name = "Jon Allen"; email = "jon@ylixir.io"; }; };
+                condition = "gitdir:/mnt/c/Users/ylixir/code/"; }
               { contents = { user = { name = "Jon Allen"; email = "jon.allen@icims.com"; }; };
                 condition = "gitdir:~/altru/"; }
             ];
