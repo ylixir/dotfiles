@@ -176,7 +176,7 @@ cmp.setup.cmdline(':', {
   })
 })
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require("colorizer").setup({ '*' }, { css = true })
 
@@ -293,7 +293,9 @@ null_ls.setup({
     -- null_ls.builtins.diagnostics.eslint,
     -- null_ls.builtins.code_actions.eslint,
     -- null_ls.builtins.formatting.prettier
-    null_ls.builtins.formatting.prettierd
+    null_ls.builtins.formatting.prettierd.with({
+      disabled_filetypes = { "lua" },
+    }),
   },
   on_attach = function(client)
     if client.resolved_capabilities.document_formatting then
