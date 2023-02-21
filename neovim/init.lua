@@ -209,8 +209,8 @@ require('lspconfig').eslint.setup {
 require('lspconfig').tsserver.setup { -- lua needs extra config to make it shut up about vim not being defined
   on_attach = function(client, bufnr)
     -- avoid conflicts between prettier and tsserver
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
 
     on_attach(client, bufnr)
   end,
@@ -220,8 +220,8 @@ require('lspconfig').tsserver.setup { -- lua needs extra config to make it shut 
 require('lspconfig').volar.setup { -- lua needs extra config to make it shut up about vim not being defined
   on_attach = function(client, bufnr)
     -- avoid conflicts between prettier and tsserver
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
 
     on_attach(client, bufnr)
   end,
@@ -299,7 +299,7 @@ null_ls.setup({
     }),
   },
   on_attach = function(client)
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.documentFormattingProvider then
       vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
     end
   end
