@@ -136,8 +136,9 @@ require "paq" {
   "tpope/vim-fugitive"; -- maybe neogit and/or gitsigns can replace this? it's just not discoverable
 
   -- colorschemes
-  "mcchrish/zenbones.nvim";
-  "rktjmp/lush.nvim"; -- used by zenbones
+  --"mcchrish/zenbones.nvim";
+  --"rktjmp/lush.nvim"; -- used by zenbones
+  { "catppuccin/nvim", as = "catppuccin" };
 }
 
 local cmp = require("cmp") -- autocompletion
@@ -190,7 +191,7 @@ require("indent_blankline").setup {
 }
 
 vim.opt.background = "light"
-vim.cmd("colorscheme rosebones")
+vim.cmd("colorscheme catppuccin")
 
 for _, lsp in pairs { "rnix", "solargraph", "angularls", "purescriptls", "rust_analyzer" } do
   require('lspconfig')[lsp].setup {
