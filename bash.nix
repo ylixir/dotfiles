@@ -1,5 +1,6 @@
 pkgs:{
   enable = true;
+  enableCompletion = false;
   shellOptions = [
     # Append to history file rather than replacing it.
     "histappend"
