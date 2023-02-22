@@ -191,7 +191,7 @@ require("indent_blankline").setup {
 }
 
 vim.opt.background = "dark"
-vim.cmd("colorscheme catppuccin-macchiato")
+vim.cmd("colorscheme catppuccin-latte")
 
 for _, lsp in pairs { "rnix", "solargraph", "angularls", "purescriptls", "rust_analyzer" } do
   require('lspconfig')[lsp].setup {

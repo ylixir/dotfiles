@@ -104,10 +104,12 @@
         xdg.configFile."kitty/kitty.conf".source = ./kitty.conf;
         xdg.configFile."kitty/rose-pine-dawn.conf".source = ./rose-pine-dawn.conf;
         xdg.configFile."kitty/macchiato.conf".source = ./macchiato.conf;
+        xdg.configFile."kitty/latte.conf".source = ./latte.conf;
         xdg.dataFile."nvim/site/pack/paqs/start/paq-nvim".source = paq-nvim;
 
         xdg.configFile."fish/config.fish".source = ./fish/config.fish;
         xdg.configFile."fish/functions/fish_prompt.fish".source = ./fish/functions/fish_prompt.fish;
+        xdg.configFile."fish/themes/Catppuccin Latte.theme".source = ./. + "/fish/themes/Catppuccin Latte.theme";
       };
     in {
       # cecaelia, perchta

@@ -34,3 +34,5 @@ end
 
 alias vi=nvim
 alias vim=nvim
+
+fish_config theme choose "Catppuccin Latte"
