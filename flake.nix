@@ -40,7 +40,7 @@
           curl
           fd # wanted by telescope-nvim
           fish
-          gnvim # this is nice in WSL
+          #gnvim # this is nice in WSL
           home-manager
           kitty
           lorri
@@ -103,6 +103,7 @@
         xdg.configFile."nvim/init.lua".source = ./neovim/init.lua;
         xdg.configFile."kitty/kitty.conf".source = ./kitty.conf;
         xdg.configFile."kitty/rose-pine-dawn.conf".source = ./rose-pine-dawn.conf;
+        xdg.configFile."kitty/macchiato.conf".source = ./macchiato.conf;
         xdg.dataFile."nvim/site/pack/paqs/start/paq-nvim".source = paq-nvim;
 
         xdg.configFile."fish/config.fish".source = ./fish/config.fish;

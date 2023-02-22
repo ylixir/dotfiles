@@ -1,5 +1,8 @@
 log:
 
+updating flake `nix flake update`
+updating config `home-manager switch --flake path:./`
+
 from windows for wsl2:
 download https://github.com/nix-community/NixOS-WSL/releases/latest/download/nixos-wsl-installer.tar.gz
 then `wsl --import NixOS .\NixOS\ Downloads/nixos-wsl-installer.tar.gz --version 2`
@@ -7,6 +10,7 @@ then `wsl -d NixOS`
 note that this didn't work at first (couldn't mount something), after booting ubuntu so i could see the dmesg it seemed like it started working?
 
 now `sudo nano /etc/nixos/configuration.nix` probably want to add
+
 ```nix
 environment.systemPackages = with pkgs; [
   curl
@@ -35,7 +39,6 @@ building with node 14 instead of node 12 requires `node2nix -14` (for eslint). c
 
 the wsl user _must_ be uid 1000 or we get permissions errors. to fix this you may need to delete the user form /etc/password and then `find /home -uid 1001 -exec chown 1000 {} +` and `find /nix -uid 1001 -exec chown 1000 {} +`
 careful about doing that to / because it will hop into /mnt/c
-
 
 notes for mac
 had to create user specific config

@@ -190,8 +190,8 @@ require("indent_blankline").setup {
   show_current_context_start = true,
 }
 
-vim.opt.background = "light"
-vim.cmd("colorscheme catppuccin")
+vim.opt.background = "dark"
+vim.cmd("colorscheme catppuccin-macchiato")
 
 for _, lsp in pairs { "rnix", "solargraph", "angularls", "purescriptls", "rust_analyzer" } do
   require('lspconfig')[lsp].setup {
@@ -227,7 +227,8 @@ require('lspconfig').volar.setup { -- lua needs extra config to make it shut up 
   end,
   capabilities = capabilities,
 }
-require('lspconfig').sumneko_lua.setup { -- lua needs extra config to make it shut up about vim not being defined
+
+require('lspconfig').lua_ls.setup { -- lua needs extra config to make it shut up about vim not being defined
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -240,7 +241,7 @@ require('lspconfig').sumneko_lua.setup { -- lua needs extra config to make it sh
 }
 
 require('lualine').setup {
-  options = { theme = "rosebones" },
+  options = { theme = "catppuccin" },
   sections = {
     lualine_a = { 'diff' },
     lualine_b = {},
